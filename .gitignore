@@ -130,3 +130,6 @@ dmypy.json
 
 # MacOS Cache file
 .DS_Store
+
+# Author VSCode
+.vscode
