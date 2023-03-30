@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-from Buyers.models import Customer, Products, Category, Order
+from .models import Customer, Products, Category, Order
 from django.views import View
 from .middlewares.auth import auth_middleware
 import datetime
@@ -37,8 +37,7 @@ class Index(View):
     def get(self, request):
         # print()
         return HttpResponseRedirect(f"/store{request.get_full_path()[1:]}")
-
-
+    
 def store(request):
     cart = request.session.get("cart")
     if not cart:
@@ -58,6 +57,7 @@ def store(request):
     print("you are : ", request.session.get("email"))
     return render(request, "index.html", data)
 
+    
 
 class Login(View):
     return_url = None
@@ -82,9 +82,9 @@ class Login(View):
                     Login.return_url = None
                     return redirect("homepage")
             else:
-                error_message = "Invalid !!"
+                error_message = "Please check your email and password"
         else:
-            error_message = "Invalid !!"
+            error_message = "Please check your email and password"
 
         print(email, password)
         return render(request, "login.html", {"error": error_message})
