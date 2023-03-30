@@ -1,13 +1,16 @@
 from django.contrib import admin
 from .models import Products, Category, Customer, Order
 
+
 # Register your models here.
 class AdminProduct(admin.ModelAdmin):
-    list_display = ['name', 'price', 'category']
+    list_display = ["name", "price", "category"]
+    list_editable = ["price"]
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ["name"]
+
 
 # Register your models here.
 admin.site.register(Products,AdminProduct)
