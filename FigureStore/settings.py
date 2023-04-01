@@ -48,6 +48,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "Buyers.middlewares.business_hours_check.BusinessHoursMiddleware"
 ]
 
 ROOT_URLCONF = "FigureStore.urls"
