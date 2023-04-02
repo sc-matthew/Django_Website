@@ -136,3 +136,4 @@ dmypy.json
 
 # Products Image (vary depends on product uploaded)
 uploads/
+Django_Website/
