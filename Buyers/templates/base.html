@@ -20,16 +20,16 @@
 
     <link
       rel="icon"
-      href="https://github.com/sc-matthew/Django_Website/raw/main/Buyers/icon/logo_website.png"
+      href="https://github.com/sc-matthew/Django_Website/raw/new_branches/Buyers/icon/Pmn.png"
       type="image/x-icon"
     />
 
     <style>
       nav {
-        background-color: rgb(137, 200, 221);
+        background-color: rgb(170, 249, 228);
       }
       .one-edge-shadow {
-        box-shadow: 0 8px 2px -5px rgb(246, 245, 245);
+        box-shadow: 0 8px 2px -5px rgb(170, 249, 228);
       }
       /* .display-8{
     font-weight: 200;
@@ -54,9 +54,9 @@
         />
 
         <img
-          src="https://github.com/sc-matthew/Django_Website/raw/main/Buyers/icon/logo_website.png"
-          style="width:50px;height:50px,color:text-light;margin-right:15px;"
-        />PMN FigureStore</a
+          src="https://github.com/sc-matthew/Django_Website/raw/new_branches/Buyers/icon/Pmn_logo.png"
+          style="width:250px;height:50px; color:text-light;margin-right:15px;"
+        /></a
       >
       <button
         class="navbar-toggler"
@@ -72,17 +72,32 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/store"
-              >Store <span class="sr-only">(current)</span></a
+          <!-- <li class="nav-item active"> -->
+            <!-- <a class="nav-link" href="/store" -->
+            <form action="#" method="get" 
+              style="display:flex; justify-content: center;"
             >
-          </li>
+              <input type="text" name="query" placeholder="Search..."
+              style="border:1px solid black; border-radius: 5px; width: 200 px;"
+              >
+              <button type="submit" style="border-radius: 50%; text-align: center; border: 1px solid white ">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/user-interface/search-icon.png"
+                  style="width: 15px; height: 15px; margin-bottom: 3px;">
+              </button>
+            </form>
+            <!-- <span class="sr-only">(current)</span></a
+            > -->
+          <!-- </li> -->
         </ul>
+      
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item active">
             <a class="nav-link" href="/cart"
-              >Cart
+              >
+              <img 
+              src="https://cdn-icons-png.flaticon.com/512/5465/5465858.png"
+              style="width:30px; height:30px"/>
               <span class="badge badge-success"
                 >{{request.session.cart.keys|length}}</span
               >
@@ -94,12 +109,12 @@
 
           <li class="nav-item active">
             <a class="nav-link" href="/orders"
-              >Orders<span class="sr-only">(current)</span></a
+              >Orders<span class="sr-only" >(current)</span></a
             >
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/logout"
-              >Logout<span class="sr-only">(current)</span></a
+              >Logout<span class="sr-only" >(current)</span></a
             >
           </li>
           {% else %}
