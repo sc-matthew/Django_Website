@@ -32,7 +32,13 @@ class Customer(models.Model):
             return Customer.objects.get(email=email)
         except:
             return False
-
+        
+    def get_customer_by_customerid(customer_id):
+        try:
+            return Customer.objects.filter(id=customer_id)
+        except Customer.DoesNotExist:
+            return None
+        
     def isExists(self):
         if Customer.objects.filter(email=self.email):
             return True

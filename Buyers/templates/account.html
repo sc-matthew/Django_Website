@@ -1,40 +1,34 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-
-<div class="container mt-4">
+{% for each in details %}
+<div class="container">
     
     <div class="p-3 m-3">
-
-        
         <div class="col-lg-5 rounded mx-auto border pt-4">
             <div class="text-center col">
+            
             </div>
-            <h3 class="alert alert-success rounded-pill" style="text-align:center">Create an Account</h3>
-            <form action="/signup" method="POST">
+            <h3 class="alert alert-success rounded-pill" style="text-align:center">Change Account Details</h3>
+            <form action="/update" method="POST">
                 
                 {% csrf_token %}
 
-                {% if error%}
-                <div class="alert alert-danger" role="alert">
-                    {{error}}
-                </div>
-                {% endif %}
-                <!-- firstname -->
+                <!-- name -->
                 <div class="form-group">
                     <label for="">First Name</label>
                     <input required type="text" name="firstname"
-                     id="" value="{{values.first_name}}" class="form-control form-control-sm" 
-                     placeholder="">
+                    id="" value="{{each.first_name}}"
+                    class=" form-control-sm form-control" placeholder="">
+                    
                 </div>
 
-                <!-- last name -->
+                <!-- lastname -->
                 <div class="form-group">
                     <label for="">Last Name</label>
                     <input required type="text" name="lastname" 
-                    id="" value="{{values.last_name}}" class="form-control form-control-sm"
-                    >
+                    id="" value="{{each.last_name}}" 
+                    class=" form-control-sm form-control" placeholder="">
                 </div>
 
                 <!-- phone -->
@@ -42,43 +36,34 @@
                     <label for="">Phone</label>
                     <input required type="text" name="phone" 
                     id="" class="form-control form-control-sm"
-                    value="{{values.phone}}"
+                    value="{{each.phone}}"
                     placeholder="0xxxxxxxxx (only numbers)"
                     pattern="\d{10}"
                     title="Please recheck your phone number, it should be 10 digits"
                     >
                 </div>
 
+
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>
                     <input required type="email" name="email" id=""
-                      value="{{values.email}}" 
+                      value="{{each.email}}" 
                       class="form-control-sm form-control" 
-                      placeholder="Please use chula account for signup"
+                      placeholder="Please use chula account"
                       pattern= ".+@.+\.chula\.ac\.th"
                       title="Please enter a valid Chula email address (example@chula.ac.th)">
                   </div>
-                  
 
-
-                <!-- password -->
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <input required type="password" 
-                    name="password" 
-                    id=""
-                     class="form-control form-control-sm">
-                </div>
+                <!--Submit button-->
 
                 <hr>
-                <button type="submit" class="btn btn-sm btn-success col-lg-12">Create an account</button>
+                <button type="submit" class="btn btn-sm btn-success col-lg-12">Submit Changes</button>
 
-                <!-- for resolve the overlap box and button -->
-                <div class="form-group"> </div>
-            </form>
+            <!-- for resolve the overlap box and button -->
+            <div class="form-group"> </div>
         </div>
     </div>
 </div>
-
+{% endfor %}
 {% endblock %}

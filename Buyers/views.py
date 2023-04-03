@@ -198,3 +198,10 @@ class Signup(View):
         # saving
 
         return error_message
+
+class Account(View):
+    def get(self, request):
+        customer = request.session.get("customer")
+        details = Customer.get_customer_by_customerid(customer)
+        print(details)
+        return render(request, "account.html", {"details" : details})
