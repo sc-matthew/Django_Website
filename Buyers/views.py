@@ -200,10 +200,10 @@ class Signup(View):
         return error_message
     
 class product_details(View):
-    def get(self, request):
+    def get(self, request, product_id):
         if "product_details" not in request.session:
             products = []
         else:
-            product_ids = request.session["product_details"].keys()
-            products = Products.objects.filter(id__in=product_ids)
+            # product_id = request.session["product_details"].keys()
+            products = Products.objects.get(pk = product_id)
         return render(request, "product_details.html", {"products": products})
