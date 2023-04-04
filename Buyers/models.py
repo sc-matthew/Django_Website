@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -21,6 +22,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=10)
     email = models.EmailField()
     password = models.CharField(max_length=100)
+
 
     # to save the data
     def register(self):
@@ -47,8 +49,10 @@ class Products(models.Model):
     description = models.CharField(max_length=250, default="", blank=True, null=True)
     image = models.ImageField(upload_to="uploads/products/")
     last_update = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name='each_product_like')
 
     @staticmethod
+
     def get_products_by_id(ids):
         return Products.objects.filter(id__in=ids)
 
@@ -62,6 +66,10 @@ class Products(models.Model):
             return Products.objects.filter(category=category_id)
         else:
             return Products.get_all_products()
+        
+    @staticmethod
+    def number_of_likes(self):
+        return self.likes.count()
 
 
 class Order(models.Model):

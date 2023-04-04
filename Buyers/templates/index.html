@@ -7,21 +7,19 @@
 <!-- body -->
 <div class="container-fluid mt-3">
 	<div class="row">
-		<!-- filter -->
 
+		<!-- filter -->	
 		<div class="col-lg-3 mx-auto">
+			<div  class="list-group-item " style="border-radius: 25px; margin-bottom: 10px;" >
+				<form action="#" method="get" >
+					<input type="text" name="query" placeholder="Search here..." style="width: 90%; border: 1px solid white; outline: none;">
+					<span>
+						  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/111px-Vector_search_icon.svg.png" 
+							style="width: 17px; height: 19px; float: right; margin-top: 6px;">
+					</span>
+				</form>
+			</div>
 			<div class="list-group">				
-				<div  class="list-group-item ">
-					<form action="#" method="get" >
-						<input type="text" name="query" placeholder="Search here..." style="width: 90%; border: 1px solid white; outline: none;">
-						<span>
-					  		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/111px-Vector_search_icon.svg.png" 
-								style="width: 17px; height: 19px; float: right; margin-top: 6px;">
-						</span>
-					</form>
-				</div>
-              		
-
 				<a href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a>
 
 				{% for category in categories %}
@@ -39,7 +37,9 @@
 					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
 					<div class="card-body">
 						<p class="card-title">{{product.name}}</p>
-						<p class="card-text"><b>{{product.price|currency}}</b></p>
+						<p class="card-text">
+							<b>{{product.price|currency}}</b>
+						</p>
 						<!-- {{product | is_in_cart:request.session.cart }} -->
 					</div>
 
