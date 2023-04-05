@@ -203,5 +203,49 @@ class Account(View):
     def get(self, request):
         customer = request.session.get("customer")
         details = Customer.get_customer_by_customerid(customer)
-        print(details)
         return render(request, "account.html", {"details" : details})
+    
+    def post(self, request):
+        postData = request.POST
+        customer_id = request.session.get("customer")
+        customer = Customer.objects.get(id=customer_id)
+        
+        # set original_email to current email value
+        customer.original_email = customer.email
+
+        customer.first_name = postData["firstname"]
+        customer.last_name = postData["lastname"]
+        customer.phone = postData["phone"]
+        customer.email = postData["email"]
+
+        error_message = self.validateCustomer(customer)
+
+        if not error_message:
+            customer.save()
+            success_message = "Changes saved successfully!"
+            return render(request, "account.html", {"success_message": success_message, "details" : customer})
+
+        else:
+            data = {"error": error_message, "details": customer}
+            return render(request, "account.html", data)
+
+    def validateCustomer(self, customer):
+        error_message = None
+        if not customer.first_name:
+            error_message = "Please Enter your First Name !!"
+        elif len(customer.first_name) < 3:
+            error_message = "First Name must be 3 char long or more"
+        elif not customer.last_name:
+            error_message = "Please Enter your Last Name"
+        elif len(customer.last_name) < 3:
+            error_message = "Last Name must be 3 char long or more"
+        elif not customer.phone:
+            error_message = "Enter your Phone Number"
+        elif len(customer.phone) < 10:
+            error_message = "Phone Number must be 10 char Long"
+        elif len(customer.email) < 5:
+            error_message = "Email must be 5 char long"
+        elif customer.email != customer.original_email and customer.isExists():
+            error_message = "Email Address Already Registered.."
+        
+        return error_message

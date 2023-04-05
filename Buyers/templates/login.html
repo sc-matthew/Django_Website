@@ -10,7 +10,7 @@
             <div class="text-center col">
             
             </div>
-            <h3 class="alert alert-success rounded-pill" style="text-align:center">Login</h3>
+            <h3 class="alert alert-info rounded-pill" style="text-align:center">Login</h3>
             <form action="/login" method="POST">
                 
                 {% csrf_token %}
@@ -20,6 +20,7 @@
                     {{error}}
                 </div>
                 {% endif %}
+                
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>

@@ -35,7 +35,7 @@ class Customer(models.Model):
         
     def get_customer_by_customerid(customer_id):
         try:
-            return Customer.objects.filter(id=customer_id)
+            return Customer.objects.get(id=customer_id)
         except Customer.DoesNotExist:
             return None
         
