@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from .middlewares.auth import auth_middleware
 from . import views
-from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView, like_product
+from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView,like_product
 
 # URLConf
 urlpatterns = [
@@ -14,5 +14,5 @@ urlpatterns = [
     path("cart", auth_middleware(Cart.as_view()), name="cart"),
     path("check-out", CheckOut.as_view(), name="checkout"),
     path("orders", auth_middleware(OrderView.as_view()), name="orders"),
-    path('like/<int:id>', views.like_product, name='like_post')
+    path('store/<int:pk>', like_product, name='like_product')
 ]

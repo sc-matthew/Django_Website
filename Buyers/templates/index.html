@@ -39,6 +39,20 @@
 						<p class="card-title">{{product.name}}</p>
 						<p class="card-text">
 							<b>{{product.price|currency}}</b>
+							{% if user.is_authenticated %}
+								<form action="{% url 'like_product' product.id %}" method="POST">
+									{% csrf_token %}
+									{% if post_is_liked %}
+										<button type="submit" name="product_id" value="{{product.id}}" class="btn btn-info" 
+										style="float: right; font-size: 3px;">Unlike</button>
+									{% else %}
+										<button type="submit" name="product_id" value="{{product.id}}" class="btn btn-info"
+										style="float: right; font-size: 3px;">Like</button>
+									{% endif %}
+								</form>
+							{% else %}
+								<a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+							{% endif %}
 						</p>
 						<!-- {{product | is_in_cart:request.session.cart }} -->
 					</div>
@@ -81,3 +95,10 @@
 
 
 {% endblock %}
+
+
+
+
+
+
+
