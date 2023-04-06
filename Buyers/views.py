@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
@@ -76,16 +78,26 @@ class Index(View):
         return HttpResponseRedirect(f"/store{request.get_full_path()[1:]}")
 
 
-def like_product(request, pk):
+def like_product(request):
     product = get_object_or_404(Products, id=request.POST.get("product_id"))
+    is_liked= False
     if product.likes.filter(id = request.Customer.id).exists():
         product.likes.remove(request.Customer)
+        is_liked = False
     else:
         product.likes.add(request.Customer)
+        is_liked = True
 
+    context ={
+        'product': product,
+        'is_liked': is_liked,
+        'total_likes': product.likes.count(),
+    }
+    print("hello you are ", request.user.is_authenticated())
      # Get the URL of the current page, excluding any query string
-    referer = request.META.get('HTTP_REFERER', reverse('index'))
-    return HttpResponseRedirect(referer)
+    if request.is_ajax():
+        html = render_to_string('index.html', context, request=request)
+        return JsonResponse({'form': html})
 
 
 def store(request):
