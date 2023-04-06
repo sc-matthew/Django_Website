@@ -201,5 +201,5 @@ class Signup(View):
     
 class product_details(View):
     def get(self, request, product_id):
-        products = get_object_or_404(Products, pk=product_id)
+        products = Products.objects.get(id=product_id)
         return render(request, "product_details.html", {"products": products})
