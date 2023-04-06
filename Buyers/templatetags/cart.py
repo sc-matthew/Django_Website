@@ -7,7 +7,7 @@ register = template.Library ()
 def is_in_cart(product, cart):
     keys = cart.keys ()
     for id in keys:
-        if float (id) == product.id:
+        if int (id) == product.id:
             return True
     return False;
 
