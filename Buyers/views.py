@@ -78,10 +78,10 @@ class Index(View):
 
 def like_product(request, pk):
     product = get_object_or_404(Products, id=request.POST.get("product_id"))
-    if product.likes.filter(id = request.user.id).exists():
-        product.likes.remove(request.user)
+    if product.likes.filter(id = request.Customer.id).exists():
+        product.likes.remove(request.Customer)
     else:
-        product.likes.add(request.user)
+        product.likes.add(request.Customer)
 
      # Get the URL of the current page, excluding any query string
     referer = request.META.get('HTTP_REFERER', reverse('index'))

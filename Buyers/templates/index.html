@@ -39,7 +39,7 @@
 						<p class="card-title">{{product.name}}</p>
 						<p class="card-text">
 							<b>{{product.price|currency}}</b>
-							{% if user.is_authenticated %}
+							{% if customer.is_authenticated %}
 								<form action="{% url 'like_product' product.id %}" method="POST">
 									{% csrf_token %}
 									{% if post_is_liked %}
