@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path, re_path
 from .middlewares.auth import auth_middleware
-from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView, Account
+from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView, Account, Homepage
 
 # URLConf
 urlpatterns = [
-    path("", Index.as_view(), name="homepage"),
-    path("store", store, name="store"),
+    path("", Homepage.as_view(), name="homepage"),
+    path("store/", store, name="store"),
     path("signup", Signup.as_view(), name="signup"),
     path("login", Login.as_view(), name="login"),
     path("logout", logout, name="logout"),
@@ -15,3 +15,6 @@ urlpatterns = [
     path("orders", auth_middleware(OrderView.as_view()), name="orders"),
     path("account", Account.as_view(), name="account")
 ]
+
+# Keep it as spare parts
+# path("", Index.as_view(), name="homepage"),

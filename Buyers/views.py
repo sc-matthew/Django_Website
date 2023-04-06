@@ -114,7 +114,7 @@ class Login(View):
                     return HttpResponseRedirect(Login.return_url)
                 else:
                     Login.return_url = None
-                    return redirect("homepage")
+                    return redirect("store")
             else:
                 error_message = "Please check your email and password"
         else:
@@ -249,3 +249,7 @@ class Account(View):
             error_message = "Email Address Already Registered.."
         
         return error_message
+
+class Homepage(View):
+    def get(self, request):
+        return render(request, "homepage.html", {})
