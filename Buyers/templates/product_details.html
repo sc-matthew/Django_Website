@@ -3,14 +3,24 @@
 {% block content %}
 {% load cart %}
 {% load custom_filter %}
-<div class = "row">
-    <div class = "col">
-        <h1 class = "product_details"> Decade </h1>
-        <div class = "row">
-            <div class = "col-12">
-
+<div class="row">
+    <div class="col">
+        <h1 class="product_details">{{ product.name }}</h1>
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+            <div class="col-6">
+                <p class="price">{{ product.price | currency }}</p>
+                <p>{{ product.description }}</p>
+                <form action="{% url 'cart' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+

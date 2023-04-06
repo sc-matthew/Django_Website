@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Products, Category, Order
@@ -201,9 +201,5 @@ class Signup(View):
     
 class product_details(View):
     def get(self, request, product_id):
-        if "product_details" not in request.session:
-            products = []
-        else:
-            # product_id = request.session["product_details"].keys()
-            products = Products.objects.get(pk = product_id)
+        products = get_object_or_404(Products, pk=product_id)
         return render(request, "product_details.html", {"products": products})

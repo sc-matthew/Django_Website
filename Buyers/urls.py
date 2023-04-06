@@ -13,6 +13,5 @@ urlpatterns = [
     path("cart", auth_middleware(Cart.as_view()), name="cart"),
     path("check-out", CheckOut.as_view(), name="checkout"),
     path("orders", auth_middleware(OrderView.as_view()), name="orders"),
-    # path("product_details", auth_middleware(product_details.as_view()), name="product_details"),
     path('product_details/<int:product_id>/', product_details.as_view(), name='product_details')
 ]
