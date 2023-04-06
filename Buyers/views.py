@@ -203,3 +203,9 @@ class product_details(View):
     def get(self, request, product_id):
         products = Products.objects.get(id=product_id)
         return render(request, "product_details.html", {"products": products})
+
+    def post(self, request, product_id): #-> Handle product in product_details page
+        products = Products.objects.get(id=product_id)
+        print('Hello from console')
+        return render(request, "product_details.html", {"products": products})
+
