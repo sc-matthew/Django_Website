@@ -24,27 +24,30 @@
 
                     {% if products|is_in_cart:request.session.cart %}
                     <div class="row no-gutters">
-                        <form action="/product_details/{{products.id}}/" class="col-2 " method="post">
+                        <form action="{% url 'add_to_cart' %}" class="col-2 " method="post">
                             {% csrf_token %}
-                            <input hidden type="text" name='product' value='{{products.id}}'>
-                            <input hidden type="text" name='remove' value='True'>
+                            <input type="hidden" name="product_id" value="{{ products.id }}">
+                            <input type="hidden" name="action" value="decrement">
                             <input type="submit" value=" - " class="btn btn-block btn-outline-primary border-right">
-                        </form>
+                        </form>                        
                         <div class="text-center col btn btn-outline-primary">{{products|cart_quantity:request.session.cart}} in Cart</div>
-                        <form action="/product_details/{{products.id}}/" class="col-2 " method="post">
+                        <form action="{% url 'add_to_cart' %}" class="col-2 " method="post">
                             {% csrf_token %}
-                            <input hidden type="text" name='product' value='{{products.id}}'>
+                            <input type="hidden" name="product_id" value="{{ products.id }}">
+                            <input type="hidden" name="action" value="add">
                             <input type="submit" value=" + " class="btn btn-block btn-outline-primary border-left">
                         </form>
                     </div>
                     {% else %}
-                    <form action="/#{{products.id}}" method="POST" class="btn-block">
+                    <form action="{% url 'add_to_cart' %}" method="POST" class="btn-block">
                         {% csrf_token %}
-                        <input hidden type="text" name='product' value='{{products.id}}'>
+                        <input type="hidden" name="product_id" value="{{ products.id }}">
+                        <input type="hidden" name="action" value="add">
                         <input type="submit" class="float-right btn btn-success form-control"
                             value="Add To Cart">
-                    </form>
+                    </form>               
                     {% endif %}
+
 
 
 

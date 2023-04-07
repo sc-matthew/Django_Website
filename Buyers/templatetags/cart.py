@@ -33,3 +33,9 @@ def total_cart_price(products, cart):
         sum += price_total (p, cart)
 
     return sum
+
+@register.filter(name='cart_quantity')
+def cart_quantity(product, cart):
+    if str(product.id) in cart:
+        return cart[str(product.id)]['quantity']
+    return 0
