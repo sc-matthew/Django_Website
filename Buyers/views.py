@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
-from django.template.loader import render_to_string
-from django.http import JsonResponse
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from .models import Customer, Products, Category, Order
 from django.views import View
 from .middlewares.auth import auth_middleware
-from django.urls import reverse
 import datetime
 
 
@@ -78,26 +75,13 @@ class Index(View):
         return HttpResponseRedirect(f"/store{request.get_full_path()[1:]}")
 
 
-def like_product(request):
-    product = get_object_or_404(Products, id=request.POST.get("product_id"))
-    is_liked= False
-    if product.likes.filter(id = request.Customer.id).exists():
-        product.likes.remove(request.Customer)
-        is_liked = False
+def like_product(request, product_id):
+    product = get_object_or_404(Products, id = product_id)
+    if request.user in product.likes.all():
+        product.likes.remove(request.user)
     else:
-        product.likes.add(request.Customer)
-        is_liked = True
-
-    context ={
-        'product': product,
-        'is_liked': is_liked,
-        'total_likes': product.likes.count(),
-    }
-    print("hello you are ", request.user.is_authenticated())
-     # Get the URL of the current page, excluding any query string
-    if request.is_ajax():
-        html = render_to_string('index.html', context, request=request)
-        return JsonResponse({'form': html})
+        product.likes.add(request.user)
+    return redirect("product_detail", product_id = product_id)
 
 
 def store(request):
