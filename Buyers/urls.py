@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from .middlewares.auth import auth_middleware
 from . import views
-from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView,product_details, add_to_cart
+from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView,product_details, add_to_cart, like_product
 
 # URLConf
 urlpatterns = [
@@ -16,4 +16,6 @@ urlpatterns = [
     path("orders", auth_middleware(OrderView.as_view()), name="orders"),
     path('product_details/<int:product_id>/', product_details.as_view(), name='product_details'),
     path('add-to-cart/', add_to_cart, name='add_to_cart'),
+    path('product_details/<int:product_id>/like/', like_product, name='like_product'),
+
 ]

@@ -36,12 +36,11 @@
 				<div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
 					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
 					<div class="card-body">
-						<p class="card-title">{{product.name}}</p>
+						<a class="card-title" href="product_details/{{product.id}}">{{product.name}}</a>
 						<p class="card-text">
 							<b>{{product.price|currency}}</b>
-							{% if customer.is_authenticated %}
-							
-								<form action="{% url 'like_product'}" method="POST">
+							{% if user.is_authenticated %}
+								<form action="{% url 'like_product' product_id=product.id %}" method="post">
 									{% csrf_token %}
 									{% if post_is_liked %}
 										<button type="submit" name="product_id" value="{{product.id}}" class="btn btn-info" 

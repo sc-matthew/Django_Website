@@ -49,7 +49,7 @@ class Products(models.Model):
     description = models.CharField(max_length=250, default="", blank=True, null=True)
     image = models.ImageField(upload_to="uploads/products/")
     last_update = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(Customer, blank = True, related_name='like_product')
+    likes = models.ManyToManyField(User, blank = True, related_name='like_product')
 
     @staticmethod
 
