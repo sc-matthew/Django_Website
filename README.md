@@ -52,5 +52,5 @@
 
 ---
 Memo updated list:
-Matthew -> Finished all requirements within Tuesday 12PM
-New & Prince -> Get data from Matthew and working on progress after Aj.Kavin's class
+* Matthew -> Finished all requirements within Tuesday 12PM
+* New & Prince -> Get data from Matthew and working on progress after Aj.Kavin's class
