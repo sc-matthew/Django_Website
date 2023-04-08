@@ -203,6 +203,7 @@ class product_details(View):
     def get(self, request, product_id):
         products = Products.objects.get(id=product_id)
         return render(request, "product_details.html", {"products": products})
+<<<<<<< HEAD
 
     def post(self, request, product_id): #-> Handle product in product_details page
         products = Products.objects.get(id=product_id)
@@ -245,3 +246,5 @@ def add_to_cart(request):
 
 
 
+=======
+>>>>>>> parent of fecb17a (product details template finish)

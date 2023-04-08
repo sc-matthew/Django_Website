@@ -4,6 +4,7 @@
 {% load cart %}
 {% load custom_filter %}
 
+<<<<<<< HEAD
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="container">
@@ -130,45 +131,43 @@
                 </div>
             </div>
         </div>
+=======
+<div class="card mx-auto mb-3" style="width: 18rem;">
+    <img class="card-img-top" src="{{ products.image.url }}" alt="Product image">
+    <div class="card-body">
+        <h5 class="card-title">{{ products.name }}</h5>
+        <p class="card-text">{{ products.description }}</p>
+        <p class="card-text"><b>{{ products.price|currency }}</b></p>
+>>>>>>> parent of fecb17a (product details template finish)
     </div>
+    <div class="card-footer p-0 no-gutters">
+
+        {% if products|is_in_cart:request.session.cart %}
+        <div class="row no-gutters">
+            <form action="/#{{products.id}}" class="col-2 " method="post">
+                {% csrf_token %}
+                <input hidden type="text" name='product' value='{{products.id}}'>
+                <input hidden type="text" name='remove' value='True'>
+                <input type="submit" value=" - " class="btn btn-block btn-success border-right">
+            </form>
+            <div class="text-center col btn btn-success">{{products|cart_quantity:request.session.cart}} in Cart</div>
+            <form action="/#{{products.id}}" class="col-2 " method="post">
+                {% csrf_token %}
+                <input hidden type="text" name='product' value='{{products.id}}'>
+                <input type="submit" value=" + " class="btn btn-block btn-success border-left">
+            </form>
+        </div>
+        {% else %}
+        <form action="/#{{products.id}}" method="POST" class="btn-block">
+            {% csrf_token %}
+            <input hidden type="text" name='product' value='{{products.id}}'>
+            <input type="submit" class="float-right btn btn-success form-control"
+                value="Add To Cart">
+        </form>
+        {% endif %}
+
+    </div>
+
 </div>
-
-<style>
-body{
-    background-color: #edf1f5;
-}
-
-.img-responsive {
-    width:400px;
-    height:500px
-}
-
-.card {
-    margin-bottom: 30px;
-}
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid transparent;
-    border-radius: 0;
-}
-.card .card-subtitle {
-    font-weight: 300;
-    margin-bottom: 10px;
-    color: #8898aa;
-}
-.table-product.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f3f8fa!important
-}
-.table-product td{
-    border-top: 0px solid #dee2e6 !important;
-    color: #728299!important;
-}</style>
-
 
 {% endblock %}
