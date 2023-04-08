@@ -209,5 +209,48 @@ class Signup(View):
         # saving
 
         return error_message
+    
 
+class product_details(View):
+    def get(self, request, product_id):
+        products = Products.objects.get(id=product_id)
+        return render(request, "product_details.html", {"products": products})
+
+    def post(self, request, product_id): #-> Handle product in product_details page
+        products = Products.objects.get(id=product_id)
+        print('Hello from console')
+        return render(request, "product_details.html", {"products": products})
+
+def add_to_cart(request):
+    product_id = None
+
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        action = request.POST.get('action')
+
+        if 'cart' not in request.session:
+            request.session['cart'] = {}
+
+        if product_id and action:
+            product = Products.objects.get(id=product_id)
+
+            if action == 'add':
+                if product_id in request.session['cart']:
+                    request.session['cart'][product_id]['quantity'] += 1
+                else:
+                    request.session['cart'][product_id] = {'quantity': 1}
+
+            elif action == 'increment':
+                if product_id in request.session['cart']:
+                    request.session['cart'][product_id]['quantity'] += 1
+
+            elif action == 'decrement':
+                if request.session['cart'][product_id]['quantity'] > 1:
+                    request.session['cart'][product_id]['quantity'] -= 1
+                else:
+                    del request.session['cart'][product_id]
+
+        request.session.modified = True
+
+    return redirect('product_details', product_id=product_id)
 
