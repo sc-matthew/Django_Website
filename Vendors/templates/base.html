@@ -71,13 +71,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers">Store <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/store">Store <span class="sr-only">(current)</span></a>
           </li>
         </ul>
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/cart">Cart
+            <a class="nav-link" href="/cart">Cart
               <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
               <span class="sr-only">(current)</span></a>
           </li>
@@ -85,24 +85,24 @@
           {% if request.session.customer %}
 
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/orders">Orders<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/orders">Orders<span class="sr-only">(current)</span></a>
           </li>
 
 
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/account">Account<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/account">Account<span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/logout">Logout<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
           </li>
           {% else %}
 
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/signup">Signup<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/signup">Signup<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/login">Login<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
           </li>
           {% endif %}
         </ul>

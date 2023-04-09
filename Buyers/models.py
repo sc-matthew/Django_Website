@@ -50,7 +50,7 @@ class Products(models.Model):
     name = models.CharField(max_length=60)
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    description = models.CharField(max_length=250, default="", blank=True, null=True)
+    description = models.CharField(max_length=2500, default="", blank=True, null=True)
     image = models.ImageField(upload_to="uploads/products/")
     last_update = models.DateTimeField(auto_now=True)
 

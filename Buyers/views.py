@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Products, Category, Order
+from django.urls import reverse
 from django.views import View
 from .middlewares.auth import auth_middleware
 import datetime
@@ -70,8 +71,8 @@ class Index(View):
         return redirect("homepage")
 
     def get(self, request):
-        # print()
-        return HttpResponseRedirect(f"/store{request.get_full_path()[1:]}")
+        print(f"{request.get_full_path()}")
+        return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
 
 
 def store(request):
@@ -249,7 +250,3 @@ class Account(View):
             error_message = "Email Address Already Registered.."
         
         return error_message
-
-class Homepage(View):
-    def get(self, request):
-        return render(request, "homepage.html", {})

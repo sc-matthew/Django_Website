@@ -75,8 +75,13 @@
       </div>
       <div class="modal-body">
         <div class="m-2 p-3">
-          <form action="/check-out" method="POST">
+          <form action="/buyers/check-out" method="POST">
             {% csrf_token %}
+            <p class="alert alert-info rounded-pill">
+              Please note that the address and phone number provided in this pop-up should be the contact information for the person who will be available to 
+              receive the packages from us. If there is no recipient and the packages are returned, we will not issue any refunds.
+            </p> <br/>
+
             <div class="form-group">
               <label for="">Address</label>
               <input type="text" name="address" id="" class="form-control"
