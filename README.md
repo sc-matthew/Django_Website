@@ -25,14 +25,14 @@
 
 ### Sellers
 
-- [ ] Seller signup module
-  - [ ] Add ชื่อร้าน
-  - [ ] ชื่อผู้ติดต่อ
-  - [ ] เบอร์โทร
-  - [ ] ที่อยู่ร้าน
-  - [ ] รูปของร้าน (1 picture)
-  - [ ] รูป QRCode (1 picture)
-- [ ] Seller login module
+- [x] Seller signup module
+  - [x] Add ชื่อร้าน
+  - [x] ชื่อผู้ติดต่อ
+  - [x] เบอร์โทร
+  - [x] ที่อยู่ร้าน
+  - [x] รูปของร้าน (1 picture)
+  - [x] รูป QRCode (1 picture)
+- [x] Seller login module
 - [ ] Seller account module (able to edit)
   - [ ] ชื่อร้าน
   - [ ] ชื่อผู้ติดต่อ
