@@ -1,0 +1,64 @@
+{% extends 'vd_base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div class="p-3 m-3">
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col">
+
+            </div>
+            <h3 class="alert alert-info rounded-pill" style="text-align:center">Change
+                Account Details</h3>
+            <form action="/vendors/account_image" method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{error_message}}
+                </div>
+                {% endif %}
+
+                {% if success_message %}
+                <div class="alert alert-success" role="alert">
+                    {{success_message}}
+                </div>
+                {% endif %}
+                <hr />
+                <div>
+                    <h5 class="text-center">Store Picture</h5>
+                    <div class="text-center">
+                        <img src="{{ details.store_picture.url }}" class="rounded"
+                            style="max-width: 50%;height: 50%;margin-top: 10px;">
+                        <div class="form-group" style="margin-top: 20px">
+                            <input required type="file" name="store_picture" id=""
+                                class="form-control-file form-control-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <div>
+                    <h5 class="text-center">QRCode Picture</h5>
+                    <div class="text-center">
+                        <img src="{{ details.qrcode_picture.url }}" class="rounded"
+                            style="max-width: 50%;height: 50%;margin-top: 15px;">
+                        <div class="form-group" style="margin-top: 20px">
+                            <input required type="file" name="qrcode_picture" id=""
+                                class="form-control-file form-control-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!--Submit button-->
+                <hr>
+                <button type="submit" class="btn btn-sm btn-success col-lg-12">Submit
+                    Changes</button>
+
+                <!-- for resolve the overlap box and button -->
+                <div class="form-group"> </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

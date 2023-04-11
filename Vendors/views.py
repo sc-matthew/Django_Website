@@ -115,13 +115,13 @@ class Login(View):
 
 def logout(request):
     request.session.clear()
-    return redirect("login")
+    return redirect("vendor_homepage")
 
 class Account(View):
     def get(self, request):
         vendors = request.session.get("vendors")
         details = Vendors.get_vendors_by_vendorsid(vendors)
-        return render(request, "vd_account.html", {"details" : details})
+        return render(request, "vd_account_details.html", {"details" : details})
     
     def post(self, request):
         postData = request.POST
@@ -143,11 +143,11 @@ class Account(View):
         if not error_message:
             vendors.save()
             success_message = "Changes saved successfully!"
-            return render(request, "vd_account.html", {"success_message": success_message, "details" : vendors})
+            return render(request, "vd_account_details.html", {"success_message": success_message, "details" : vendors})
 
         else:
             data = {"error": error_message, "details": vendors}
-            return render(request, "vd_account.html", data)
+            return render(request, "vd_account_details.html", data)
 
     def validateVendors(self, vendors):
         error_message = None
@@ -172,6 +172,38 @@ class Account(View):
         # saving
 
         return error_message
+    
+class Image(View):
+    def get(self, request):
+        vendors = request.session.get("vendors")
+        details = Vendors.get_vendors_by_vendorsid(vendors)
+        print(details)
+        return render(request, "vd_account_image.html", {"details" : details})
+    
+    def post(self, request):
+        postFiles = request.FILES
+        vendors_id = request.session.get("vendors")
+        vendors = Vendors.objects.get(id=vendors_id)
+
+        store_picture = postFiles.get("store_picture")
+        qrcode_picture = postFiles.get("qrcode_picture")
+
+        # Check file types
+        if store_picture.content_type != "image/jpeg":
+            error_message = "Invalid file type for Store Picture (Only JPEG and JPG are supported). Please try again."
+            return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
+        
+        if qrcode_picture.content_type != "image/jpeg":
+            error_message = "Invalid file type for QRCode Picture (Only JPEG and JPG are supported). Please try again."
+            return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
+
+        vendors.store_picture = store_picture
+        vendors.qrcode_picture = qrcode_picture
+        
+        vendors.save()
+        success_message = "Changes saved successfully!"
+        return render(request, "vd_account_image.html", {"success_message": success_message, "details" : vendors})
+
 
 class Test(View):
     def get(self, request):

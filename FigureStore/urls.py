@@ -24,4 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('LandingPage.urls')),
     path('vendors/', include('Vendors.urls')),
-    path('buyers/', include('Buyers.urls'))] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('buyers/', include('Buyers.urls'))
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
