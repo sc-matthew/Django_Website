@@ -48,7 +48,7 @@ class Signup(View):
             store_picture = store_picture,
             qrcode_picture = qrcode_picture
         )
-        error_message = self.validateCustomer(vendors)
+        error_message = self.validateVendors(vendors)
 
         if not error_message:
             vendors.password = make_password(vendors.password)
@@ -58,7 +58,7 @@ class Signup(View):
             data = {"error": error_message, "values": value}
             return render(request, "vd_signup.html", data)
 
-    def validateCustomer(self, vendors):
+    def validateVendors(self, vendors):
         error_message = None
         if not vendors.contact_person_first_name:
             error_message = "Please Enter your First Name !!"
@@ -116,6 +116,62 @@ class Login(View):
 def logout(request):
     request.session.clear()
     return redirect("login")
+
+class Account(View):
+    def get(self, request):
+        vendors = request.session.get("vendors")
+        details = Vendors.get_vendors_by_vendorsid(vendors)
+        return render(request, "vd_account.html", {"details" : details})
+    
+    def post(self, request):
+        postData = request.POST
+        vendors_id = request.session.get("vendors")
+        vendors = Vendors.objects.get(id=vendors_id)
+        
+        # set original_email to current email value
+        vendors.original_email = vendors.email
+
+        vendors.store_name = postData["storename"]
+        vendors.contact_person_first_name = postData["firstname"]
+        vendors.contact_person_last_name = postData["lastname"]
+        vendors.phone = postData["phone"]
+        vendors.email = postData["email"]
+        vendors.address = postData["address"]
+
+        error_message = self.validateVendors(vendors)
+
+        if not error_message:
+            vendors.save()
+            success_message = "Changes saved successfully!"
+            return render(request, "vd_account.html", {"success_message": success_message, "details" : vendors})
+
+        else:
+            data = {"error": error_message, "details": vendors}
+            return render(request, "vd_account.html", data)
+
+    def validateVendors(self, vendors):
+        error_message = None
+        if not vendors.contact_person_first_name:
+            error_message = "Please Enter your First Name !!"
+        elif len(vendors.contact_person_first_name) < 3:
+            error_message = "First Name must be 3 char long or more"
+        elif not vendors.contact_person_last_name:
+            error_message = "Please Enter your Last Name"
+        elif len(vendors.contact_person_last_name) < 3:
+            error_message = "Last Name must be 3 char long or more"
+        elif not vendors.phone:
+            error_message = "Enter your Phone Number"
+        elif len(vendors.phone) < 10:
+            error_message = "Phone Number must be 10 char Long"
+        elif len(vendors.password) < 5:
+            error_message = "Password must be 5 char long"
+        elif len(vendors.email) < 5:
+            error_message = "Email must be 5 char long"
+        elif vendors.email != vendors.original_email and vendors.isExists():
+            error_message = "Email Address Already Registered.."
+        # saving
+
+        return error_message
 
 class Test(View):
     def get(self, request):

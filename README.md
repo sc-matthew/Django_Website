@@ -25,28 +25,34 @@
 
 ### Sellers
 
-- [x] Seller signup module
-  - [x] Add ชื่อร้าน
-  - [x] ชื่อผู้ติดต่อ
-  - [x] เบอร์โทร
-  - [x] ที่อยู่ร้าน
-  - [x] รูปของร้าน (1 picture)
-  - [x] รูป QRCode (1 picture)
-- [x] Seller login module
-- [ ] Seller account module (able to edit)
-  - [ ] ชื่อร้าน
-  - [ ] ชื่อผู้ติดต่อ
-  - [ ] เบอร์โทร
-  - [ ] ที่อยู่ร้าน
+- [X] Seller signup module
+
+  - [X] Add ชื่อร้าน
+  - [X] ชื่อผู้ติดต่อ
+  - [X] เบอร์โทร
+  - [X] ที่อยู่ร้าน
+  - [X] รูปของร้าน (1 picture)
+  - [X] รูป QRCode (1 picture)
+- [X] Seller login module
+- [X] Seller account module (able to edit)
+
+  * extra -> drop-down list to separate postData + postFiles
+
+  - [X] ชื่อร้าน
+  - [X] ชื่อผู้ติดต่อ
+  - [X] เบอร์โทร
+  - [X] ที่อยู่ร้าน
   - [ ] รูปของร้าน (1 picture)
   - [ ] รูป QRCode (1 picture)
 - [ ] My Product Listing Screen (Show all my products details)
+
   - [ ] ชื่อสินค้า
   - [ ] รูปสินค้า
   - [ ] หมวดหมู่
   - [ ] ราคา
   - [ ] สถานะ (ปกติ/หมด)
 - [ ] Add/Edit/Delete Product Screen
+
   - [ ] ชื่อสินค้า
   - [ ] รูปสินค้า
   - [ ] หมวดหมู่
@@ -58,5 +64,5 @@
 
 Memo updated list:
 
-* Matthew -> Finished all requirements within Tuesday 12PM
+* Matthew -> Finished all requirements within Tuesday 12PM (Couldn't complete within the time limit, sorry guys 😓)
 * New & Prince -> Get data from Matthew and working on progress after Aj.Kavin's class
