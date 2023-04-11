@@ -46,14 +46,14 @@ This project is brought to you by:
 
   * Additional Parts (Extra marks)
     * drop-down list to separate postData + postFiles
-    * files uploaded check whether it is jpeg or not -> avoid unsupported file type
+    * files uploaded check whether it is jpeg or not -> avoid unsupported file types
 
   - [X] ชื่อร้าน
   - [X] ชื่อผู้ติดต่อ
   - [X] เบอร์โทร
   - [X] ที่อยู่ร้าน
   - [X] รูปของร้าน (1 picture)
-  - [x] รูป QRCode (1 picture)
+  - [X] รูป QRCode (1 picture)
 - [ ] My Product Listing Screen (Show all my products details)
 
   - [ ] ชื่อสินค้า
@@ -74,8 +74,7 @@ This project is brought to you by:
 
 Memo updated list:
 
-* Matthew -> Finished all requirements within Tuesday 12PM
-  (Couldn't complete within the time limit, sorry guys 😓) <br>
+* Matthew -> Finished all requirements within Tuesday 12PM `<br>`
+  (Couldn't complete within the time limit, sorry guys 😓) `<br>`
   Updated : 5PM -> Already done with the assigned tasks and forwarded to New and Prince for further dev.
-
 * New & Prince -> Get data from Matthew and working on progress after Aj.Kavin's class

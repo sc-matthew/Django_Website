@@ -193,7 +193,7 @@ class Image(View):
             error_message = "Invalid file type for Store Picture (Only JPEG and JPG are supported). Please try again."
             return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
         
-        if qrcode_picture.content_type != "image/jpeg":
+        elif qrcode_picture.content_type != "image/jpeg":
             error_message = "Invalid file type for QRCode Picture (Only JPEG and JPG are supported). Please try again."
             return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
 
