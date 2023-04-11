@@ -2,6 +2,14 @@
 
 ---
 
+This project is brought to you by:
+
+* Suramate Chokchaisuwan (Matthew)
+* Dhawalrat Leelapratak (New)
+* Tanupat Kontha (Prince)
+
+---
+
 ### Buyers
 
 - [X] Buyer signup module (using chula domain)
