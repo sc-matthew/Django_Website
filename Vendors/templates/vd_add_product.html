@@ -1,0 +1,83 @@
+{% extends 'vd_base.html' %}
+
+{% block content %}
+
+    <div class="centered-content">
+        <!-- Content -->
+        <div id="content" class="colM">
+            <h2>Add product</h2>
+
+            <div id="content-main">
+                <form enctype="multipart/form-data" action="?_changelist_filters=o%3D3" method="post" id="products_v_form" novalidate="">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="QGuBRzsHhqXdJHech3Q9RHFwFDW6hiHpol7COdehtSroDxQHMHPix31Y0PPePVqL">
+                    <div>
+                        <fieldset class="module aligned ">
+
+                            <div class="form-row field-name">
+                                <div>
+                                    <label class="required" for="id_name">Name:</label>
+                                    <input type="text" name="name" class="vTextField" maxlength="60" required="" id="id_name" fdprocessedid="4j0lfg">
+                                </div>
+                            </div>
+
+                            <div class="form-row field-price">
+                                <div>
+                                    <label class="required" for="id_price">Price:</label>
+                                    <input type="number" name="price" value="0" step="0.01" required="" id="id_price" fdprocessedid="60vzu1h">
+                                </div>
+                            </div>
+
+                            <div class="form-row field-category">
+                                <div>
+                                    <label class="required" for="id_category">Category:</label>
+                                    <div class="related-widget-wrapper" data-model-ref="category_v">
+                                        <select name="category" required="" id="id_category" fdprocessedid="1j8lm">
+                                            {% for category in categories %}
+                                                <option value={{category.id}}>{{category.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <a class="related-widget-wrapper-link change-related" id="change_id_category" data-href-template="/admin/Vendors/category_v/__fk__/change/?_to_field=id&amp;_popup=1" data-popup="yes" title="Change selected category_v" href="/admin/Vendors/category_v/1/change/?_to_field=id&amp;_popup=1"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a>
+                                        <a class="related-widget-wrapper-link add-related" id="add_id_category" data-popup="yes" href="/admin/Vendors/category_v/add/?_to_field=id&amp;_popup=1" title="Add another category_v"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+                                        <a class="related-widget-wrapper-link view-related" id="view_id_category" data-href-template="/admin/Vendors/category_v/__fk__/change/?_to_field=id" title="View selected category_v" href="/admin/Vendors/category_v/1/change/?_to_field=id"><img src="/static/admin/img/icon-viewlink.svg" alt="View"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <div class="form-row field-description">
+                        <div>
+                            <label for="id_description">Description:</label>
+                            <input type="text" name="description" class="vTextField" maxlength="2500" id="id_description" fdprocessedid="ogukpr">
+                        </div>
+                    </div>
+
+                    <div class="form-row field-image">
+                        <div>
+                            <label class="required" for="id_image">Image:</label>
+                            <input type="file" name="image" accept="image/*" required="" id="id_image">
+                        </div>
+                    </div>
+                        </fieldset>
+
+                    <div class="submit-row">
+                        <input type="submit" value="Save" class="default" name="_save" fdprocessedid="f3lqkg">
+                        <input type="submit" value="Save and add another" name="_addanother" fdprocessedid="38jwh">
+                        <input type="submit" value="Save and continue editing" name="_continue" fdprocessedid="2ds0uw">
+                    </div>
+                        <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" data-model-name="products_v" async="">
+                        </script>
+                        <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
+                        </script>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .centered-content {
+            margin: auto;
+            width: 50%; /* Set the width of the container */
+        }
+    </style>
+
+{% endblock %}
