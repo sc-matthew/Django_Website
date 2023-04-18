@@ -36,3 +36,38 @@ class Vendors(models.Model):
             return True
 
         return False
+
+class Category_v(models.Model):
+    name = models.CharField(max_length=50, unique = True)
+
+    @staticmethod
+    def get_all_categories():
+        return Category_v.objects.all()
+
+    def __str__(self):
+        return self.name
+    
+
+class Products_v(models.Model):
+    name = models.CharField(max_length=60)
+    price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    category = models.ForeignKey(Category_v, on_delete=models.CASCADE, default=1)
+    description = models.CharField(max_length=2500, default="", blank=True, null=True)
+    image = models.ImageField(upload_to="uploads/products/")
+    last_update = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+
+    @staticmethod
+    def get_products_by_id(ids):
+        return Products_v.objects.filter(id__in=ids)
+
+    @staticmethod
+    def get_all_products():
+        return Products_v.objects.all()
+
+    @staticmethod
+    def get_all_products_by_categoryid(category_id):
+        if category_id:
+            return Products_v.objects.filter(category=category_id)
+        else:
+            return Products_v.get_all_products()

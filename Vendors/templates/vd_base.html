@@ -42,7 +42,7 @@
 
       <img
         src="https://github.com/sc-matthew/Django_Website/raw/main/Buyers/icon/logo_website.png"
-        style="width:50px;height:50px,color:text-light;margin-right:15px;"
+        style="width:50px;height:50px;color:text-light;margin-right:15px;"
         />PMN FigureStore</a>
 
     <button
@@ -66,6 +66,16 @@
       <ul class="navbar-nav me-auto my-2 my-lg-0">
 
         {% if request.session.vendors %}
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/vendors/add_products">
+            <button style="border-radius: 7px; background-color: lightgray">
+              Add Product
+              <img src = 'https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-svg-png-icon-download-1.png' 
+              style="width: 11px; height: 11px; margin-bottom: 4px; ">
+            </button>
+          </a> 
+        </li>
 
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>

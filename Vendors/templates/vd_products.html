@@ -1,0 +1,136 @@
+{% extends 'vd_base.html' %}
+
+{% block content %}
+{% load custom_filter %}
+<div class="container-fluid mt-3">
+	<div class="row">
+
+		<!-- filter -->
+
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group">
+
+				<a href="/vendors/my_products" class="list-group-item list-group-item-action btn
+					btn-outline-success">All Products</a>
+
+				{% for category in categories %}
+				<a href="/vendors/my_products?category={{category.id}}"
+					class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+
+
+		<!-- all products -->
+		<div id='products' class="col-lg-9 mx-auto">
+
+			<div id="content">
+				<h2>My product</h2>
+			</div>
+
+			<div class="results">
+				<table class="table table-bordered">
+					<thead>
+						<tr>						
+							<th scope="col" class="action-checkbox-column">
+							<div class="text"></div>
+							<div class="clear"></div>
+							</th>
+
+							<th scope="col" class="sortable column-name" width="12%">
+								<div class="text" style="text-align: center;">Image</div>
+								<div class="clear"></div>
+							</th>
+
+							<th scope="col" class="sortable column-name">
+							<div class="text" >Name</div>
+							<div class="clear"></div>
+							</th>
+
+							<th scope="col" class="sortable column-price">
+							<div class="text">Price</div>
+							<div class="clear"></div>
+							</th>
+
+							<th scope="col" class="sortable column-category sorted ascending">
+							<div class="text">Category</div>
+							<div class="clear"></div>
+							</th>
+
+							<th scope="col" class="sortable column-name">
+								<div class="text" >Status</div>
+								<div class="clear"></div>
+							</th>
+
+							<th width="8%"> </th>
+
+						</tr>
+					</thead>
+					
+					<tbody>
+							
+						{% for product in products %}
+						<tr>
+							<td class="action-checkbox">
+								<input type="checkbox" name="_selected_action" value="1" class="action-select">
+							</td>
+
+							<td id={{product.id}} class="text-center">
+								<img class="avatar" src="{{product.image.url}}" style="vertical-align: middle;
+								width: 65px;
+								height: 62px;
+								border-radius: 50%;
+								border: 1px solid #aa6969">
+							</td>
+
+							<th class="field-name">
+								<a href="/test">
+									{{product.name}}
+								</a>
+							</th>
+
+							<td class="field-price">
+								<a> {{product.price|currency}} </a>
+							</td>
+
+							<td class="field-category nowrap">
+								<a>{{product.category}}</a>
+        					</td>
+
+							<td class="field-category nowrap">
+								{% if product.status %}
+								<small class="badge badge-success" style="font-size: 13px; padding: 8px;">Ready to Sell</small>
+								{%else%}
+								<small class="badge badge-danger" style="font-size: 13px; padding: 8px;">Not Available</small>
+								{% endif %}
+        					</td>
+
+							<td class="field-price" >
+								<div class="text-center">
+									<class="nav-link" href="/test">
+										<button style=" border-radius: 7px; border: 1px solid lightgray; flex:0.5;">
+											<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/OOjs_UI_icon_edit-ltr-gray.svg/120px-OOjs_UI_icon_edit-ltr-gray.svg.png?20211119134628' 
+											style="width: 20px; height: 20px; margin-bottom: 4px;">
+										</button>
+	
+									<class="nav-link" href="/test">
+										<button style="border-radius: 7px; border: 1px solid lightgray; flex: 0.5;">
+											<img src = 'https://www.shareicon.net/data/128x128/2015/09/06/96798_trash_512x512.png' 
+											style="width: 20px; height: 20px; margin-bottom: 4px;">
+										</button>
+								</div>
+							</td>
+
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			
+
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

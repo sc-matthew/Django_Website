@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.views import View
-from .models import Vendors
+from .models import Vendors,Products_v, Category_v
 from .middlewares.auth import auth_middleware
 
 class Homepage(View):
@@ -103,7 +103,7 @@ class Login(View):
                     return HttpResponseRedirect(Login.return_url)
                 else:
                     Login.return_url = None
-                    return redirect("vendor_test")
+                    return redirect("vendor_products")
             else:
                 error_message = "Please check your email and password"
         else:
@@ -205,6 +205,23 @@ class Image(View):
         return render(request, "vd_account_image.html", {"success_message": success_message, "details" : vendors})
 
 
-class Test(View):
+class vendor_store(View):
     def get(self, request):
-        return render(request, "test.html", {})
+        products = None
+        categories = Category_v.get_all_categories()
+        categoryID = request.GET.get("category")
+        if categoryID:
+            products = Products_v.get_all_products_by_categoryid(categoryID)
+        else:
+            products = Products_v.get_all_products()
+
+        data = {}
+        data["products"] = products
+        data["categories"] = categories
+
+        return render(request, "vd_products.html",data)
+
+class AddProductView(View):
+    def get(self, request):
+
+        return render(request, 'vd_add_product.html', {})
