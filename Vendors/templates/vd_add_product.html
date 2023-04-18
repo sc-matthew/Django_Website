@@ -31,9 +31,10 @@
                                 <div>
                                     <label class="required" for="id_category">Category:</label>
                                     <div class="related-widget-wrapper" data-model-ref="category_v">
-                                        <select name="category" required="" id="id_category" fdprocessedid="1j8lm">
+                                        <select class="form-select form-select-lg mb-3">
+                                            <option selected> --- </option>
                                             {% for category in categories %}
-                                                <option value={{category.id}}>{{category.name}}</option>
+                                                <option value="{{category.id}}">{{category.name}}</option>
                                             {% endfor %}
                                         </select>
                                         <a class="related-widget-wrapper-link change-related" id="change_id_category" data-href-template="/admin/Vendors/category_v/__fk__/change/?_to_field=id&amp;_popup=1" data-popup="yes" title="Change selected category_v" href="/admin/Vendors/category_v/1/change/?_to_field=id&amp;_popup=1"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a>
@@ -59,9 +60,7 @@
                         </fieldset>
 
                     <div class="submit-row">
-                        <input type="submit" value="Save" class="default" name="_save" fdprocessedid="f3lqkg">
-                        <input type="submit" value="Save and add another" name="_addanother" fdprocessedid="38jwh">
-                        <input type="submit" value="Save and continue editing" name="_continue" fdprocessedid="2ds0uw">
+                        <input type="submit" value="Save" class="default" name="_save" >
                     </div>
                         <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" data-model-name="products_v" async="">
                         </script>

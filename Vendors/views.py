@@ -223,5 +223,7 @@ class vendor_store(View):
 
 class AddProductView(View):
     def get(self, request):
+        categories = Category_v.get_all_categories()
+        categoryID = request.GET.get("category")
 
-        return render(request, 'vd_add_product.html', {})
+        return render(request, 'vd_add_product.html', {"categories": categories, "categoryID": categoryID})
