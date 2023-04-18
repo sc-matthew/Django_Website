@@ -1,7 +1,7 @@
 {% extends 'vd_base.html' %}
 
 {% block content %}
-
+{% load custom_filter %}
 <div class="container-fluid mt-3">
 	<div class="row">
 
@@ -90,7 +90,7 @@
 							</th>
 
 							<td class="field-price">
-								<a> {{product.price}} </a>
+								<a> {{product.price|currency}} </a>
 							</td>
 
 							<td class="field-category nowrap">
@@ -105,18 +105,18 @@
 								{% endif %}
         					</td>
 
-							<td class="field-price">
-								<div  style="text-align: right;">
+							<td class="field-price" >
+								<div class="text-center">
 									<class="nav-link" href="/test">
 										<button style=" border-radius: 7px; border: 1px solid lightgray; flex:0.5;">
 											<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/OOjs_UI_icon_edit-ltr-gray.svg/120px-OOjs_UI_icon_edit-ltr-gray.svg.png?20211119134628' 
-											style="width: 15px; height: 15px; margin-bottom: 4px;">
+											style="width: 20px; height: 20px; margin-bottom: 4px;">
 										</button>
 	
 									<class="nav-link" href="/test">
 										<button style="border-radius: 7px; border: 1px solid lightgray; flex: 0.5;">
 											<img src = 'https://www.shareicon.net/data/128x128/2015/09/06/96798_trash_512x512.png' 
-											style="width: 15px; height: 15px; margin-bottom: 4px;">
+											style="width: 20px; height: 20px; margin-bottom: 4px;">
 										</button>
 								</div>
 							</td>

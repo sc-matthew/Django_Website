@@ -38,7 +38,7 @@ class Vendors(models.Model):
         return False
 
 class Category_v(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique = True)
 
     @staticmethod
     def get_all_categories():
