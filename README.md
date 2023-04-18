@@ -54,13 +54,13 @@ This project is brought to you by:
   - [X] ที่อยู่ร้าน
   - [X] รูปของร้าน (1 picture)
   - [X] รูป QRCode (1 picture)
-- [ ] My Product Listing Screen (Show all my products details)
+- [X] My Product Listing Screen (Show all my products details)
 
-  - [ ] ชื่อสินค้า
-  - [ ] รูปสินค้า
-  - [ ] หมวดหมู่
-  - [ ] ราคา
-  - [ ] สถานะ (ปกติ/หมด)
+  - [X] ชื่อสินค้า
+  - [X] รูปสินค้า
+  - [X] หมวดหมู่
+  - [X] ราคา
+  - [X] สถานะ (ปกติ/หมด)
 - [ ] Add/Edit/Delete Product Screen
 
   - [ ] ชื่อสินค้า
@@ -74,7 +74,4 @@ This project is brought to you by:
 
 Memo updated list:
 
-* Matthew -> Finished all requirements within Tuesday 12PM `<br>`
-  (Couldn't complete within the time limit, sorry guys 😓) `<br>`
-  Updated : 5PM -> Already done with the assigned tasks and forwarded to New and Prince for further dev.
-* New & Prince -> Get data from Matthew and working on progress after Aj.Kavin's class
+* Already merged from prince_new branch to main branch
