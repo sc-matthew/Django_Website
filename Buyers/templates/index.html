@@ -11,7 +11,7 @@
 		<!-- filter -->	
 		<div class="col-lg-3 mx-auto">
 			<div  class="list-group-item " style="border-radius: 25px; margin-bottom: 10px;" >
-				<form action="#" method="get" >
+				<form action="{% url 'product_search' %}" method="GET" >
 					<input type="text" name="query" placeholder="Search here..." style="width: 90%; border: 1px solid white; outline: none;">
 					<span>
 						  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/111px-Vector_search_icon.svg.png" 
@@ -34,26 +34,10 @@
 			<div class="row mx-auto">
 				{% for product in products %}
 				<div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
-					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap" >
 					<div class="card-body">
-						<a class="card-title" href="product_details/{{product.id}}">{{product.name}}</a>
-						<p class="card-text">
-							<b>{{product.price|currency}}</b>
-							{% if user.is_authenticated %}
-								<form action="{% url 'like_product' product_id=product.id %}" method="post">
-									{% csrf_token %}
-									{% if post_is_liked %}
-										<button type="submit" name="product_id" value="{{product.id}}" class="btn btn-info" 
-										style="float: right; font-size: 3px;">Unlike</button>
-									{% else %}
-										<button type="submit" name="product_id" value="{{product.id}}" class="btn btn-info"
-										style="float: right; font-size: 3px;">Like</button>
-									{% endif %}
-								</form>
-							{% else %}
-								<a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
-							{% endif %}
-						</p>
+						<a class="card-title" href="product_details/{{product.id}}/">{{product.name}}</a>
+						<p class="card-text"><b>{{product.price|currency}}</b></p>
 						<!-- {{product | is_in_cart:request.session.cart }} -->
 					</div>
 

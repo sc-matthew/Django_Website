@@ -84,6 +84,12 @@ def like_product(request, product_id):
     return redirect("product_detail", product_id = product_id)
 
 
+def product_search(request):
+    query = request.GET.get('query')
+    products = Products.objects.filter(name__icontains=query)
+    return render(request, 'search.html', {'products': products})
+
+
 def store(request):
     cart = request.session.get("cart")
     if not cart:
@@ -212,9 +218,11 @@ class Signup(View):
     
 
 class product_details(View):
+
     def get(self, request, product_id):
         products = Products.objects.get(id=product_id)
         return render(request, "product_details.html", {"products": products})
+    
 
     def post(self, request, product_id): #-> Handle product in product_details page
         products = Products.objects.get(id=product_id)
@@ -253,4 +261,5 @@ def add_to_cart(request):
         request.session.modified = True
 
     return redirect('product_details', product_id=product_id)
+
 
