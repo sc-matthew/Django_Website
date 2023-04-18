@@ -17,6 +17,7 @@ class Category(models.Model):
 
 
 class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone = models.CharField(max_length=10)
@@ -46,13 +47,16 @@ class Products(models.Model):
     name = models.CharField(max_length=60)
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    description = models.CharField(max_length=250, default="", blank=True, null=True)
+    description = models.CharField(max_length=5000, default="", blank=True, null=True)
     image = models.ImageField(upload_to="uploads/products/")
     last_update = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, blank = True, related_name='like_product')
+    created = models.DateTimeField(auto_now_add= True)
+    likes = models.ManyToManyField(User, default = None, blank =True, related_name='likes')
 
+    def __str__(self):
+        return self.name
+    
     @staticmethod
-
     def get_products_by_id(ids):
         return Products.objects.filter(id__in=ids)
 
@@ -67,9 +71,23 @@ class Products(models.Model):
         else:
             return Products.get_all_products()
         
-    @staticmethod
+    @property
     def number_of_likes(self):
-        return self.likes.count()
+        return self.likes.all().count()
+
+LIKE_CHOICES = (
+    ("Like", "Like"),
+    ("Unlike", "Unlike"),
+)
+    
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    value = models.CharField(choices= LIKE_CHOICES, default='Like', max_length=10)
+
+    def __str__(self):
+        return str(self.product)
 
 
 class Order(models.Model):

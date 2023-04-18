@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
-from .models import Customer, Products, Category, Order
+from .models import Customer, Products, Category, Order, Like
 from django.views import View
 from .middlewares.auth import auth_middleware
 import datetime
@@ -76,12 +76,28 @@ class Index(View):
 
 
 def like_product(request, product_id):
-    product = get_object_or_404(Products, id = product_id)
-    if request.user in product.likes.all():
-        product.likes.remove(request.user)
-    else:
-        product.likes.add(request.user)
-    return redirect("product_detail", product_id = product_id)
+    user = request.user
+    if request.method == 'POST':
+        if not hasattr(user, 'customer'):
+            return redirect('signup')
+        
+        product_obj = Products.objects.get(id=product_id)
+
+        if request.user in product_obj.likes.all():
+            product_obj.likes.remove(user)
+        else:
+            product_obj.likes.add(user)
+
+        like, created = Like.objects.get_or_create(user=user, product_id=product_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = 'Like'
+
+        like.save()
+    return redirect("product_details")
 
 
 def product_search(request):
@@ -215,6 +231,17 @@ class Signup(View):
         # saving
 
         return error_message
+    
+def product_search(request):
+    query = request.GET.get('query')
+    products = Products.objects.filter(name__icontains=query)
+
+    cart = request.session.get("cart")
+    if not cart:
+        request.session["cart"] = {}
+
+    categories = Category.get_all_categories()
+    return render(request, 'search.html', {'products': products, 'categories':categories})
     
 
 class product_details(View):
