@@ -98,7 +98,11 @@
         					</td>
 
 							<td class="field-category nowrap">
-								<a></a>
+								{% if product.status %}
+								<small class="badge badge-success" style="font-size: 13px; padding: 8px;">Ready to Sell</small>
+								{%else%}
+								<small class="badge badge-danger" style="font-size: 13px; padding: 8px;">Not Available</small>
+								{% endif %}
         					</td>
 
 							<td class="field-price">

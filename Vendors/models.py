@@ -55,6 +55,7 @@ class Products_v(models.Model):
     description = models.CharField(max_length=2500, default="", blank=True, null=True)
     image = models.ImageField(upload_to="uploads/products/")
     last_update = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
 
     @staticmethod
     def get_products_by_id(ids):
