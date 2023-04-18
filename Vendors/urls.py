@@ -12,4 +12,5 @@ urlpatterns = [
     path("logout", logout, name="vendor_logout"),
     path("my_products",vendor_store.as_view(), name="vendor_products"),
     path("add_products", AddProductView.as_view(), name='add_product'),
+    path("edit_products", AddProductView.as_view(), name='edit_product')
 ]
