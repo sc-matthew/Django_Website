@@ -227,3 +227,23 @@ class AddProductView(View):
         categoryID = request.GET.get("category")
 
         return render(request, 'vd_add_product.html', {"categories": categories, "categoryID": categoryID})
+    
+class EditCat(View):
+    def get(self, request):
+        categoryID = request.session.get("category")
+        details = Category_v.get_categories_by_catid(categoryID)
+        return render(request, "vd_edit_cat.html", {"details" : details})
+    
+    def post(self, request):
+        postData = request.POST
+        category_id = request.session.get("category")
+        categoryID = Category_v.objects.get(id=category_id)
+
+        categoryID.name = postData['categoryname']
+
+        categoryID.save()
+        success_message = "Changes saved successfully!"
+
+        return render(request, "vd_edit_cat.html", {"success_message": success_message, "categoryID" : categoryID})
+
+

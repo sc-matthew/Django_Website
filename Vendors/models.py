@@ -43,6 +43,9 @@ class Category_v(models.Model):
     @staticmethod
     def get_all_categories():
         return Category_v.objects.all()
+    
+    def get_categories_by_catid(category_id):
+        return Category_v.objects.get(id=category_id)
 
     def __str__(self):
         return self.name
