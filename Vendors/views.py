@@ -228,38 +228,44 @@ class AddProductView(View):
 
         return render(request, 'vd_add_product.html', {"categories": categories, "categoryID": categoryID})
     
-class AddCat(View):
+class AddCategory(View):
     def get(self, request):
         return render(request, "vd_add_cat.html")
     
     def post(self, request):
         postData = request.POST
-        categoryID = postData.get("category")
+        name = postData.get('name')
 
-        category = Category_v.objects.get(id=categoryID)
-        category.name = postData['categoryname']
-        category.save()
-        
-        return redirect("vd_add_product") 
+        category = Category_v(
+            name=name
+        )
+
+        try:
+            category = Category_v.objects.get(name=name)
+            category.save()
+        except Category_v.DoesNotExist:
+            category = Category_v(name=name)
+            category.save()
+            return redirect("add_product")
         
     
-class EditCat(View):
+class EditCategory(View):
     def get(self, request):
-        categoryID = request.GET.get("category")
-        return render(request, "vd_edit_cat.html", {"categoryID" : categoryID})
-    
+        category_id = request.GET.get('category')
+        category = Category_v.get_category_by_categorysid(category_id)
+        return render(request, 'vd_edit_cat.html', {'category': category})
+
     def post(self, request):
-        postData = request.POST
-        categoryID = request.GET.get("category")
+        category_id = int(request.GET.get('category'))
+        category = Category_v.get_category_by_categorysid(category_id) 
 
-        categoryID.name = postData['categoryname']
+        if category is not None:
+            category.name = request.POST.get('name')
+            category.save()
+        else:
+            pass
 
-        value = {
-            "name" : categoryID,}
-
-        categoryID.save()
-
-        return render(request, "vd_edit_cat.html", {"value":value, "categoryID" : categoryID})
+        return redirect('add_product')
     
     
 

@@ -27,16 +27,15 @@
                         <div class="form-group">
                             <label class="required" for="id_category">Category:</label>
                             <div class="related-widget-wrapper" data-model-ref="category_v">
-                                <form method="GET" action="vd_edit_cat.html"></form>
-                                    <select class="form-select form-select-lg mb-3">
-                                        <option selected> --- </option>
-                                        {% for category in categories %}
-                                            <option value="{{category.id}}">{{category.name}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </form>
-                                <a class="related-widget-wrapper-link change-related" title="Change selected category_v" href="/vendors/add_products/edit_category"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a>
-                                <a class="related-widget-wrapper-link add-related" href="/vendors/add_products/add_category" title="Add another category_v"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+                                <select class="form-select form-select-lg mb-3" name="category">
+                                    <option selected> --- </option>
+                                    {% for category in categories %}
+                                        <option value="{{category.id}}">{{category.name}}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <a class="related-widget-wrapper-link change-related" title="Change selected category_v" href="/vendors/add_products/edit_category?category={{categories.0.id}}"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a>
+                                <a class="related-widget-wrapper-link add-related" title="Add another category_v" href="/vendors/add_products/add_category"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
                             </div>  
                         </div>
 
@@ -55,9 +54,13 @@
                             <input style="margin-bottom: 15px;"type="submit" value="Save" class="default" name="_save" >
                         </div>
                             
-                        <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" data-model-name="products_v" async="">
-                        </script>
-                        <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
+                        <script>
+                            document.querySelector('select[name="category"]').addEventListener('change', function(event) {
+                                var selectedCategoryId = event.target.value;
+                                var editCategoryLink = document.querySelector('a.change-related');
+                                var editCategoryUrl = editCategoryLink.getAttribute('href').split('?')[0] + '?category=' + selectedCategoryId;
+                                editCategoryLink.setAttribute('href', editCategoryUrl);
+                            });
                         </script>
                     </form>
                 </div>

@@ -41,8 +41,17 @@ class Category_v(models.Model):
     name = models.CharField(max_length=50, unique = True)
 
     @staticmethod
+    def register(self):
+        self.save()
+        
     def get_all_categories():
         return Category_v.objects.all()
+
+    def get_category_by_categorysid(category_id):
+        try:
+            return Category_v.objects.get(id=category_id)
+        except Category_v.DoesNotExist:
+            return None
 
     def __str__(self):
         return self.name
