@@ -8,67 +8,57 @@
 
 
             <div class="col-lg-5 rounded mx-auto border pt-4">
-                <h2  style="text-align:center" >Add product</h2>
+                <div class="text-center col"></div>
+                <h2 class="alert alert-info rounded-pill"style="text-align:center">Add product</h2>
 
                 <div id="content-main">
-                    <form enctype="multipart/form-data" action="?_changelist_filters=o%3D3" method="post" id="products_v_form" novalidate="">
-                        <input type="hidden" name="csrfmiddlewaretoken" value="QGuBRzsHhqXdJHech3Q9RHFwFDW6hiHpol7COdehtSroDxQHMHPix31Y0PPePVqL">
-                        <div>
-                            <fieldset class="module aligned ">
-
-                                <div class="form-row field-name">
-                                    <div>
-                                        <label class="required" for="id_name">Name:</label>
-                                        <input type="text" name="name" class="vTextField" maxlength="60" required="" id="id_name" fdprocessedid="4j0lfg">
-                                    </div>
-                                </div>
-
-                                <div class="form-row field-price">
-                                    <div>
-                                        <label class="required" for="id_price">Price:</label>
-                                        <input type="number" name="price" value="0" step="0.01" required="" id="id_price" fdprocessedid="60vzu1h">
-                                    </div>
-                                </div>
-
-                                <div class="form-row field-category">
-                                    <div>
-                                        <label class="required" for="id_category">Category:</label>
-                                        <div class="related-widget-wrapper" data-model-ref="category_v">
-                                            <select class="form-select form-select-lg mb-3">
-                                                <option selected> --- </option>
-                                                {% for category in categories %}
-                                                    <option value="{{category.id}}">{{category.name}}</option>
-                                                {% endfor %}
-                                            </select>
-                                            <a class="related-widget-wrapper-link change-related" id="change_id_category" data-popup="yes" title="Change selected category_v" href="/vendors/add_products/edit_category"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a>
-                                            <a class="related-widget-wrapper-link add-related" id="add_id_category" data-popup="yes" href="/admin/Vendors/category_v/add/?_to_field=id&amp;_popup=1" title="Add another category_v"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                        <div class="form-row field-description">
-                            <div>
-                                <label for="id_description">Description:</label>
-                                <input type="text" name="description" class="vTextField" maxlength="2500" id="id_description" fdprocessedid="ogukpr">
-                            </div>
+                    <form enctype="multipart/form-data" action="add_product" method="POST" id="products_v_form" novalidate="">
+                        {% csrf_token %}
+                        <div class="form-group">   
+                            <label class="required" for="" style="margin-right: 40px;">Product Name:</label>
+                            <input type="text" name="name" class="vTextField" required="">
                         </div>
 
-                        <div class="form-row field-image">
-                            <div>
-                                <label class="required" for="id_image">Image:</label>
-                                <input type="file" name="image" accept="image/*" required="" id="id_image">
-                            </div>
+                        <div class="form-group">
+                            <label class="required" for="id_price"  style="margin-right: 49px;">Price:</label>
+                            <input type="number" name="price" value="0" step="0.1" required="" id="id_price">
                         </div>
-                            </fieldset>
+
+                        <div class="form-group">
+                            <label class="required" for="id_category">Category:</label>
+                            <div class="related-widget-wrapper" data-model-ref="category_v">
+                                <form method="GET" action="vd_edit_cat.html"></form>
+                                    <select class="form-select form-select-lg mb-3">
+                                        <option selected> --- </option>
+                                        {% for category in categories %}
+                                            <option value="{{category.id}}">{{category.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                                <a class="related-widget-wrapper-link change-related" title="Change selected category_v" href="/vendors/add_products/edit_category"><img src="/static/admin/img/icon-changelink.svg" alt="Change"></a>
+                                <a class="related-widget-wrapper-link add-related" href="/vendors/add_products/add_category" title="Add another category_v"><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+                            </div>  
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_description">Description:</label>
+                            <input type="text" name="description" class="vTextField" maxlength="2500" id="id_description" >
+
+                        </div>
+
+                        <div class="form-group">                           
+                            <label class="required" for="id_image">Image:</label>
+                            <input type="file" name="image" accept="image/*" required="" id="id_image">                           
+                        </div>
 
                         <div class="submit-row">
-                            <input type="submit" value="Save" class="default" name="_save" >
+                            <input style="margin-bottom: 15px;"type="submit" value="Save" class="default" name="_save" >
                         </div>
-                            <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" data-model-name="products_v" async="">
-                            </script>
-                            <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
-                            </script>
-                        </div>
+                            
+                        <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" data-model-name="products_v" async="">
+                        </script>
+                        <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
+                        </script>
                     </form>
                 </div>
             </div>

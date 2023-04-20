@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, re_path
 from .middlewares.auth import auth_middleware
-from .views import Homepage, Signup, Login, Account, Image, logout, vendor_store, AddProductView, EditCat
+from .views import Homepage, Signup, Login, Account, Image, logout, vendor_store, AddProductView, EditCat, AddCat
 
 urlpatterns = [
     path("", Homepage.as_view(), name="vendor_homepage"),
@@ -14,5 +14,6 @@ urlpatterns = [
     path("add_products", AddProductView.as_view(), name='add_product'),
     path("edit_products", AddProductView.as_view(), name='edit_product'),
     path("add_products/edit_category", EditCat.as_view(),name = "edit_category"),
+    path("add_products/add_category", AddCat.as_view(),name = "add_category"),
 
 ]

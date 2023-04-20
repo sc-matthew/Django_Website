@@ -1,36 +1,24 @@
+{% extends 'landing_base.html' %}
+
 {% block content %}
 
-<div id="content" class="colM">       
-    <h1>Add Category</h1>
-    <div id="content-main">
-        <form method="post" id="category_v_form" novalidate="">
+<div id="content" class="card" style="border:none">   
+    <div class="card-body" id="content-main">
+        <h1 class="card-title" style="margin-bottom: 30px;">Add Category</h1>
+
+        <form action="/vendors/add_products/add_category" method="post">
+            {% csrf_token %}
             <div>
-                <input type="hidden" name="_popup" value="1">
-                <input type="hidden" name="_to_field" value="id">
-
-                <fieldset class="module aligned ">
-                    <div class="form-row field-name">
-                        <div>
-                            <label class="required" for="id_name">Name:</label>
-                            <input type="text" name="name" value="Model" class="vTextField" maxlength="50" required="" id="id_name">
-                        </div>
+                <div class="form-row field-name">
+                    <div>
+                        <label class="required" for="id_name">Name:</label>
+                        <input type="text" name="name" value="" class="vTextField" maxlength="50" required="" id="id_name">
+                        <input type="submit" value="Save" class="default" name="_save">
                     </div>
-                </fieldset>
-
-
-                <div class="submit-row">
-                    <input type="submit" value="Save" class="default" name="_save">
                 </div>
-
-                <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" async="">
-                </script>
-
-                <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
-                </script>
-
-
             </div>
         </form>
+
     </div>
     <br class="clear">
 </div>
