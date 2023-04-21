@@ -25,7 +25,7 @@
 		<div id='products' class="col-lg-9 mx-auto">
 			<br>
 			<div id="content">
-				<h2>My Product</h2>
+				<h2>Management System - Products</h2>
 			</div>
 
 			<br>
@@ -69,12 +69,12 @@
 					</thead>
 					
 					<tbody>
-							
 						{% for product in products %}
 						<tr>
-							<td class="action-checkbox">
-								<input type="checkbox" name="_selected_action" value="1" class="action-select">
+							<td>
+								{{ forloop.counter }}
 							</td>
+							
 
 							<td id={{product.id}} class="text-center">
 								<img class="avatar" src="{{product.image.url}}" style="vertical-align: middle;
