@@ -221,7 +221,7 @@ class vendor_store(View):
 
         return render(request, "vd_products.html",data)
 
-class AddProductView(View):
+class AddProduct(View):
     def get(self, request):
         categories = Category_v.get_all_categories()
         categoryID = request.GET.get("category")
@@ -230,7 +230,7 @@ class AddProductView(View):
     
 class AddCategory(View):
     def get(self, request):
-        return render(request, "vd_add_cat.html")
+        return render(request, "vd_add_category.html")
     
     def post(self, request):
         postData = request.POST
@@ -253,7 +253,7 @@ class EditCategory(View):
     def get(self, request):
         category_id = request.GET.get('category')
         category = Category_v.get_category_by_categorysid(category_id)
-        return render(request, 'vd_edit_cat.html', {'category': category})
+        return render(request, 'vd_edit_category.html', {'category': category})
 
     def post(self, request):
         category_id = int(request.GET.get('category'))
@@ -265,7 +265,7 @@ class EditCategory(View):
         else:
             pass
 
-        return redirect('add_product')
+        return redirect("add_product")
     
     
 
