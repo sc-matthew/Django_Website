@@ -75,3 +75,24 @@ This project is brought to you by:
 Memo updated list:
 
 * Already merged from prince_new branch to main branch
+---
+
+Matthew:
+- [ ] module edit product details (link to ดินสอ)
+- [ ] edit nav bar
+
+New:
+- [ ] add /edit ให้ show ว่าซ้ำไหม (unique)
+  1. edit success -> no show after save (pop-up & return)
+  2. duplicate value -> error page  (red warning)
+
+
+Prince:
+- [ ] delete product (link to trash) 
+  1. pop-up (confirmation to delete)
+  2. delete successful
+  3. press ok (redirect to manage product page)
+
+---
+Remain after finish buyer:
+- [ ] link details href to buyers product details info
