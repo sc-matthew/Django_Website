@@ -227,6 +227,56 @@ class AddProduct(View):
         categoryID = request.GET.get("category")
 
         return render(request, 'vd_add_product.html', {"categories": categories, "categoryID": categoryID})
+
+    def post(self, request):
+        postData = request.POST
+        postFiles = request.FILES
+        name = postData.get("name")
+        price = postData.get("price")
+        category_id = postData.get('category')
+        category = Category_v.get_category_by_categorysid(category_id)
+        description = postData.get("description")
+        image = postFiles.get("image")
+        status = postData.get("status")
+        if status == 'on':
+            status = 1
+        else:
+            status = 0
+        
+        product = Products_v(
+            name = name,
+            price = price,
+            description = description,
+            image = image,
+            category_id = category_id,
+            status = status
+        )
+            
+        if image.content_type != "image/jpeg":
+            error_message = "Invalid file type for Store Picture (Only JPEG and JPG are supported). Please try again."
+            data = {"error": error_message, "values": product}
+            return render(request, "vd_add_product.html", data)
+        else:
+            error_message = self.validateProduct(product)
+
+            if not error_message:
+                product.save()
+                success_message = "Changes saved successfully!"
+                return render(request, "vd_add_product.html", {"success_message": success_message, "values": product})
+            else:
+                data = {"error": error_message, "values": product}
+                return render(request, "vd_signup.html", data)
+        
+    def validateProduct(self, product):
+        error_message = None
+        if len(product.description.strip()) == 0:
+            error_message = "You should not enter blank in the description"
+
+        return error_message
+
+        
+        
+
     
 class AddCategory(View):
     def get(self, request):
@@ -258,6 +308,7 @@ class EditCategory(View):
     def post(self, request):
         category_id = int(request.GET.get('category'))
         category = Category_v.get_category_by_categorysid(category_id) 
+        
 
         if category is not None:
             category.name = request.POST.get('name')
