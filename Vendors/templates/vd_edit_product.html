@@ -1,0 +1,139 @@
+{% extends 'vd_base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="p-3 m-3">
+
+
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col"></div>
+            <h3 class="alert alert-info rounded-pill" style="text-align:center">Edit Product Details</h3>
+            <form enctype="multipart/form-data" action="/vendors/add_products"
+                method="POST">
+
+
+                {% if error_message %}
+                <div class="alert alert-danger" role="alert">
+                    {{error_message}}
+                </div>
+                {% endif %}
+
+                {% if success_message %}
+                <div class="alert alert-success" role="alert">
+                    {{success_message}}
+                </div>
+                {% endif %}
+                
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="">Product Name</label>
+                    <input required type="text" name="name" id=""
+                        value="{{details.name}}"
+                        class="form-control-sm form-control"
+                        title="Length of product name must be between at least 5
+                        characters, and not exceed 99 characters">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Price</label>
+                    <input required type="number" name="price" id=""
+                        value="{{details.price}}"
+                        class="form-control-sm form-control" value="0"
+                        step="0.1">
+                </div>
+                        
+                        <div class="form-group">
+                            <label class="required" for="id_category">Category</label>
+                            <div class="related-widget-wrapper"
+                                data-model-ref="category_v" style="margin-top: 5px;">
+                                <select required class="form-select form-select-sm mb-3"
+                                    name="category" style="font-size: 11pt;">
+                                    <option value="" disabled selected>Select Category</option>
+                                    {% for category in categories %}
+                                    <option value="{{category.id}}">{{category.name}}</option>
+                                    {% endfor %}
+                                </select>
+                        
+
+                        <a class="related-widget-wrapper-link
+                            change-related" title="Edit category name"
+                            href="/vendors/add_products/edit_category?category={{categories.0.id}}"><img
+                                src="/static/admin/img/icon-changelink.svg"
+                                alt="Change" style="width: 20px;margin-left:12px;"></a>
+                        <a class="related-widget-wrapper-link add-related"
+                            title="Add another category"
+                            href="/vendors/add_products/add_category"><img
+                                src="/static/admin/img/icon-addlink.svg"
+                                alt="Add" style="width: 20px;margin-left:5px"></a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_description">Description</label>
+                    <textarea required type="text" name="description" id=""
+                        class="form-control" maxlength="2500" style="font-size: 11pt;">{{details.description}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_image">Product Image</label>
+                    <div class="text-center">
+                        <img src="{{ details.image.url }}" class="rounded"
+                            style="max-width: 60%;height: 60%;margin-top: 15px;">
+                        <div class="form-group" style="margin-top: 25px">
+                    <input required type="file" name="image"
+                        id="id_image" class="form-control-file form-control-sm">
+                    </div>
+                </div>
+
+
+                <div class="checkbox-row">
+                    <label class="vCheckboxLabel" for="id_status"
+                        style="margin-top: 10px">Status</label>
+                            <a href="#" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" 
+                            title=
+"If the product is ready to be sold, please tick the checkbox below. 
+Otherwise, the checkbox should be left empty." >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi
+                            bi-info-circle" style="margin-left:5px">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1
+                                0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93
+                                    6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738
+                                    3.468c-.194.897.105 1.319.808 1.319.545 0
+                                    1.178-.252
+                                    1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275
+                                    0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1
+                                    1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </a><br>
+                            <input type="checkbox" name="status" id="id_status" {% if details.status %}checked{% endif %} style="margin-left:10px"> Available to be sold
+
+                </div>
+                            
+                        <hr>
+                        <button type="submit" class="btn btn-sm btn-success
+                            col-lg-12">Save Changes</button>
+
+
+                        <!-- for resolve the overlap box and button -->
+                        <div class="form-group"> </div>
+
+                        <script>
+                            document.querySelector('select[name="category"]').addEventListener('change', function(event) {
+                                var selectedCategoryId = event.target.value;
+                                var editCategoryLink = document.querySelector('a.change-related');
+                                var editCategoryUrl = editCategoryLink.getAttribute('href').split('?')[0] + '?category=' + selectedCategoryId;
+                                editCategoryLink.setAttribute('href', editCategoryUrl);
+                            });
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

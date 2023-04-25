@@ -274,10 +274,14 @@ class AddProduct(View):
 
         return error_message
 
-        
-        
 
-    
+class EditProduct(View):
+    def get(self, request, product_id):
+        product = Products_v.objects.get(id=product_id)
+        categories = Category_v.get_all_categories()
+        print(product.name, product.description, product.price, product.category_id)
+        return render(request, "vd_edit_product.html", {"details":product, "categories":categories})
+
 class AddCategory(View):
     def get(self, request):
         return render(request, "vd_add_category.html")
