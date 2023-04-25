@@ -134,6 +134,3 @@ dmypy.json
 # Author VSCode
 .vscode
 
-# Products Image (vary depends on product uploaded)
-uploads/
-
