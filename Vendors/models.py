@@ -63,8 +63,9 @@ class Products_v(models.Model):
     category = models.ForeignKey(Category_v, on_delete=models.CASCADE, default=1)
     description = models.CharField(max_length=2500)
     image = models.ImageField(upload_to="uploads/products/")
-    last_update = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
+    ownerid = models.PositiveSmallIntegerField(default=1, null=False)
+    last_update = models.DateTimeField(auto_now=True)
 
     @staticmethod
     def get_products_by_id(ids):
@@ -80,3 +81,9 @@ class Products_v(models.Model):
             return Products_v.objects.filter(category=category_id)
         else:
             return Products_v.get_all_products()
+        
+    def get_product_by_owner(ownerid):
+        if ownerid:
+            return Products_v.objects.filter(ownerid=ownerid)
+        else:
+            return None

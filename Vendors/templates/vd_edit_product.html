@@ -51,9 +51,13 @@
                                 data-model-ref="category_v" style="margin-top: 5px;">
                                 <select required class="form-select form-select-sm mb-3"
                                     name="category" style="font-size: 11pt;">
-                                    <option value="" disabled selected>Select Category</option>
                                     {% for category in categories %}
+                                    {% if details.category == category %}
+                                    <option value="{{category.id}}" selected>{{category.name}}</option>
+                                {% else %}
                                     <option value="{{category.id}}">{{category.name}}</option>
+                                {% endif %}
+                                
                                     {% endfor %}
                                 </select>
                         

@@ -211,9 +211,9 @@ class vendor_store(View):
         categories = Category_v.get_all_categories()
         categoryID = request.GET.get("category")
         if categoryID:
-            products = Products_v.get_all_products_by_categoryid(categoryID)
+            products = Products_v.objects.filter(ownerid=request.session.get("vendors")).filter(category=categoryID)
         else:
-            products = Products_v.get_all_products()
+            products = Products_v.get_product_by_owner(request.session.get("vendors"))
 
         data = {}
         data["products"] = products
@@ -238,6 +238,7 @@ class AddProduct(View):
         description = postData.get("description")
         image = postFiles.get("image")
         status = postData.get("status")
+        owner = request.session.get("vendors")
         if status == 'on':
             status = 1
         else:
@@ -249,7 +250,8 @@ class AddProduct(View):
             description = description,
             image = image,
             category_id = category_id,
-            status = status
+            status = status,
+            ownerid = owner
         )
             
         if image.content_type != "image/jpeg":
