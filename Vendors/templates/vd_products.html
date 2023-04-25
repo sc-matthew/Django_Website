@@ -108,86 +108,19 @@
 
 							<td class="field-price" >
 								<div class="text-center">
-									<class="nav-link" href="/test">
-										<button style=" border-radius: 7px; border: 1px solid lightgray; flex:0.5;">
+									<class="nav-link" >
+										<a href="/vendors/edit_products/{{product.id}}">
+										<button style=" border-radius: 7px; border: 1px solid lightgray; flex:0.5;" >
 											<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/OOjs_UI_icon_edit-ltr-gray.svg/120px-OOjs_UI_icon_edit-ltr-gray.svg.png?20211119134628' 
 											style="width: 20px; height: 20px; margin-bottom: 4px;">
 										</button>
-	
-									<button style="border-radius: 7px; border: 1px solid lightgray; flex: 0.5;" onclick="confirmDelete({{ product.id }})">
-										<img src = 'https://www.shareicon.net/data/128x128/2015/09/06/96798_trash_512x512.png' style="width: 20px; height: 20px; margin-bottom: 4px;">
-									</button>
-								
-									<script>
-										function confirmDelete(productId) {
-											var popup = document.createElement('div');
-											popup.setAttribute('class', 'popup');
-											popup.setAttribute('id', 'popup');
-											popup.innerHTML = `
-												<p style="font-size: 20px; margin: 30px 0 10px;">Are you sure you want to delete this product?</p>
-												<button type="button" onclick="deleteProduct(${productId})"
-													style="width: 100px; margin-right: 10px; padding: 10px; background: rgb(82, 201, 82);
-													color: white; border: 0;border-radius: 4px; font-size: 18 px; cursor: pointer; box-shadow: 0 2px rgba(0,0,0,0.2); outline: none;">
-													OK
-												</button>
-												<button type="button" onclick="closePopup()"
-													style="width: 100px; margin-left: 10px; padding: 10px; background: rgb(255, 0, 0);
-													color: white; border: 0;border-radius: 4px; font-size: 18 px; cursor: pointer; box-shadow: 0 2px rgba(0,0,0,0.2); outline: none;">
-													Cancel
-												</button>
-											`;
-											document.body.appendChild(popup);
-										}
-									
-										function deleteProduct(productId) {
-											var popup = document.getElementById('popup');
-											popup.innerHTML = `<p style="font-size: 20px; margin: 30px 0 10px;">Deleting...</p>`;
-											fetch('/delete_product/' + productId, {
-												method: 'DELETE',
-											})
-											.then(response => {
-												if (response.ok) {
-													popup.innerHTML = `
-														<p style="font-size: 20px; margin: 30px 0 10px;">Delete successful!</p>
-														<button type="button" onclick="closePopup()"
-															style="width: 100%; margin-top: 50px; padding: 10px; background: rgb(82, 201, 82);
-															color: white; border: 0;border-radius: 4px; font-size: 18px; cursor: pointer; box-shadow: 0 2px rgba(0,0,0,0.2); outline: none;">
-															Back
-														</button>
-													`;
-													
-												} else {
-													popup.innerHTML = `
-														<p style="font-size: 20px; margin: 30px 0 10px;"> Delete failed.</p>
-														<button type="button" onclick="closePopup()"
-															style="width: 100%; margin-top: 50px; padding: 10px; background: rgb(255, 0, 0);
-															color: white; border: 0;border-radius: 4px; font-size: 18px; cursor: pointer; box-shadow: 0 2px rgba(0,0,0,0.2); outline: none;">
-															Back
-														</button>
-													`;
-												}
-											})
-										}
-									
-										function closePopup() {
-											var popup = document.getElementById('popup');
-											if (popup) {
-												popup.parentNode.removeChild(popup);
-											}
-										}
-									</script>
-									
-									
-									
-								<!-- <div class="popup" id="popup"
-                                    style="width: 500px; background: #fff; border-radius: 6px; position: absolute; top: 35% ; left: 20%;
-                                    text-align: center; padding: 0 30px 30px; transform: (-50%, -50%); border: 1px solid gray;">
-                                    <p style="font-size: 20px; margin: 30px 0 10px;"> {{delete_successful}}</p>
-                                    <button type="button" onclick="closePopup()"
-                                    style="width: 100%; margin-top: 50px; padding: 10px; background: rgb(82, 201, 82); 
-                                    color: white; border: 0;border-radius: 4px; font-size: 18 px; cursor: pointer; box-shadow: 0 2px rgba(0,0,0,0.2); outline: none;"> Back </button>
-                                </div> -->
-								
+									</a>
+
+									<class="nav-link" href="/test">
+										<button style="border-radius: 7px; border: 1px solid lightgray; flex: 0.5;">
+											<img src = 'https://www.shareicon.net/data/128x128/2015/09/06/96798_trash_512x512.png' 
+											style="width: 20px; height: 20px; margin-bottom: 4px;">
+										</button>
 
 								</div>
 							</td>
