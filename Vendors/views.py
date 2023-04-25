@@ -290,17 +290,23 @@ class AddCategory(View):
         postData = request.POST
         name = postData.get('name')
 
+
+        # Convert the category name to lowercase
+        lowercase_name = name.lower()
+
         category = Category_v(
             name=name
         )
 
-        try:
-            category = Category_v.objects.get(name=name)
-            category.save()
-        except Category_v.DoesNotExist:
-            category = Category_v(name=name)
-            category.save()
-            return redirect("add_product")
+        if Category_v.objects.filter(name__iexact=lowercase_name).exists():
+            error_message = "This category name already exists."
+            data = {"error_message": error_message, "name": name}
+            return render(request, "vd_add_category.html", data)
+
+        category = Category_v(name=name)
+        success_message = "Changes saved successfully!"
+        category.save()
+        return redirect("add_product")
         
     
 class EditCategory(View):
@@ -315,12 +321,18 @@ class EditCategory(View):
         
 
         if category is not None:
-            category.name = request.POST.get('name')
-            category.save()
-        else:
-            pass
+            name = request.POST.get('name')
+            lowercase_name = name.lower()
 
-        return redirect("add_product")
+            if Category_v.objects.filter(name__iexact=lowercase_name).exclude(id=category_id).exists():
+                error_message = "This category name already exists."
+                data = {"error_message": error_message, "name": name}
+                return render(request, "vd_edit_category.html", data)
+
+            category.name = name
+            success_message = "Changes saved successfully!"
+            category.save()
+            return render(request, "vd_edit_category.html", {'success_message':success_message})
     
 
 

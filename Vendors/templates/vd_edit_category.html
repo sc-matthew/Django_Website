@@ -12,6 +12,14 @@
 
                 <form action="/vendors/add_products/edit_category?category={{ category.id }}" method="post">
                     {% csrf_token %}
+
+                    {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error_message}}
+                    </div>
+                    {% endif %}
+                    <hr />
+                    
                     <div>
                         <div class="form-row field-name">
                             <div>
@@ -21,6 +29,7 @@
                                     maxlength="50" required="">
                                 <input type="submit" value="Save"
                                     class="default" name="_save">
+
                             </div>
                         </div>
                     </div>
