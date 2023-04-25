@@ -15,5 +15,5 @@ urlpatterns = [
     path("edit_products/<int:product_id>", EditProduct.as_view(), name='edit_product'),
     path("add_products/edit_category", EditCategory.as_view(),name = "edit_category"),
     path("add_products/add_category", AddCategory.as_view(),name = "add_category"),
-
+    
 ]

@@ -322,6 +322,6 @@ class EditCategory(View):
 
         return redirect("add_product")
     
-    
+
 
 
