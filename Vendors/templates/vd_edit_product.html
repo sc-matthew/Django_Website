@@ -10,7 +10,7 @@
         <div class="col-lg-5 rounded mx-auto border pt-4">
             <div class="text-center col"></div>
             <h3 class="alert alert-info rounded-pill" style="text-align:center">Edit Product Details</h3>
-            <form enctype="multipart/form-data" action="/vendors/add_products"
+            <form enctype="multipart/form-data" action="/vendors/edit_products/{{details.id}}"
                 method="POST">
 
 
@@ -54,9 +54,9 @@
                                     {% for category in categories %}
                                     {% if details.category == category %}
                                     <option value="{{category.id}}" selected>{{category.name}}</option>
-                                {% else %}
+                                    {% else %}
                                     <option value="{{category.id}}">{{category.name}}</option>
-                                {% endif %}
+                                    {% endif %}
                                 
                                     {% endfor %}
                                 </select>
@@ -87,7 +87,7 @@
                         <img src="{{ details.image.url }}" class="rounded"
                             style="max-width: 60%;height: 60%;margin-top: 15px;">
                         <div class="form-group" style="margin-top: 25px">
-                    <input required type="file" name="image"
+                    <input type="file" name="image"
                         id="id_image" class="form-control-file form-control-sm">
                     </div>
                 </div>
