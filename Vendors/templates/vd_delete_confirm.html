@@ -1,0 +1,100 @@
+{% extends 'vd_base.html' %}
+
+{% block content %}
+{% load custom_filter %}
+<div class="container">
+
+    <div class="p-3 m-3">
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col">
+
+            </div>
+            <h3 class="alert alert-danger rounded-pill" style="text-align:center">Delete Product Confirmation</h3>
+            <form action="/vendors/delete_products/{{product.id}}" method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <hr />
+                <div>
+                    <h2 class="text-center" style="margin-top:20px">{{product.name}}</h2>
+                    <div class="text-center">
+                        <img src="{{ product.image.url }}" class="rounded"
+                            style="max-width: 50%;height: 50%;margin-top: 15px;">
+                    </div>
+                </div>
+
+                <div style="margin-top:30px">
+                    <div>
+                        <h5 style="display: inline-block;"><u>Price:</u></h5>
+                        <span class="product-price" style="display: inline-block;font-size: 12.5pt;margin-left: 8px;">{{product.price|currency}}</span>
+                    </div>
+                    
+                    <div>
+                        <h5 style="display: inline-block;"><u>Status:</u></h5>
+                        {% if product.status == 1 %}
+                            <span class="product-price" style="display: inline-block;font-size: 12.5pt;margin-left: 8px;">Ready to Sell</span>
+                        {% else %}
+                            <span class="product-price" style="display: inline-block;font-size: 12.5pt;margin-left: 8px;">Not Available</span>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <h5 style="display: inline-block;"><u>Description:</u></h5>
+                    </div>
+                        <span class="product-price" style="margin-left: 30px;">
+                            {{product.description|truncatechars:180}}
+                        </span>
+                    
+                    
+                </div>
+
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--Cancel button-->
+                        <a href="/vendors/my_products">
+                        <button type="button" class="btn btn-outline-secondary col-lg-12">Cancel</button>
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <!--Submit button-->
+                        <a data-toggle="modal" data-target="#exampleModal">
+                            <button type="submit" class="btn btn-danger col-lg-12">Delete Product</button>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- for resolve the overlap box and button -->
+                <div class="form-group"> </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Message from System
+          </h5>
+          <hr>
+        </div>
+        <div class="modal-body">
+          <div class="m-2 p-3">
+            {% csrf_token %}
+            <p class="alert alert-danger rounded-pill">
+              The selected product will be deleted from our system. Please note that once a product is deleted, the action can't be reverted. <br><br>
+              After the product deletion, you will be redirected to the product management screen.
+            </p> 
+            <br/> 
+            <input type="submit" class="btn btn-outline-danger col-lg-12" value="Click here to return to homepage">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

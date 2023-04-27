@@ -77,7 +77,7 @@
         <div class="m-2 p-3">
           <form action="/buyers/check-out" method="POST">
             {% csrf_token %}
-            <p class="alert alert-info rounded-pill">
+            <p class="alert alert-secondary rounded-pill">
               Please note that the address and phone number provided in this pop-up should be the contact information for the person who will be available to 
               receive the packages from us. If there is no recipient and the packages are returned, we will not issue any refunds.
             </p> <br/>
@@ -94,6 +94,7 @@
                 placeholder="" aria-describedby="helpId">
             </div>
 
+            <br>
             <input type="submit" class="btn float-right btn-outline-success
               col-lg-6" value="Check out">
           </form>
