@@ -180,29 +180,34 @@ class Image(View):
         print(details)
         return render(request, "vd_account_image.html", {"details" : details})
     
+
     def post(self, request):
         postFiles = request.FILES
         vendors_id = request.session.get("vendors")
         vendors = Vendors.objects.get(id=vendors_id)
 
-        store_picture = postFiles.get("store_picture")
-        qrcode_picture = postFiles.get("qrcode_picture")
-
-        # Check file types
-        if store_picture.content_type != "image/jpeg":
-            error_message = "Invalid file type for Store Picture (Only JPEG and JPG are supported). Please try again."
-            return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
-        
-        elif qrcode_picture.content_type != "image/jpeg":
-            error_message = "Invalid file type for QRCode Picture (Only JPEG and JPG are supported). Please try again."
+        if not ('store_picture' in postFiles or 'qrcode_picture' in postFiles):
+            error_message = "There is no file uploaded, please check again !"
             return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
 
-        vendors.store_picture = store_picture
-        vendors.qrcode_picture = qrcode_picture
-        
+        if 'store_picture' in postFiles:
+            store_picture = postFiles.get("store_picture")
+            if store_picture.content_type != "image/jpeg":
+                error_message = "Invalid file type for Store Picture (Only JPEG and JPG are supported). Please try again."
+                return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
+            vendors.store_picture = store_picture
+
+        if 'qrcode_picture' in postFiles:
+            qrcode_picture = postFiles.get("qrcode_picture")
+            if qrcode_picture.content_type != "image/jpeg":
+                error_message = "Invalid file type for QRCode Picture (Only JPEG and JPG are supported). Please try again."
+                return render(request, "vd_account_image.html", {"error_message": error_message, "details": vendors})
+            vendors.qrcode_picture = qrcode_picture
+
         vendors.save()
         success_message = "Changes saved successfully!"
         return render(request, "vd_account_image.html", {"success_message": success_message, "details" : vendors})
+
 
 
 class vendor_store(View):
@@ -211,9 +216,9 @@ class vendor_store(View):
         categories = Category_v.get_all_categories()
         categoryID = request.GET.get("category")
         if categoryID:
-            products = Products_v.get_all_products_by_categoryid(categoryID)
+            products = Products_v.objects.filter(ownerid=request.session.get("vendors")).filter(category=categoryID)
         else:
-            products = Products_v.get_all_products()
+            products = Products_v.get_product_by_owner(request.session.get("vendors"))
 
         data = {}
         data["products"] = products
@@ -221,7 +226,161 @@ class vendor_store(View):
 
         return render(request, "vd_products.html",data)
 
-class AddProductView(View):
+class AddProduct(View):
     def get(self, request):
+        categories = Category_v.get_all_categories()
+        categoryID = request.GET.get("category")
 
-        return render(request, 'vd_add_product.html', {})
+        return render(request, 'vd_add_product.html', {"categories": categories, "categoryID": categoryID})
+
+    def post(self, request):
+        postData = request.POST
+        postFiles = request.FILES
+        name = postData.get("name")
+        price = postData.get("price")
+        category_id = postData.get('category')
+        categories = Category_v.get_all_categories()
+        description = postData.get("description")
+        image = postFiles["image"]
+        status = postData.get("status")
+        owner = request.session.get("vendors")
+        if status == 'on':
+            status = 1
+        else:
+            status = 0
+        
+        if image.content_type != "image/jpeg":
+            error_message = "Invalid file type for Product Image (Only JPEG and JPG are supported). Please try again."
+            data = {"error_message": error_message, "categories":categories}
+            return render(request, "vd_add_product.html", data)
+        
+        product = Products_v(
+            name = name,
+            price = price,
+            description = description,
+            image = image,
+            category_id = category_id,
+            status = status,
+            ownerid = owner
+        )
+
+        error_message = self.validateProduct(product)
+        if not error_message:
+            product.save()
+            success_message = "Changes saved successfully!"
+            return render(request, "vd_add_product.html", {"success_message": success_message, "values": product, "categories":categories})
+        else:
+            data = {"error_message": error_message, "values": product, "categories":categories}
+            return render(request, "vd_add_product.html", data)
+        
+    def validateProduct(self, product):
+        error_message = None
+        if len(product.description.strip()) == 0:
+            error_message = "You should not enter blank in the description"
+
+        return error_message
+
+
+class EditProduct(View):
+    def get(self, request, product_id):
+        product = Products_v.objects.get(id=product_id)
+        categories = Category_v.get_all_categories()
+        return render(request, "vd_edit_product.html", {"details":product, "categories":categories})
+    
+    def post(self, request, product_id):
+        postData = request.POST
+        postFiles = request.FILES
+        product = Products_v.objects.get(id=product_id)
+        categories = Category_v.get_all_categories()
+
+        if 'image' in request.FILES:
+            image = postFiles["image"]
+            if image.content_type != "image/jpeg":
+                error_message = "Invalid file type for Product Image (Only JPEG and JPG are supported). Please try again."
+                return render(request, "vd_edit_product.html", {"error_message": error_message, "details": product,"categories":categories})
+            else:
+                product.image = image
+        
+        if postData.get("status") == 'on':
+            product.status = 1
+        else:
+            product.status = 0
+
+        product.name = postData["name"]
+        product.price = postData["price"]
+        product.description = postData["description"]
+        product.category_id = postData['category']
+
+        product.save()
+        success_message = "Changes saved successfully!"
+        return render(request, "vd_edit_product.html", {"success_message": success_message, "details": product,"categories":categories, "product_id" : product_id})
+
+class DeleteConfirm(View):
+    def get(self, request, product_id):
+        product = Products_v.objects.get(id=product_id)
+        data = {'product':product}
+        return render(request, "vd_delete_confirm.html", data)
+
+class DeleteProduct(View):
+    def post(self, request, product_id):
+        product = Products_v.objects.get(id=product_id)
+        product.delete()
+        return redirect("vendor_products")
+
+class AddCategory(View):
+    def get(self, request):
+        return render(request, "vd_add_category.html")
+    
+    def post(self, request):
+        postData = request.POST
+        name = postData.get('name')
+
+
+        # Convert the category name to lowercase
+        lowercase_name = name.lower()
+
+        category = Category_v(
+            name=name
+        )
+
+        if Category_v.objects.filter(name__iexact=lowercase_name).exists():
+            error_message = "This category name already exists."
+            data = {"error_message": error_message, "name": name}
+            return render(request, "vd_add_category.html", data)
+
+        category = Category_v(name=name)
+        success_message = "Changes saved successfully!"
+        category.save()
+        return redirect("add_product")
+        
+    
+class EditCategory(View):
+    def get(self, request):
+        category_id = request.GET.get('category')
+        category = Category_v.get_category_by_categorysid(category_id)
+        return render(request, 'vd_edit_category.html', {'category': category})
+
+    def post(self, request):
+        category_id = int(request.GET.get('category'))
+        category = Category_v.get_category_by_categorysid(category_id) 
+        
+
+        if category is not None:
+            name = request.POST.get('name')
+            lowercase_name = name.lower()
+
+            if Category_v.objects.filter(name__iexact=lowercase_name).exclude(id=category_id).exists():
+                error_message = "This category name already exists."
+                data = {"error_message": error_message, "name": name}
+                return render(request, "vd_edit_category.html", data)
+
+            category.name = name
+            success_message = "Changes saved successfully!"
+            category.save()
+            return render(request, "vd_edit_category.html", {'success_message':success_message})
+        
+
+    
+
+
+

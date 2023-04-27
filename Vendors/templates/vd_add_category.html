@@ -1,0 +1,41 @@
+{% extends 'vd_base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="p-3 m-3">
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col">
+                <h1 class="card-title" style="margin-bottom: 30px;">Add Category</h1>
+                <form action="/vendors/add_products/add_category" method="post">
+                    {% csrf_token %}
+
+                    {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error_message}}
+                    </div>
+                    {% endif %}
+                    <hr />
+
+                    <div>
+                        <div class="form-row field-name">
+                            <div>
+                                <label class="required" for="id_name">Name:</label>
+                                <input type="text" name="name" value=""
+                                    class="vTextField" maxlength="50"
+                                    required="" id="id_name">
+                                <input type="submit" value="Save"
+                                    class="default" name="_save">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <br class="clear">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

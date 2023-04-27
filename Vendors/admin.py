@@ -3,8 +3,8 @@ from .models import Vendors, Products_v, Category_v
 
 # Register your models here.
 class AdminProduct_v(admin.ModelAdmin):
-    list_display = ["name", "price", "category"]
-    list_editable = ["price"]
+    list_display = ["name", "price", "category", "ownerid"]
+    list_editable = ["price", "ownerid"]
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ["name"]

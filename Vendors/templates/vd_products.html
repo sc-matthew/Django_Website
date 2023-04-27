@@ -20,14 +20,15 @@
 			</div>
 		</div>
 
-
+		
 		<!-- all products -->
 		<div id='products' class="col-lg-9 mx-auto">
-
+			<br>
 			<div id="content">
-				<h2>My product</h2>
+				<h2>Management System - Products</h2>
 			</div>
 
+			<br>
 			<div class="results">
 				<table class="table table-bordered">
 					<thead>
@@ -62,29 +63,29 @@
 								<div class="clear"></div>
 							</th>
 
-							<th width="8%"> </th>
+							<th width="10%"> </th>
 
 						</tr>
 					</thead>
 					
 					<tbody>
-							
 						{% for product in products %}
 						<tr>
-							<td class="action-checkbox">
-								<input type="checkbox" name="_selected_action" value="1" class="action-select">
+							<td>
+								{{ forloop.counter }}
 							</td>
+							
 
 							<td id={{product.id}} class="text-center">
 								<img class="avatar" src="{{product.image.url}}" style="vertical-align: middle;
 								width: 65px;
 								height: 62px;
 								border-radius: 50%;
-								border: 1px solid #aa6969">
+								border: 2px solid #e0d1c6">
 							</td>
 
 							<th class="field-name">
-								<a href="/test">
+								<a href="my_products/{{product.id}}">
 									{{product.name}}
 								</a>
 							</th>
@@ -107,17 +108,21 @@
 
 							<td class="field-price" >
 								<div class="text-center">
-									<class="nav-link" href="/test">
-										<button style=" border-radius: 7px; border: 1px solid lightgray; flex:0.5;">
-											<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/OOjs_UI_icon_edit-ltr-gray.svg/120px-OOjs_UI_icon_edit-ltr-gray.svg.png?20211119134628' 
-											style="width: 20px; height: 20px; margin-bottom: 4px;">
-										</button>
-	
-									<class="nav-link" href="/test">
-										<button style="border-radius: 7px; border: 1px solid lightgray; flex: 0.5;">
-											<img src = 'https://www.shareicon.net/data/128x128/2015/09/06/96798_trash_512x512.png' 
-											style="width: 20px; height: 20px; margin-bottom: 4px;">
-										</button>
+									<class="nav-link">
+										<a href="/vendors/edit_products/{{product.id}}">
+											<button style=" border-radius: 7px; border: 1px solid lightgray; flex:0.5;" >
+												<img src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/OOjs_UI_icon_edit-ltr-gray.svg/120px-OOjs_UI_icon_edit-ltr-gray.svg.png?20211119134628' 
+												style="width: 20px; height: 20px; margin-bottom: 4px;">
+											</button>
+										</a>
+
+									<class="nav-link">
+										<a href="/vendors/delete_confirm/{{product.id}}">
+											<button style="border-radius: 7px; border: 1px solid lightgray; flex: 0.5;">
+												<img src = 'https://www.shareicon.net/data/128x128/2015/09/06/96798_trash_512x512.png' 
+												style="width: 20px; height: 20px; margin-bottom: 4px;">
+											</button>
+										</a>
 								</div>
 							</td>
 
