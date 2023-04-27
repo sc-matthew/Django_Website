@@ -31,7 +31,7 @@ This project is brought to you by:
   - [X] Show the total price
   - [X] Buy button to create a transaction
 
-### Sellers
+### Sellers [Completed]
 
 - [X] Seller signup module
 
@@ -43,10 +43,6 @@ This project is brought to you by:
   - [X] รูป QRCode (1 picture)
 - [X] Seller login module
 - [X] Seller account module (able to edit)
-
-  * Additional Parts (Extra marks)
-    * drop-down list to separate postData + postFiles
-    * files uploaded check whether it is jpeg or not -> avoid unsupported file types
 
   - [X] ชื่อร้าน
   - [X] ชื่อผู้ติดต่อ
@@ -61,14 +57,26 @@ This project is brought to you by:
   - [X] หมวดหมู่
   - [X] ราคา
   - [X] สถานะ (ปกติ/หมด)
-- [ ] Add/Edit/Delete Product Screen
+- [x] Add/Edit/Delete Product Screen
 
-  - [ ] ชื่อสินค้า
-  - [ ] รูปสินค้า
-  - [ ] หมวดหมู่
-  - [ ] รายละเอียดสินค้า
-  - [ ] ราคา
-  - [ ] สถานะ (ปกติ/หมด)
+  - [x] ชื่อสินค้า
+  - [x] รูปสินค้า
+  - [x] หมวดหมู่
+  - [x] รายละเอียดสินค้า
+  - [x] ราคา
+  - [x] สถานะ (ปกติ/หมด)
+
+---
+* Additional Parts (Extra marks)
+  * 1
+    * Proudly presented : JavaScript -> QuerySelector
+    * drop-down list to separate postData + postFiles
+    * files uploaded check whether it is jpeg or not -> avoid unsupported file types
+    * Info Button -> Hover and show info box
+    * Modal & Lightbox
+    * Currency omitted -> Automatically filled in (TM TG)
+  * 2
+    * Image Carousel (Banner)
 
 ---
 
