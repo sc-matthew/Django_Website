@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-from .models import Customer, Products, Category, Order
+from Buyers.models import Customer, Order
+from Vendors.models import  Products_v, Category_v
 from django.urls import reverse
 from django.views import View
 from .middlewares.auth import auth_middleware
@@ -14,7 +15,7 @@ import datetime
 class Cart(View):
     def get(self, request):
         ids = list(request.session.get("cart").keys())
-        products = Products.get_products_by_id(ids)
+        products = Products_v.get_products_by_id(ids)
         print(products)
         return render(request, "cart.html", {"products": products})
 
@@ -25,7 +26,7 @@ class CheckOut(View):
         phone = request.POST.get("phone")
         customer = request.session.get("customer")
         cart = request.session.get("cart")
-        products = Products.get_products_by_id(list(cart.keys()))
+        products = Products_v.get_products_by_id(list(cart.keys()))
         print(address, phone, customer, cart, products)
 
         for product in products:
@@ -42,7 +43,6 @@ class CheckOut(View):
         request.session["cart"] = {}
 
         return redirect("cart")
-
 
 class Index(View):
     def post(self, request):
@@ -73,6 +73,11 @@ class Index(View):
     def get(self, request):
         print(f"{request.get_full_path()}")
         return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
+    
+def product_search(request):
+    query = request.GET.get('query')
+    products = Products_v.objects.filter(name__icontains=query)
+    return render(request, 'search.html', {'products': products})
 
 
 def store(request):
@@ -80,12 +85,12 @@ def store(request):
     if not cart:
         request.session["cart"] = {}
     products = None
-    categories = Category.get_all_categories()
+    categories = Category_v.get_all_categories()
     categoryID = request.GET.get("category")
     if categoryID:
-        products = Products.get_all_products_by_categoryid(categoryID)
+        products = Products_v.get_all_products_by_categoryid(categoryID)
     else:
-        products = Products.get_all_products()
+        products = Products_v.get_all_products()
 
     data = {}
     data["products"] = products
@@ -128,7 +133,6 @@ class Login(View):
 def logout(request):
     request.session.clear()
     return redirect("login")
-
 
 class OrderView(View):
     def get(self, request):
@@ -250,3 +254,39 @@ class Account(View):
             error_message = "Email Address Already Registered.."
         
         return error_message
+    
+class ProductDetailsView(View):
+    def get(self, request, product_id):
+        products = Products_v.objects.get(id=product_id)
+        return render(request, "product_details.html", {"products": products})
+
+    def post(self, request, product_id): #-> Handle product in product_details page
+        products = Products_v.objects.get(id=product_id)
+        customer = request.session.get("customer")
+        products.liked_by.add(customer)
+        return render(request, "product_details.html", {"products": products})
+    
+# def like_product(request):
+#     customer_id = request.session.get("customer")
+#     customer = Customer.objects.get(id=customer_id)
+
+#     if request.method == "POST":
+#         product_id = request.POST.get('product_id')
+#         products = Products_v.objects.get(id=product_id)
+        
+#         if customer in products.liked_by.all():
+#             products.liked_by.remove(customer)
+#         else:
+#             products.liked_by.add(customer)
+
+#         like, created = Like.objects.get(customer=customer, id=product_id)
+
+#         if not created:
+#             if like.value == 'Like':
+#                 like.value = 'Unlike'
+#             else:
+#                 like.value = 'Like'
+
+#         like.save()
+
+#         return redirect('product_details')

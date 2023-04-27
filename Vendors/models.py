@@ -1,4 +1,5 @@
 from django.db import models
+# from Buyers.models import Customer 
 
 # Create your models here.
 
@@ -66,6 +67,10 @@ class Products_v(models.Model):
     status = models.BooleanField(default=True)
     ownerid = models.PositiveSmallIntegerField(default=1, null=False)
     last_update = models.DateTimeField(auto_now=True)
+    # liked_by = models.ManyToManyField(Customer, related_name='liked_products')
+
+    def __str__(self):
+        return self.name
 
     @staticmethod
     def get_products_by_id(ids):
@@ -74,6 +79,7 @@ class Products_v(models.Model):
     @staticmethod
     def get_all_products():
         return Products_v.objects.all()
+
 
     @staticmethod
     def get_all_products_by_categoryid(category_id):
@@ -87,3 +93,7 @@ class Products_v(models.Model):
             return Products_v.objects.filter(ownerid=ownerid)
         else:
             return None
+        
+
+
+        

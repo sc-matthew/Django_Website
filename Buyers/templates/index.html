@@ -12,13 +12,20 @@
 		<!-- filter -->
 
 		<div class="col-lg-3 mx-auto">
-			<div class="list-group">
-
-				<a href="/buyers/" class="list-group-item list-group-item-action btn
-					btn-outline-success">All Products</a>
+			<div  class="list-group-item " style="border-radius: 25px; margin-bottom: 10px;" >
+				<form action="{% url 'product_search' %}" method="GET" >
+					<input type="text" name="query" placeholder="Search here..." style="width: 90%; border: 1px solid white; outline: none;">
+					<span>
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/111px-Vector_search_icon.svg.png" 
+							style="width: 17px; height: 19px; float: right; margin-top: 6px;">
+					</span>
+				</form>
+			</div>
+			<div class="list-group">				
+				<a href="store" class="list-group-item list-group-item-action btn btn-outline-success">All Products</a>
 
 				{% for category in categories %}
-				<a href="/buyers/?category={{category.id}}"
+				<a href="store?category={{category.id}}"
 					class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
 				{% endfor %}
 			</div>
@@ -31,7 +38,7 @@
 				<div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
 					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
 					<div class="card-body">
-						<p class="card-title">{{product.name}}</p>
+						<a class="card-title" href="product_details/{{product.id}}/">{{product.name}}</a>
 						<p class="card-text"><b>{{product.price|currency}}</b></p>
 						<!-- {{product | is_in_cart:request.session.cart }} -->
 					</div>
@@ -44,16 +51,13 @@
 								{% csrf_token %}
 								<input hidden type="text" name='product' value='{{product.id}}'>
 								<input hidden type="text" name='remove' value='True'>
-								<input type="submit" value=" - " class="btn btn-block btn-success
-									border-right">
+								<input type="submit" value=" - " class="btn btn-block btn-success border-right">
 							</form>
-							<div class="text-center col btn btn-success">{{product|cart_quantity:request.session.cart}}
-								in Cart</div>
+							<div class="text-center col btn btn-success">{{product|cart_quantity:request.session.cart}} in Cart</div>
 							<form action="/buyers/#{{product.id}}" class="col-2 " method="post">
 								{% csrf_token %}
 								<input hidden type="text" name='product' value='{{product.id}}'>
-								<input type="submit" value=" + " class="btn btn-block btn-success
-									border-left">
+								<input type="submit" value=" + " class="btn btn-block btn-success border-left">
 							</form>
 						</div>
 						{% else %}

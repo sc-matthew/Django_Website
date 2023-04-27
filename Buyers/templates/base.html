@@ -51,12 +51,13 @@
           href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
           crossorigin="anonymous"
-          />
+        />
 
         <img
-          src="https://github.com/sc-matthew/Django_Website/raw/main/Buyers/icon/logo_website.png"
-          style="width:50px;height:50px,color:text-light;margin-right:15px;"
-          />PMN FigureStore</a>
+          src="https://github.com/sc-matthew/Django_Website/raw/new_branches/Buyers/icon/Pmn_logo.png"
+          style="width:250px;height:50px; color:text-light;margin-right:15px;"
+        />
+      </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -77,7 +78,10 @@
 
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="/buyers/cart">Cart
+            <a class="nav-link" href="/buyers/cart">
+              <img 
+              src="https://cdn-icons-png.flaticon.com/512/5465/5465858.png"
+              style="width:30px; height:30px"/>
               <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
               <span class="sr-only">(current)</span></a>
           </li>

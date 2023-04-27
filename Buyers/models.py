@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from Vendors.models import Products_v
 
 # Create your models here.
 
@@ -54,6 +55,9 @@ class Products(models.Model):
     image = models.ImageField(upload_to="uploads/products/")
     last_update = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
     @staticmethod
     def get_products_by_id(ids):
         return Products.objects.filter(id__in=ids)
@@ -71,7 +75,7 @@ class Products(models.Model):
 
 
 class Order(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products_v, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
@@ -80,9 +84,24 @@ class Order(models.Model):
     date = models.DateField(default=datetime.datetime.today)
     status = models.BooleanField(default=False)
 
+
     def placeOrder(self):
         self.save()
 
     @staticmethod
     def get_orders_by_customer(customer_id):
         return Order.objects.filter(customer=customer_id).order_by("-date")
+    
+
+# LIKE_CHOICES = (
+#     ('Like', 'Like'),
+#     ('Unlike','Unlike'),
+# )
+    
+# class Like(models.Model):
+#     product = models.ForeignKey(Products_v, on_delete=models.CASCADE)
+#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+#     value = models.CharField(choice = LIKE_CHOICES, default='Like', max_length=10)
+
+#     def __str__(self):
+#         return str(self.product)
