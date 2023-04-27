@@ -19,11 +19,14 @@ This project is brought to you by:
   - [X] Able to edit Name, telephone (regex), email (regex)
 - [ ] Category browsing screen
   - [ ] Have category name and image
-- [ ] Product browsing screen
-  - [ ] Based on a category
-  - [ ] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา, ชื่อร้าน และ สถานที่ของร้าน
-- [ ] Product details screen
-  - [ ] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา, ชื่อร้าน และ สถานที่ของร้าน
+- [X] Product browsing screen
+  - [X] Based on a category
+  - [X] แสดงข้อมูล
+    - [X] รูปสินค้า, ชื่อสินค้า, ราคา,
+    - [ ] ชื่อร้าน และ สถานที่ของร้าน
+- [X] Product details screen
+  - [x] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
+  - [ ] ชื่อร้าน และ สถานที่ของร้าน
   - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
   - [ ] สามารถกดลิ้งค์ไปที่ร้านได้
 - [X] Shopping Cart screen
@@ -57,16 +60,17 @@ This project is brought to you by:
   - [X] หมวดหมู่
   - [X] ราคา
   - [X] สถานะ (ปกติ/หมด)
-- [x] Add/Edit/Delete Product Screen
+- [X] Add/Edit/Delete Product Screen
 
-  - [x] ชื่อสินค้า
-  - [x] รูปสินค้า
-  - [x] หมวดหมู่
-  - [x] รายละเอียดสินค้า
-  - [x] ราคา
-  - [x] สถานะ (ปกติ/หมด)
+  - [X] ชื่อสินค้า
+  - [X] รูปสินค้า
+  - [X] หมวดหมู่
+  - [X] รายละเอียดสินค้า
+  - [X] ราคา
+  - [X] สถานะ (ปกติ/หมด)
 
 ---
+
 * Additional Parts (Extra marks)
   * 1
     * Proudly presented : JavaScript -> QuerySelector
@@ -83,24 +87,29 @@ This project is brought to you by:
 Memo updated list:
 
 * Already merged from prince_new branch to main branch
+
 ---
 
 Matthew:
+
 - [ ] module edit product details (link to ดินสอ)
 - [ ] edit nav bar
 
 New:
+
 - [ ] add /edit ให้ show ว่าซ้ำไหม (unique)
   1. edit success -> no show after save (pop-up & return)
   2. duplicate value -> error page  (red warning)
 
-
 Prince:
-- [ ] delete product (link to trash) 
+
+- [ ] delete product (link to trash)
   1. pop-up (confirmation to delete)
   2. delete successful
   3. press ok (redirect to manage product page)
 
 ---
+
 Remain after finish buyer:
+
 - [ ] link details href to buyers product details info
