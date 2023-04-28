@@ -90,14 +90,5 @@ This project is brought to you by:
   - [ ] move category to the top of product add
   - [ ] add to cart (number then plus the amount in cart)
 
----
-### Additional Parts (Extra marks)
-  * 1
-    * Proudly presented : JavaScript -> QuerySelector
-    * files uploaded check whether it is jpeg or not -> avoid unsupported file types
-    * Info Button -> Hover and show info box
-    * Modal & Lightbox
-    * Currency omitted -> Automatically filled in (TM TG)
-  * 2
-    * Image Carousel (Banner)
+
 
