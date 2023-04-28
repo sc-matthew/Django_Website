@@ -74,9 +74,9 @@ This project is brought to you by:
 ### Extra 
 * Plan to-do
   - [x] Aesthetic templates
+  - [x] Product Search
+  - [ ] Make use of any 3rd parties (API)
   - [ ] Shop open-close time
-  - [ ] Product Search
-  - [ ] Make use of any 3rd parties
   - [ ] Publically accessible to cloud service
 
 * Tentative (if there is enough time)
