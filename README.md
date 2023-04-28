@@ -34,6 +34,7 @@ This project is brought to you by:
   - [X] Show the total price
   - [X] Buy button to create a transaction
 
+---
 ### Sellers [Completed]
 
 - [X] Seller signup module
@@ -70,11 +71,29 @@ This project is brought to you by:
   - [X] สถานะ (ปกติ/หมด)
 
 ---
+### Extra 
+* Plan to-do
+  - [x] Aesthetic templates
+  - [ ] Shop open-close time
+  - [ ] Product Search
+  - [ ] Make use of any 3rd parties
+  - [ ] Publically accessible to cloud service
 
-* Additional Parts (Extra marks)
+* Tentative (if there is enough time)
+  - [ ] Seller - Buyer Message
+  - [ ] Like a Product
+
+---
+### Remain after finish vendor:
+
+  - [ ] link details href to buyers product details info
+  - [ ] move category to the top of product add
+  - [ ] add to cart (number then plus the amount in cart)
+
+---
+### Additional Parts (Extra marks)
   * 1
     * Proudly presented : JavaScript -> QuerySelector
-    * drop-down list to separate postData + postFiles
     * files uploaded check whether it is jpeg or not -> avoid unsupported file types
     * Info Button -> Hover and show info box
     * Modal & Lightbox
@@ -82,34 +101,3 @@ This project is brought to you by:
   * 2
     * Image Carousel (Banner)
 
----
-
-Memo updated list:
-
-* Already merged from prince_new branch to main branch
-
----
-
-Matthew:
-
-- [ ] module edit product details (link to ดินสอ)
-- [ ] edit nav bar
-
-New:
-
-- [ ] add /edit ให้ show ว่าซ้ำไหม (unique)
-  1. edit success -> no show after save (pop-up & return)
-  2. duplicate value -> error page  (red warning)
-
-Prince:
-
-- [ ] delete product (link to trash)
-  1. pop-up (confirmation to delete)
-  2. delete successful
-  3. press ok (redirect to manage product page)
-
----
-
-Remain after finish buyer:
-
-- [ ] link details href to buyers product details info
