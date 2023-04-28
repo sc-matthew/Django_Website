@@ -89,6 +89,15 @@ This project is brought to you by:
   - [ ] link details href to buyers product details info
   - [ ] move category to the top of product add
   - [ ] add to cart (number then plus the amount in cart)
+  - [ ] Buyer profile screen (ID, name, telephone, email)
+  - [ ] Product browsing screen
+      - [ ] ชื่อร้าน และ สถานที่ของร้าน
+  - [ ] Product details screen
+    - [ ] ชื่อร้าน และ สถานที่ของร้าน
+    - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
+    - [ ] สามารถกดลิ้งค์ไปที่ร้านได้
 
-
+Still confused:
+  - [ ] Category browsing screen
+    - [ ] Have category name and image
 
