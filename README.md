@@ -25,7 +25,7 @@ This project is brought to you by:
     - [X] รูปสินค้า, ชื่อสินค้า, ราคา,
     - [ ] ชื่อร้าน และ สถานที่ของร้าน
 - [X] Product details screen
-  - [x] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
+  - [X] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
   - [ ] ชื่อร้าน และ สถานที่ของร้าน
   - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
   - [ ] สามารถกดลิ้งค์ไปที่ร้านได้
@@ -35,6 +35,7 @@ This project is brought to you by:
   - [X] Buy button to create a transaction
 
 ---
+
 ### Sellers [Completed]
 
 - [X] Seller signup module
@@ -71,33 +72,43 @@ This project is brought to you by:
   - [X] สถานะ (ปกติ/หมด)
 
 ---
-### Extra 
+
+### Extra
+
 * Plan to-do
-  - [x] Aesthetic templates
-  - [x] Product Search
+
+  - [X] Aesthetic templates
+  - [X] Product Search
   - [ ] Make use of any 3rd parties (API)
   - [ ] Shop open-close time
   - [ ] Publically accessible to cloud service
-
 * Tentative (if there is enough time)
+
   - [ ] Seller - Buyer Message
   - [ ] Like a Product
 
 ---
+
 ### Remain after finish vendor:
 
-  - [ ] link details href to buyers product details info
+* Matthew
   - [ ] move category to the top of product add
-  - [ ] add to cart (number then plus the amount in cart)
-  - [ ] Buyer profile screen (ID, name, telephone, email)
-  - [ ] Product browsing screen
-      - [ ] ชื่อร้าน และ สถานที่ของร้าน
-  - [ ] Product details screen
+  - [ ] link details href to buyers product details info
+  - [ ] product details screen (vendors)
+
+* Prince
+  - Topic :  Product details screen
     - [ ] ชื่อร้าน และ สถานที่ของร้าน
     - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
-    - [ ] สามารถกดลิ้งค์ไปที่ร้านได้
+    - [ ] สามารถกดลิ้งค์ไปที่ร้านได้ (suspended)
+
+* New
+  - [ ] Topic : Product browsing screen
+    - [ ] ชื่อร้าน และ สถานที่ของร้าน
+  - [ ] Buyer profile screen (ID, name, telephone, email)
+  
 
 Still confused:
-  - [ ] Category browsing screen
-    - [ ] Have category name and image
 
+- [ ] Category browsing screen
+  - [ ] Have category name and image
