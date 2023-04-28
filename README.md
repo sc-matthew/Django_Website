@@ -103,7 +103,7 @@ This project is brought to you by:
     - [ ] สามารถกดลิ้งค์ไปที่ร้านได้ (suspended)
 
 * New
-  - [ ] Topic : Product browsing screen
+  - Topic : Product browsing screen
     - [ ] ชื่อร้าน และ สถานที่ของร้าน
   - [ ] Buyer profile screen (ID, name, telephone, email)
   
