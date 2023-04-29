@@ -229,8 +229,9 @@ class vendor_store(View):
 class ProductDetails(View):
     def get(self, request, product_id):
         products = Products_v.get_product_by_productid(product_id)
+        vendor = request.session.get("vendors")
         print(products)
-        return render(request, 'vd_product_details.html', {"products":products})
+        return render(request, 'vd_product_details.html', {"products":products, "vendor":vendor})
 
 class AddProduct(View):
     def get(self, request):
@@ -386,6 +387,15 @@ class EditCategory(View):
             category.save()
             return render(request, "vd_edit_category.html", {'success_message':success_message})
         
+class VendorDetail(View):
+    def get(self, request, vendorid):
+        vendor = Vendors.get_vendors_by_vendorsid(vendorid)
+        vendor_store = vendor.store_name.lower().replace(" ","")
+        num_product = len(Products_v.objects.filter(ownerid=vendorid))
+        print(num_product)
+        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product}
+
+        return render(request, "vd_profile.html", data)
 
     
 

@@ -14,6 +14,7 @@ class Vendors(models.Model):
     store_picture = models.ImageField(upload_to="uploads/store/")
     qrcode_picture = models.ImageField(upload_to="uploads/qrcode/")
     last_update = models.DateTimeField(auto_now=True)
+    member_since = models.DateTimeField(auto_now_add=True)
 
     # to save the data
     def register(self):
