@@ -79,7 +79,7 @@ This project is brought to you by:
 
   - [X] Aesthetic templates
   - [X] Product Search
-  - [x] Make use of any 3rd parties (API) -> Google API
+  - [x] Make use of any 3rd parties (API) 
   - [ ] Shop open-close time
   - [ ] Publically accessible to cloud service
 
