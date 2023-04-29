@@ -96,7 +96,7 @@ This project is brought to you by:
   - [x] move category to the top of product add
   - [x] link details href to product details info
   - [x] product details screen (vendors)
-  - [x] make use of google api
+  - [x] trial and error in สารพัดของกุ๊กกิ๊ก
 
 * Prince
   - Topic :  Product details screen
