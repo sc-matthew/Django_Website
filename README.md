@@ -79,9 +79,10 @@ This project is brought to you by:
 
   - [X] Aesthetic templates
   - [X] Product Search
-  - [ ] Make use of any 3rd parties (API)
+  - [x] Make use of any 3rd parties (API) -> Google API
   - [ ] Shop open-close time
   - [ ] Publically accessible to cloud service
+
 * Tentative (if there is enough time)
 
   - [ ] Seller - Buyer Message
@@ -92,9 +93,10 @@ This project is brought to you by:
 ### Remain after finish vendor:
 
 * Matthew
-  - [ ] move category to the top of product add
-  - [ ] link details href to buyers product details info
-  - [ ] product details screen (vendors)
+  - [x] move category to the top of product add
+  - [x] link details href to product details info
+  - [x] product details screen (vendors)
+  - [x] make use of google api
 
 * Prince
   - Topic :  Product details screen
