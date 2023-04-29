@@ -392,8 +392,11 @@ class VendorDetail(View):
         vendor = Vendors.get_vendors_by_vendorsid(vendorid)
         vendor_store = vendor.store_name.lower().replace(" ","")
         num_product = len(Products_v.objects.filter(ownerid=vendorid))
-        print(num_product)
-        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product}
+
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
+            api = f.read()
+
+        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api}
 
         return render(request, "vd_profile.html", data)
 

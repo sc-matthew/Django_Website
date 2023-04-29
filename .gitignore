@@ -133,3 +133,7 @@ dmypy.json
 
 # Author VSCode
 .vscode
+
+# API
+/API
+/API/api_key.txt
