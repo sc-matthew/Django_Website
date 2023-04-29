@@ -29,6 +29,36 @@
                 {% csrf_token %}
 
                 <div class="form-group">
+                    <label class="required" for="id_category">Category</label>
+                    <div class="related-widget-wrapper"
+                        data-model-ref="category_v" style="margin-top: 5px;">
+                        <select required class="form-select form-select-sm mb-3"
+                            name="category" style="font-size: 11pt;">
+                            {% for category in categories %}
+                            {% if details.category == category %}
+                            <option value="{{category.id}}" selected>{{category.name}}</option>
+                            {% else %}
+                            <option value="{{category.id}}">{{category.name}}</option>
+                            {% endif %}
+                        
+                            {% endfor %}
+                        </select>
+                
+
+                <a class="related-widget-wrapper-link
+                    change-related" title="Edit category name"
+                    href="/vendors/add_products/edit_category?category={{categories.0.id}}"><img
+                        src="/static/admin/img/icon-changelink.svg"
+                        alt="Change" style="width: 20px;margin-left:12px;"></a>
+                <a class="related-widget-wrapper-link add-related"
+                    title="Add another category"
+                    href="/vendors/add_products/add_category"><img
+                        src="/static/admin/img/icon-addlink.svg"
+                        alt="Add" style="width: 20px;margin-left:5px"></a>
+            </div>
+        </div>
+        
+                <div class="form-group">
                     <label for="">Product Name</label>
                     <input required type="text" name="name" id=""
                         value="{{details.name}}"
@@ -45,35 +75,6 @@
                         step="0.1">
                 </div>
                         
-                        <div class="form-group">
-                            <label class="required" for="id_category">Category</label>
-                            <div class="related-widget-wrapper"
-                                data-model-ref="category_v" style="margin-top: 5px;">
-                                <select required class="form-select form-select-sm mb-3"
-                                    name="category" style="font-size: 11pt;">
-                                    {% for category in categories %}
-                                    {% if details.category == category %}
-                                    <option value="{{category.id}}" selected>{{category.name}}</option>
-                                    {% else %}
-                                    <option value="{{category.id}}">{{category.name}}</option>
-                                    {% endif %}
-                                
-                                    {% endfor %}
-                                </select>
-                        
-
-                        <a class="related-widget-wrapper-link
-                            change-related" title="Edit category name"
-                            href="/vendors/add_products/edit_category?category={{categories.0.id}}"><img
-                                src="/static/admin/img/icon-changelink.svg"
-                                alt="Change" style="width: 20px;margin-left:12px;"></a>
-                        <a class="related-widget-wrapper-link add-related"
-                            title="Add another category"
-                            href="/vendors/add_products/add_category"><img
-                                src="/static/admin/img/icon-addlink.svg"
-                                alt="Add" style="width: 20px;margin-left:5px"></a>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="id_description">Description</label>

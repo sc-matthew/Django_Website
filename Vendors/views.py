@@ -226,6 +226,12 @@ class vendor_store(View):
 
         return render(request, "vd_products.html",data)
 
+class ProductDetails(View):
+    def get(self, request, product_id):
+        products = Products_v.get_product_by_productid(product_id)
+        print(products)
+        return render(request, 'vd_product_details.html', {"products":products})
+
 class AddProduct(View):
     def get(self, request):
         categories = Category_v.get_all_categories()
@@ -349,9 +355,10 @@ class AddCategory(View):
             return render(request, "vd_add_category.html", data)
 
         category = Category_v(name=name)
-        success_message = "Changes saved successfully!"
+        success_message = "Category added successfully!"
         category.save()
-        return redirect("add_product")
+        data = {"success_message": success_message, "name": name}
+        return render(request, "vd_add_category.html", data)
         
     
 class EditCategory(View):

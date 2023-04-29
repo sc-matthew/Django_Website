@@ -87,6 +87,13 @@ class Products_v(models.Model):
             return Products_v.objects.filter(category=category_id)
         else:
             return Products_v.get_all_products()
+    
+    @staticmethod
+    def get_product_by_productid(product_id):
+        if product_id:
+            return Products_v.objects.get(id=product_id)
+        else:
+            return Products_v.get_all_products()
         
     def get_product_by_owner(ownerid):
         if ownerid:
