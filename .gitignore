@@ -133,3 +133,6 @@ dmypy.json
 
 # Author VSCode
 .vscode
+
+# Extra
+EXTRA.md
