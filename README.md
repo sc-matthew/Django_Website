@@ -73,42 +73,27 @@ This project is brought to you by:
 
 ---
 
-### Extra
-
-* Plan to-do
-
-  - [X] Aesthetic templates
-  - [X] Product Search
-  - [x] Make use of any 3rd parties (API) 
-  - [ ] Shop open-close time
-  - [ ] Publically accessible to cloud service
-
-* Tentative (if there is enough time)
-
-  - [ ] Seller - Buyer Message
-  - [ ] Like a Product
-
----
-
 ### Remain after finish vendor:
 
 * Matthew
-  - [x] move category to the top of product add
-  - [x] link details href to product details info
-  - [x] product details screen (vendors)
-  - [x] trial and error in สารพัดของกุ๊กกิ๊ก
 
+  - [X] move category to the top of product add
+  - [X] link details href to product details info
+  - [X] product details screen (vendors)
+  - [X] trial and error in สารพัดของกุ๊กกิ๊ก
 * Prince
+
   - Topic :  Product details screen
     - [ ] ชื่อร้าน และ สถานที่ของร้าน
     - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
     - [ ] สามารถกดลิ้งค์ไปที่ร้านได้ (suspended)
-
 * New
+
   - Topic : Product browsing screen
-    - [ ] ชื่อร้าน และ สถานที่ของร้าน
-  - [ ] Buyer profile screen (ID, name, telephone, email)
-  
+    - [X] ชื่อร้าน และ สถานที่ของร้าน (รอ link)
+
+  - [X] Buyer profile screen (ID, name, telephone, email)
+  - [ ] Customise button (sold out, available)
 
 Still confused:
 
