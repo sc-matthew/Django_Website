@@ -22,6 +22,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=10)
     email = models.EmailField()
     password = models.CharField(max_length=100)
+    profile_picture = models.ImageField(upload_to="uploads/profile/")
 
     # to save the data
     def register(self):

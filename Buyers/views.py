@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from Buyers.models import Customer, Order
-from Vendors.models import  Products_v, Category_v
+from Vendors.models import  Products_v, Category_v, Vendors
 from django.urls import reverse
 from django.views import View
 from .middlewares.auth import auth_middleware
@@ -81,6 +81,7 @@ def product_search(request):
 
 
 def store(request):
+    all_vendors = Vendors.get_all_vendor()
     cart = request.session.get("cart")
     if not cart:
         request.session["cart"] = {}
@@ -89,12 +90,16 @@ def store(request):
     categoryID = request.GET.get("category")
     if categoryID:
         products = Products_v.get_all_products_by_categoryid(categoryID)
+    
     else:
         products = Products_v.get_all_products()
+
 
     data = {}
     data["products"] = products
     data["categories"] = categories
+    data["all_vendors"] = all_vendors
+
 
     return render(request, "index.html", data)
 
@@ -212,6 +217,7 @@ class Account(View):
     
     def post(self, request):
         postData = request.POST
+        postFiles = request.FILES
         customer_id = request.session.get("customer")
         customer = Customer.objects.get(id=customer_id)
         
@@ -222,6 +228,13 @@ class Account(View):
         customer.last_name = postData["lastname"]
         customer.phone = postData["phone"]
         customer.email = postData["email"]
+
+        if 'profile_picture' in postFiles:
+            profile_picture = postFiles.get("profile_picture")
+            if profile_picture.content_type != "image/jpeg":
+                error = "Invalid file type for Profile Picture (Only JPEG and JPG are supported). Please try again."
+                return render(request, "account.html", {"error": error, "details": customer})
+            customer.profile_picture = profile_picture
 
         error_message = self.validateCustomer(customer)
 
@@ -254,6 +267,12 @@ class Account(View):
             error_message = "Email Address Already Registered.."
         
         return error_message
+    
+class Profile(View):
+    def get(self, request):
+        customer = request.session.get("customer")
+        details = Customer.get_customer_by_customerid(customer)
+        return render(request, "view_profile.html", {"details" : details})
     
 class ProductDetailsView(View):
     def get(self, request, product_id):

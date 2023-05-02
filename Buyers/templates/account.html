@@ -11,7 +11,7 @@
             </div>
             <h3 class="alert alert-info rounded-pill" style="text-align:center">Change
                 Account Details</h3>
-            <form action="/buyers/account" method="POST">
+            <form action="/buyers/account" method="POST" enctype="multipart/form-data">
 
                 {% csrf_token %}
 
@@ -27,56 +27,64 @@
                 </div>
                 {% endif %}
 
+                
                 <!-- name -->
                 <div class="form-group">
                     <label for="">First Name</label>
                     <input required type="text" name="firstname" id=""
-                        value="{{details.first_name}}"
-                        class=" form-control-sm form-control" placeholder="">
+                    value="{{details.first_name}}"
+                    class=" form-control-sm form-control" placeholder="">
                 </div>
-
+                
                 <!-- lastname -->
                 <div class="form-group">
                     <label for="">Last Name</label>
                     <input required type="text" name="lastname" id=""
-                        value="{{details.last_name}}"
-                        class=" form-control-sm form-control" placeholder="">
+                    value="{{details.last_name}}"
+                    class=" form-control-sm form-control" placeholder="">
                 </div>
-
+                
                 <!-- phone -->
                 <div class="form-group">
                     <label for="">Phone</label>
                     <input required type="text" name="phone" id=""
-                        class="form-control form-control-sm"
-                        value="{{details.phone}}" placeholder="0xxxxxxxxx (only
-                        numbers)" pattern="\d{10}"
-                        title="Please recheck your phone number, it should be 10
-                        digits">
+                    class="form-control form-control-sm"
+                    value="{{details.phone}}" placeholder="0xxxxxxxxx (only
+                    numbers)" pattern="\d{10}"
+                    title="Please recheck your phone number, it should be 10
+                    digits">
                 </div>
-
-
+                
+                
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>
                     <input required type="email" name="email" id=""
-                        value="{{details.email}}"
-                        class="form-control-sm form-control" placeholder="Please
-                        use chula account"
-                        pattern=".+@.+\.chula\.ac\.th"
-                        title="Please enter a valid Chula email address
-                        (example@chula.ac.th)">
+                    value="{{details.email}}"
+                    class="form-control-sm form-control" placeholder="Please
+                    use chula account"
+                    pattern=".+@.+\.chula\.ac\.th"
+                    title="Please enter a valid Chula email address
+                    (example@chula.ac.th)">
                 </div>
-
+                
+                <!-- profile picture -->
+                <div class="form-group">
+                    <label for="">Profile Picture</label>
+                    <input type="file" name="profile_picture" id=""
+                    class="form-control-file form-control-sm">
+                </div>
+                
                 <!--Submit button-->
-
+                
                 <hr>
                 <button type="submit" class="btn btn-sm btn-success col-lg-12">Submit
                     Changes</button>
-
-                <!-- for resolve the overlap box and button -->
-                <div class="form-group"> </div>
+                    
+                    <!-- for resolve the overlap box and button -->
+                    <div class="form-group"> </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    {% endblock %}
+        
+        {% endblock %}
