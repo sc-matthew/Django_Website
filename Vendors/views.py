@@ -226,6 +226,13 @@ class vendor_store(View):
 
         return render(request, "vd_products.html",data)
 
+class ProductDetails(View):
+    def get(self, request, product_id):
+        products = Products_v.get_product_by_productid(product_id)
+        vendor = request.session.get("vendors")
+        print(products)
+        return render(request, 'vd_product_details.html', {"products":products, "vendor":vendor})
+
 class AddProduct(View):
     def get(self, request):
         categories = Category_v.get_all_categories()
@@ -349,9 +356,10 @@ class AddCategory(View):
             return render(request, "vd_add_category.html", data)
 
         category = Category_v(name=name)
-        success_message = "Changes saved successfully!"
+        success_message = "Category added successfully!"
         category.save()
-        return redirect("add_product")
+        data = {"success_message": success_message, "name": name}
+        return render(request, "vd_add_category.html", data)
         
     
 class EditCategory(View):
@@ -379,6 +387,18 @@ class EditCategory(View):
             category.save()
             return render(request, "vd_edit_category.html", {'success_message':success_message})
         
+class VendorDetail(View):
+    def get(self, request, vendorid):
+        vendor = Vendors.get_vendors_by_vendorsid(vendorid)
+        vendor_store = vendor.store_name.lower().replace(" ","")
+        num_product = len(Products_v.objects.filter(ownerid=vendorid))
+
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
+            api = f.read()
+
+        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api}
+
+        return render(request, "vd_profile.html", data)
 
     
 

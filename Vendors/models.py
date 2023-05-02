@@ -14,6 +14,7 @@ class Vendors(models.Model):
     store_picture = models.ImageField(upload_to="uploads/store/")
     qrcode_picture = models.ImageField(upload_to="uploads/qrcode/")
     last_update = models.DateTimeField(auto_now=True)
+    member_since = models.DateTimeField(auto_now_add=True)
 
     # to save the data
     def register(self):
@@ -88,6 +89,13 @@ class Products_v(models.Model):
     def get_all_products_by_categoryid(category_id):
         if category_id:
             return Products_v.objects.filter(category=category_id)
+        else:
+            return Products_v.get_all_products()
+    
+    @staticmethod
+    def get_product_by_productid(product_id):
+        if product_id:
+            return Products_v.objects.get(id=product_id)
         else:
             return Products_v.get_all_products()
         
