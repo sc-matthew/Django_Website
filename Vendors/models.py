@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 # from Buyers.models import Customer 
 
 # Create your models here.
@@ -13,12 +14,17 @@ class Vendors(models.Model):
     address = models.CharField(max_length=300)
     store_picture = models.ImageField(upload_to="uploads/store/")
     qrcode_picture = models.ImageField(upload_to="uploads/qrcode/")
+    open_hour = models.TimeField(default=datetime.time(8, 00))
+    to_hour = models.TimeField(default=datetime.time(20, 00))
     last_update = models.DateTimeField(auto_now=True)
     member_since = models.DateTimeField(auto_now_add=True)
 
     # to save the data
     def register(self):
         self.save()
+
+    def __str__(self):
+        return self.store_name
 
     @staticmethod
     def get_vendors_by_email(email):
@@ -32,11 +38,11 @@ class Vendors(models.Model):
             return Vendors.objects.get(id=vendors_id)
         except Vendors.DoesNotExist:
             return None
-        
+
     def isExists(self):
         if Vendors.objects.filter(email=self.email):
             return True
-
+        
         return False
 
 class Category_v(models.Model):
