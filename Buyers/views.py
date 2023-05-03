@@ -81,6 +81,7 @@ def product_search(request):
 
 
 def store(request):
+    all_vendors = Vendors.get_all_vendor()
     cart = request.session.get("cart")
     if not cart:
         request.session["cart"] = {}
@@ -222,6 +223,7 @@ class Account(View):
     
     def post(self, request):
         postData = request.POST
+        postFiles = request.FILES
         customer_id = request.session.get("customer")
         customer = Customer.objects.get(id=customer_id)
         
@@ -232,6 +234,13 @@ class Account(View):
         customer.last_name = postData["lastname"]
         customer.phone = postData["phone"]
         customer.email = postData["email"]
+
+        if 'profile_picture' in postFiles:
+            profile_picture = postFiles.get("profile_picture")
+            if profile_picture.content_type != "image/jpeg":
+                error = "Invalid file type for Profile Picture (Only JPEG and JPG are supported). Please try again."
+                return render(request, "account.html", {"error": error, "details": customer})
+            customer.profile_picture = profile_picture
 
         error_message = self.validateCustomer(customer)
 
@@ -264,6 +273,12 @@ class Account(View):
             error_message = "Email Address Already Registered.."
         
         return error_message
+    
+class Profile(View):
+    def get(self, request):
+        customer = request.session.get("customer")
+        details = Customer.get_customer_by_customerid(customer)
+        return render(request, "view_profile.html", {"details" : details})
     
 class ProductDetailsView(View):
     def get(self, request, product_id):

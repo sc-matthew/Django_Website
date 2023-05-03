@@ -55,7 +55,7 @@
 
         <img
           src="https://github.com/sc-matthew/Django_Website/raw/new_branches/Buyers/icon/Pmn_logo.png"
-          style="width:250px;height:50px; color:text-light;margin-right:15px;"
+          style="width:250px;height:50px; color:text-light;margin-right:15px; margin-top: 5px;"
         />
       </a>
       <button
@@ -84,7 +84,7 @@
             <a class="nav-link" href="/buyers/cart">
               <img 
               src="https://cdn-icons-png.flaticon.com/512/5465/5465858.png"
-              style="width:30px; height:30px"/>
+              style="width:30px; height:30px; margin-top: -1px;"/>
               <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
               <span class="sr-only">(current)</span></a>
           </li>
@@ -96,9 +96,13 @@
           </li>
 
 
-          <li class="nav-item active">
-            <a class="nav-link" href="/buyers/account">Account<span class="sr-only">(current)</span></a>
-          </li>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/buyers/account">Edit profile</a>
+              <a class="dropdown-item" href="/buyers/my_profile">My profile</a>
+            </div>
+          </div>
 
           <li class="nav-item active">
             <a class="nav-link" href="/buyers/logout">Logout<span class="sr-only">(current)</span></a>

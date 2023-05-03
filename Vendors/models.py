@@ -39,6 +39,9 @@ class Vendors(models.Model):
         except Vendors.DoesNotExist:
             return None
 
+    def get_all_vendor():
+        return Vendors.objects.all()
+        
     def isExists(self):
         if Vendors.objects.filter(email=self.email):
             return True
