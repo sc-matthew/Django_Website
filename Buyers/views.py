@@ -105,7 +105,7 @@ def store(request):
         products = [product for product in products if product.category_id == categoryID]
 
     # Prepare data dictionary for rendering the template
-    data = {"products": products, "categories": Category_v.get_all_categories(), "cart": cart}
+    data = {"products": products, "categories": Category_v.get_all_categories(), "cart": cart, "all_vendors" : all_vendors}
 
     return render(request, "index.html", data)
 
