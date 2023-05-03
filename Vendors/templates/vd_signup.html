@@ -69,8 +69,21 @@
                 <div class="form-group">
                     <label for="">Address</label>
                     <input required type="text" name="address" id="" class="form-control form-control-sm"
-                        value="{{values.address}}" title="Please recheck your phone number, it should be 10
-                        digits">
+                        value="{{values.address}}">
+                </div>
+
+                <!-- operation time -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Opening Time</label>
+                        <input required type="text" name="opentime" pattern="\d{1,2}:\d{1,2}" title="Please check your time format"
+                        size="8" id="id_open_hour" value="{{values.open_hour}}" class="form-control form-control-sm" placeholder="Time Format (HH:MM)">
+                    </div>
+                
+                    <div class="form-group col-md-6">
+                        <label for="">Closing Time</label>
+                        <input required type="text" name="closetime" pattern="\d{1,2}:\d{1,2}" title="Please check your time format"
+                        size="8" id="id_close_hour" value="{{values.to_hour}}" class="form-control form-control-sm" placeholder="Time Format (HH:MM)">
                 </div>
 
                 <!-- store picture -->
@@ -89,7 +102,9 @@
                 <button type="submit" class="btn btn-sm btn-success col-lg-12">Create
                     an account</button>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-top:-20px"><br></div>
+                
+
                 </div>
             </form>
         </div>

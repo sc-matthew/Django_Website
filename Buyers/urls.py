@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path, re_path
 from .middlewares.auth import auth_middleware
-from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView, Account, ProductDetailsView,product_search,Profile
+
+from .views import Index, store, Signup, Login, logout, Cart, CheckOut, OrderView, Account, ProductDetailsView, product_search, Tracking, Profile
+
 
 urlpatterns = [
     path('', Index.as_view(), name='homepage'),
@@ -14,6 +16,7 @@ urlpatterns = [
     path('account', Account.as_view(), name="account"),
     path('my_profile', Profile.as_view(), name="profile"),
     path('orders', auth_middleware(OrderView.as_view()), name='orders'),
+    path('tracking', Tracking.as_view(), name="tracking"),
     path('product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details'),
     path('search/store', store , name='store'),
     path('search/', product_search, name='product_search'),

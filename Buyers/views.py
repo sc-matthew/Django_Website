@@ -85,21 +85,27 @@ def store(request):
     cart = request.session.get("cart")
     if not cart:
         request.session["cart"] = {}
-    products = None
-    categories = Category_v.get_all_categories()
+    vendors = Vendors.objects.all()  # Get all vendors
+    vendor_product_dict = {}  # Dictionary to hold vendor IDs as keys and corresponding products as values
+
+    # Iterate over vendors and get their available products based on their operational hours
+    for vendor in vendors:
+        if vendor.open_hour <= datetime.datetime.now().time() <= vendor.to_hour:  # Check if the vendor is currently open
+            vendor_products = Products_v.get_product_by_owner(vendor.id)
+            vendor_product_dict[vendor.id] = vendor_products
+
+    # Filter products based on available vendors
+    products = []
+    for product_list in vendor_product_dict.values():
+        products += product_list
+
+    # If a category ID is specified, filter products by category
     categoryID = request.GET.get("category")
     if categoryID:
-        products = Products_v.get_all_products_by_categoryid(categoryID)
-    
-    else:
-        products = Products_v.get_all_products()
+        products = [product for product in products if product.category_id == categoryID]
 
-
-    data = {}
-    data["products"] = products
-    data["categories"] = categories
-    data["all_vendors"] = all_vendors
-
+    # Prepare data dictionary for rendering the template
+    data = {"products": products, "categories": Category_v.get_all_categories(), "cart": cart, "all_vendors" : all_vendors}
 
     return render(request, "index.html", data)
 
@@ -284,7 +290,16 @@ class ProductDetailsView(View):
         customer = request.session.get("customer")
         products.liked_by.add(customer)
         return render(request, "product_details.html", {"products": products})
-    
+
+class Tracking(View):
+    def get(self, request):
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/ThailandPost.txt") as f:
+            token = f.read().strip()
+        print(token)
+        context = {"token": token}
+        return render(request, "tracking.html", context)
+
+
 # def like_product(request):
 #     customer_id = request.session.get("customer")
 #     customer = Customer.objects.get(id=customer_id)
