@@ -15,7 +15,7 @@ This project is brought to you by:
 - [X] Buyer signup module (using chula domain)
   - [X] Name, telephone (regex), email (regex)
 - [X] Buyer login module
-- [ ] Buyer profile screen (ID, name, telephone, email)
+- [X] Buyer profile screen (ID, name, telephone, email)
   - [X] Able to edit Name, telephone (regex), email (regex)
 - [ ] Category browsing screen
   - [ ] Have category name and image
@@ -93,9 +93,9 @@ This project is brought to you by:
     - [X] ชื่อร้าน และ สถานที่ของร้าน (รอ link)
 
   - [X] Buyer profile screen (ID, name, telephone, email)
-  - [ ] Customise button (sold out, available)
+  - [X] Customise button (sold out, available)
+  - Extra !!
+    - [ ] Include search bar in vendors module
+    - [ ] Category - Query bug fix !!
+    - [ ] Include functionality in search (Store + Status)
 
-Still confused:
-
-- [ ] Category browsing screen
-  - [ ] Have category name and image
