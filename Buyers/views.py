@@ -270,6 +270,7 @@ class Account(View):
         elif len(customer.email) < 5:
             error_message = "Email must be 5 char long"
         elif customer.email != customer.original_email and customer.isExists():
+<<<<<<< Updated upstream
             error_message = "Email Address Already Registered.."
         
         return error_message
@@ -324,3 +325,6 @@ class Tracking(View):
 #         like.save()
 
 #         return redirect('product_details')
+=======
+            error_message = "Email Address Already Registered.."
+>>>>>>> Stashed changes

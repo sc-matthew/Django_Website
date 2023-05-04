@@ -20,6 +20,5 @@ urlpatterns = [
     path('product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details'),
     path('search/store', store , name='store'),
     path('search/', product_search, name='product_search'),
-    path('search/product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details_search'),
-    # path('like', like_product, name = "like_product")
+    path('search/product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details_search')
 ]
