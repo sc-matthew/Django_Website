@@ -19,8 +19,5 @@ urlpatterns = [
     path('tracking', Tracking.as_view(), name="tracking"),
     path('product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details'),
     path('search/', product_search, name='product_search'),
-    path('search/product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details'),
-
-
-    # path('like', like_product, name = "like_product")
+    path('search/product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details_search')
 ]
