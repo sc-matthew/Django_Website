@@ -45,6 +45,10 @@ class CheckOut(View):
         return redirect("cart")
 
 class Index(View):
+    def get(self, request):
+        print(f"1.{request.get_full_path()}")
+        return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
+    
     def post(self, request):
         product = request.POST.get("product")
         remove = request.POST.get("remove")
@@ -68,30 +72,8 @@ class Index(View):
 
         request.session["cart"] = cart
         print("cart", request.session["cart"])
-        return redirect("homepage")
-
-    def get(self, request):
         print(f"{request.get_full_path()}")
-        return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
-    
-def product_search(request):
-    all_vendors = Vendors.get_all_vendor()
-    cart = request.session.get("cart")
-    if not cart:
-        request.session["cart"] = {}
-    vendors = Vendors.objects.all()
-    vendor_product_dict = {} 
-
-    for vendor in vendors:
-        if vendor.open_hour <= datetime.datetime.now().time() <= vendor.to_hour:  # Check if the vendor is currently open
-            vendor_products = Products_v.get_product_by_owner(vendor.id)
-            vendor_product_dict[vendor.id] = vendor_products
-
-    query = request.GET.get('query')
-    products = Products_v.objects.filter(name__icontains=query)
-    data = {"products": products, "cart": cart, "all_vendors" : all_vendors}
-    return render(request, 'search.html',  data)
-
+        return redirect("homepage")
 
 def store(request):
     all_vendors = Vendors.get_all_vendor()
@@ -126,10 +108,26 @@ def store(request):
 
     # Prepare data dictionary for rendering the template
     data = {"products": products, "categories": categories, "cart": cart, "all_vendors": all_vendors}
-
+    print(f'2.{request.get_full_path()}')
     return render(request, "index.html", data)
 
+def product_search(request):
+    all_vendors = Vendors.get_all_vendor()
+    cart = request.session.get("cart")
+    if not cart:
+        request.session["cart"] = {}
+    vendors = Vendors.objects.all()
+    vendor_product_dict = {} 
 
+    for vendor in vendors:
+        if vendor.open_hour <= datetime.datetime.now().time() <= vendor.to_hour:  # Check if the vendor is currently open
+            vendor_products = Products_v.get_product_by_owner(vendor.id)
+            vendor_product_dict[vendor.id] = vendor_products
+
+    query = request.GET.get('query')
+    products = Products_v.objects.filter(name__icontains=query)
+    data = {"products": products, "cart": cart, "all_vendors" : all_vendors}
+    return render(request, 'search.html',  data)
 
 class Login(View):
     return_url = None
@@ -299,19 +297,58 @@ class Profile(View):
     def get(self, request):
         customer = request.session.get("customer")
         details = Customer.get_customer_by_customerid(customer)
-        return render(request, "view_profile.html", {"details" : details})
+        return render(request, "buyer_profile.html", {"details" : details})
     
 class ProductDetailsView(View):
     def get(self, request, product_id):
         products = Products_v.objects.get(id=product_id)
-        return render(request, "product_details.html", {"products": products})
+        vendor = Vendors.objects.get(id=products.ownerid)
+        return render(request, "product_details.html", {"product": products, "vendor":vendor})
 
-    def post(self, request, product_id): #-> Handle product in product_details page
+    def post(self, request, product_id):
         products = Products_v.objects.get(id=product_id)
-        customer = request.session.get("customer")
-        products.liked_by.add(customer)
-        return render(request, "product_details.html", {"products": products})
+        vendor = Vendors.objects.get(id=products.ownerid)
+        product = request.POST.get("product")
+        remove = request.POST.get("remove")
+        cart = request.session.get("cart")
+        if cart:
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(product)
+                    else:
+                        cart[product] = quantity - 1
+                else:
+                    cart[product] = quantity + 1
 
+            else:
+                cart[product] = 1
+        else:
+            cart = {}
+            cart[product] = 1
+
+        request.session["cart"] = cart
+        print("cart", request.session["cart"])
+        return render(request, "product_details.html", {"product": products, "vendor":vendor})
+
+class VendorDetail_onBuyers(View):
+    def get(self, request, vendorid):
+        vendor = Vendors.get_vendors_by_vendorsid(vendorid)
+        vendor_store = vendor.store_name.lower().replace(" ","")
+        num_product = len(Products_v.objects.filter(ownerid=vendorid))
+        open_hour = vendor.open_hour.strftime("%H:%M")
+        to_hour = vendor.to_hour.strftime("%H:%M")
+        print(open_hour, to_hour)
+
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
+            api = f.read()
+
+        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api,
+                "open_hour":open_hour, "to_hour":to_hour}
+
+        return render(request, "seller_profile.html", data)
+    
 class Tracking(View):
     def get(self, request):
         with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/ThailandPost.txt") as f:

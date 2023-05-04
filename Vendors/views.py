@@ -202,7 +202,6 @@ class Image(View):
         print(details)
         return render(request, "vd_account_image.html", {"details" : details})
     
-
     def post(self, request):
         postFiles = request.FILES
         vendors_id = request.session.get("vendors")
@@ -229,14 +228,6 @@ class Image(View):
         vendors.save()
         success_message = "Changes saved successfully!"
         return render(request, "vd_account_image.html", {"success_message": success_message, "details" : vendors})
-
-
-def vender_product_search(request):
-    query = request.GET.get('query')
-    products = Products_v.objects.filter(name__icontains=query)
-
-    return render(request,'vd_search.html', {"products": products})
-
 
 class vendor_store(View):
     def get(self, request):
@@ -432,6 +423,12 @@ class VendorDetail(View):
                 "open_hour":open_hour, "to_hour":to_hour}
 
         return render(request, "vd_profile.html", data)
+    
+def vender_product_search(request):
+    query = request.GET.get('query')
+    products = Products_v.objects.filter(name__icontains=query)
+
+    return render(request,'vd_search.html', {"products": products})
 
     
 
