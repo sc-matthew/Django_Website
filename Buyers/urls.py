@@ -18,8 +18,9 @@ urlpatterns = [
     path('orders', auth_middleware(OrderView.as_view()), name='orders'),
     path('tracking', Tracking.as_view(), name="tracking"),
     path('product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details'),
-    path('search/store', store , name='store'),
     path('search/', product_search, name='product_search'),
-    path('search/product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details_search'),
+    path('search/product_details/<int:product_id>/', ProductDetailsView.as_view(), name='product_details'),
+
+
     # path('like', like_product, name = "like_product")
 ]

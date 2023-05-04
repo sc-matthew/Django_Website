@@ -75,9 +75,22 @@ class Index(View):
         return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
     
 def product_search(request):
+    all_vendors = Vendors.get_all_vendor()
+    cart = request.session.get("cart")
+    if not cart:
+        request.session["cart"] = {}
+    vendors = Vendors.objects.all()
+    vendor_product_dict = {} 
+
+    for vendor in vendors:
+        if vendor.open_hour <= datetime.datetime.now().time() <= vendor.to_hour:  # Check if the vendor is currently open
+            vendor_products = Products_v.get_product_by_owner(vendor.id)
+            vendor_product_dict[vendor.id] = vendor_products
+
     query = request.GET.get('query')
     products = Products_v.objects.filter(name__icontains=query)
-    return render(request, 'search.html', {'products': products})
+    data = {"products": products, "cart": cart, "all_vendors" : all_vendors}
+    return render(request, 'search.html',  data)
 
 
 def store(request):
@@ -85,29 +98,37 @@ def store(request):
     cart = request.session.get("cart")
     if not cart:
         request.session["cart"] = {}
-    vendors = Vendors.objects.all()  # Get all vendors
-    vendor_product_dict = {}  # Dictionary to hold vendor IDs as keys and corresponding products as values
 
-    # Iterate over vendors and get their available products based on their operational hours
-    for vendor in vendors:
-        if vendor.open_hour <= datetime.datetime.now().time() <= vendor.to_hour:  # Check if the vendor is currently open
-            vendor_products = Products_v.get_product_by_owner(vendor.id)
-            vendor_product_dict[vendor.id] = vendor_products
+    # Get all vendors that are currently open
+    open_vendors = Vendors.objects.filter(open_hour__lte=datetime.datetime.now().time(),
+                                           to_hour__gte=datetime.datetime.now().time())
 
-    # Filter products based on available vendors
-    products = []
-    for product_list in vendor_product_dict.values():
-        products += product_list
+    # Get the products of the open vendors
+    vendor_product_dict = {}
+    for vendor in open_vendors:
+        vendor_products = Products_v.get_product_by_owner(vendor.id)
+        vendor_product_dict[vendor.id] = vendor_products
 
-    # If a category ID is specified, filter products by category
+    # If a category ID is specified, filter products by category from the open vendors
+    categories = Category_v.get_all_categories()
     categoryID = request.GET.get("category")
     if categoryID:
-        products = [product for product in products if product.category_id == categoryID]
+        products = []
+        for vendor_id, product_list in vendor_product_dict.items():
+            filtered_products = product_list.filter(category=categoryID)
+            if filtered_products:
+                products += filtered_products
+    else:
+        # Get all products from the open vendors
+        products = []
+        for product_list in vendor_product_dict.values():
+            products += product_list
 
     # Prepare data dictionary for rendering the template
-    data = {"products": products, "categories": Category_v.get_all_categories(), "cart": cart, "all_vendors" : all_vendors}
+    data = {"products": products, "categories": categories, "cart": cart, "all_vendors": all_vendors}
 
     return render(request, "index.html", data)
+
 
 
 class Login(View):

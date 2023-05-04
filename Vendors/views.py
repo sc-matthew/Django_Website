@@ -231,6 +231,12 @@ class Image(View):
         return render(request, "vd_account_image.html", {"success_message": success_message, "details" : vendors})
 
 
+def vender_product_search(request):
+    query = request.GET.get('query')
+    products = Products_v.objects.filter(name__icontains=query)
+
+    return render(request,'vd_search.html', {"products": products})
+
 
 class vendor_store(View):
     def get(self, request):

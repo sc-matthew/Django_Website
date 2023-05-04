@@ -1,6 +1,7 @@
 {% extends 'vd_base.html' %}
-
+{% block title %} Search {% endblock title %}
 {% block content %}
+
 {% load custom_filter %}
 <div class="container-fluid mt-3">
 	<div class="row">
@@ -8,7 +9,7 @@
 		<!-- filter -->
 
 		<div class="col-lg-3 mx-auto">
-			<div class="list-group-item " style="border-radius: 25px; margin-bottom: 10px;">
+            <div class="list-group-item " style="border-radius: 25px; margin-bottom: 10px;">
 				<form action="{% url 'search' %}" method="GET">
 					<input type="text" name="query" placeholder="Search here..."
 						style="width: 90%; border: 1px solid white; outline: none;">
@@ -18,16 +19,11 @@
 					</span>
 				</form>
 			</div>
-			<div class="list-group">
-
-				<a href="/vendors/my_products" class="list-group-item list-group-item-action btn
-					btn-outline-success">All Products</a>
-
-				{% for category in categories %}
-				<a href="/vendors/my_products?category={{category.id}}"
-					class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
-				{% endfor %}
-			</div>
+			<div class="list-group">				
+                <a href="/vendors/my_products">
+                    <button type="button" class="list-group-item list-group-item-action btn btn-outline-success">Back</button>
+                </a>
+            </div>	
 		</div>
 
 		
