@@ -270,7 +270,6 @@ class Account(View):
         elif len(customer.email) < 5:
             error_message = "Email must be 5 char long"
         elif customer.email != customer.original_email and customer.isExists():
-<<<<<<< Updated upstream
             error_message = "Email Address Already Registered.."
         
         return error_message
@@ -301,30 +300,3 @@ class Tracking(View):
         return render(request, "tracking.html", context)
 
 
-# def like_product(request):
-#     customer_id = request.session.get("customer")
-#     customer = Customer.objects.get(id=customer_id)
-
-#     if request.method == "POST":
-#         product_id = request.POST.get('product_id')
-#         products = Products_v.objects.get(id=product_id)
-        
-#         if customer in products.liked_by.all():
-#             products.liked_by.remove(customer)
-#         else:
-#             products.liked_by.add(customer)
-
-#         like, created = Like.objects.get(customer=customer, id=product_id)
-
-#         if not created:
-#             if like.value == 'Like':
-#                 like.value = 'Unlike'
-#             else:
-#                 like.value = 'Like'
-
-#         like.save()
-
-#         return redirect('product_details')
-=======
-            error_message = "Email Address Already Registered.."
->>>>>>> Stashed changes
