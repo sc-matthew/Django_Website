@@ -14,6 +14,7 @@ This project is brought to you by:
 
 - [X] Buyer signup module (using chula domain)
   - [X] Name, telephone (regex), email (regex)
+  * E-mail check (can't use the one that already used)
 - [X] Buyer login module
 - [X] Buyer profile screen (ID, name, telephone, email)
   - [X] Able to edit Name, telephone (regex), email (regex)
@@ -26,9 +27,9 @@ This project is brought to you by:
     - [X] ชื่อร้าน และ สถานที่ของร้าน
 - [X] Product details screen
   - [X] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
-  - [x] ชื่อร้าน และ สถานที่ของร้าน
+  - [X] ชื่อร้าน และ สถานที่ของร้าน
   - [X] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
-  - [x] สามารถกดลิ้งค์ไปที่ร้านได้
+  - [X] สามารถกดลิ้งค์ไปที่ร้านได้
 - [X] Shopping Cart screen
   - [X] Show the selected products, quantity, and price
   - [X] Show the total price
@@ -72,4 +73,3 @@ This project is brought to you by:
   - [X] สถานะ (ปกติ/หมด)
 
 ---
-
