@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.views import View
 from .middlewares.auth import auth_middleware
 import datetime
+import os
+from dotenv import load_dotenv, dotenv_values
 
 
 # Create your views here.
@@ -341,8 +343,11 @@ class VendorDetail_onBuyers(View):
         to_hour = vendor.to_hour.strftime("%H:%M")
         print(open_hour, to_hour)
 
-        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
-            api = f.read()
+        config = {
+                    **dotenv_values(".env.secret")
+                }
+
+        api = config['GOOGLE_API_KEY']
 
         data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api,
                 "open_hour":open_hour, "to_hour":to_hour}
@@ -351,10 +356,10 @@ class VendorDetail_onBuyers(View):
     
 class Tracking(View):
     def get(self, request):
-        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/ThailandPost.txt") as f:
-            token = f.read().strip()
-        print(token)
-        context = {"token": token}
-        return render(request, "tracking.html", context)
+        config = {
+                    **dotenv_values(".env.secret")
+                }
 
+        token = config['THAILAND_POST_TOKEN']
+        return render(request, "tracking.html", {"token": token})
 

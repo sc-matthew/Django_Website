@@ -5,6 +5,8 @@ from django.views import View
 from .models import Vendors,Products_v, Category_v
 from .middlewares.auth import auth_middleware
 from datetime import *
+import os
+from dotenv import load_dotenv, dotenv_values
 
 class Homepage(View):
     def get(self, request):
@@ -416,8 +418,11 @@ class VendorDetail(View):
         to_hour = vendor.to_hour.strftime("%H:%M")
         print(open_hour, to_hour)
 
-        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
-            api = f.read()
+        config = {
+                    **dotenv_values(".env.secret")
+                }
+
+        api = config['GOOGLE_API_KEY']
 
         data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api,
                 "open_hour":open_hour, "to_hour":to_hour}

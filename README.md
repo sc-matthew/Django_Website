@@ -10,25 +10,25 @@ This project is brought to you by:
 
 ---
 
-### Buyers
+### Buyers [Completed]
 
 - [X] Buyer signup module (using chula domain)
   - [X] Name, telephone (regex), email (regex)
 - [X] Buyer login module
 - [X] Buyer profile screen (ID, name, telephone, email)
   - [X] Able to edit Name, telephone (regex), email (regex)
-- [ ] Category browsing screen
-  - [ ] Have category name and image
+- [X] Category browsing screen
+  - [X] Have category name and image
 - [X] Product browsing screen
   - [X] Based on a category
   - [X] แสดงข้อมูล
     - [X] รูปสินค้า, ชื่อสินค้า, ราคา,
-    - [ ] ชื่อร้าน และ สถานที่ของร้าน
+    - [X] ชื่อร้าน และ สถานที่ของร้าน
 - [X] Product details screen
   - [X] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
-  - [ ] ชื่อร้าน และ สถานที่ของร้าน
-  - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
-  - [ ] สามารถกดลิ้งค์ไปที่ร้านได้
+  - [x] ชื่อร้าน และ สถานที่ของร้าน
+  - [X] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
+  - [x] สามารถกดลิ้งค์ไปที่ร้านได้
 - [X] Shopping Cart screen
   - [X] Show the selected products, quantity, and price
   - [X] Show the total price
@@ -72,30 +72,4 @@ This project is brought to you by:
   - [X] สถานะ (ปกติ/หมด)
 
 ---
-
-### Remain after finish vendor:
-
-* Matthew
-
-  - [X] move category to the top of product add
-  - [X] link details href to product details info
-  - [X] product details screen (vendors)
-  - [X] trial and error in สารพัดของกุ๊กกิ๊ก
-* Prince
-
-  - Topic :  Product details screen
-    - [ ] ชื่อร้าน และ สถานที่ของร้าน
-    - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
-    - [ ] สามารถกดลิ้งค์ไปที่ร้านได้ (suspended)
-* New
-
-  - Topic : Product browsing screen
-    - [X] ชื่อร้าน และ สถานที่ของร้าน (รอ link)
-
-  - [X] Buyer profile screen (ID, name, telephone, email)
-  - [X] Customise button (sold out, available)
-  - Extra !!
-    - [ ] Include search bar in vendors module
-    - [ ] Category - Query bug fix !!
-    - [ ] Include functionality in search (Store + Status)
 
