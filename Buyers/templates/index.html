@@ -41,8 +41,8 @@
 				<div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
 					<div class="card-header">
 						<img src="{{ vendor.store_picture.url }}"
-							style="width: 35px;height: 35px; border: 1px solid grey; border-radius: 50%; margin-right: 5px">
-						<a style="font-size: 16px;color: brown" href="profile/{{vendor.id}}"><b>{{ vendor.store_name }}</b></a>
+							style="width: 35px;height: 35px; border: 1px solid #333333; border-radius: 50%; margin-right: 5px">
+						<a style="font-size: 16px;color: #0080ff" href="profile/{{vendor.id}}"><b>{{ vendor.store_name }}</b></a>
 					</div>
 					{% endif %}
 					{% endfor %}
@@ -88,8 +88,7 @@
 							<input type="submit" class="float-right btn btn-success form-control" value="Add To Cart">
 
 							{% else %}
-							<input disabled type="submit" class="float-right btn btn-danger form-control"
-								value="Not Available">
+							<input disabled type="submit" class="float-right btn btn-danger form-control" value="Not Available">
 							{% endif %}
 						</form>
 						{% endif %}
