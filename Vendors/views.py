@@ -431,7 +431,7 @@ class VendorDetail(View):
     
 def vender_product_search(request):
     query = request.GET.get('query')
-    products = Products_v.objects.filter(name__icontains=query)
+    products = Products_v.objects.filter(name__icontains=query).filter(ownerid=request.session.get("vendors"))
 
     return render(request,'vd_search.html', {"products": products})
 
