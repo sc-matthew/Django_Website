@@ -179,12 +179,14 @@ class Signup(View):
         return render(request, "signup.html")
 
     def post(self, request):
+        postFiles = request.FILES
         postData = request.POST
         first_name = postData.get("firstname")
         last_name = postData.get("lastname")
         phone = postData.get("phone")
         email = postData.get("email")
         password = postData.get("password")
+        profile_picture = postFiles.get("profile_picture")
         # validation
         value = {
             "first_name": first_name,
@@ -200,6 +202,7 @@ class Signup(View):
             phone=phone,
             email=email,
             password=password,
+            profile_picture=profile_picture,
         )
         error_message = self.validateCustomer(customer)
 
