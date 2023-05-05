@@ -10,7 +10,6 @@ class VendorsAdmin(admin.ModelAdmin):
         "last_name",
         "email",
         "phone",
-        "address",
         "open_hour",
         "to_hour",
     ]
@@ -29,6 +28,7 @@ class VendorsAdmin(admin.ModelAdmin):
     
     def last_name(self, obj):
         return obj.contact_person_last_name
+
     
     first_name.short_description = "First Name"
     last_name.short_description = "Last Name"
@@ -49,8 +49,8 @@ class ProductsAdmin(admin.ModelAdmin):
         "name",
         "price",
         "category",
-        "last_update",
         "status",
+        "last_update",
 
     ]
 
