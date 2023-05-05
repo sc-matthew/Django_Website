@@ -15,15 +15,18 @@ This project is brought to you by:
 - [X] Buyer signup module (using chula domain)
   - [X] Name, telephone (regex), email (regex)
 - [X] Buyer login module
-- [ ] Buyer profile screen (ID, name, telephone, email)
+- [X] Buyer profile screen (ID, name, telephone, email)
   - [X] Able to edit Name, telephone (regex), email (regex)
 - [ ] Category browsing screen
   - [ ] Have category name and image
-- [ ] Product browsing screen
-  - [ ] Based on a category
-  - [ ] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา, ชื่อร้าน และ สถานที่ของร้าน
-- [ ] Product details screen
-  - [ ] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา, ชื่อร้าน และ สถานที่ของร้าน
+- [X] Product browsing screen
+  - [X] Based on a category
+  - [X] แสดงข้อมูล
+    - [X] รูปสินค้า, ชื่อสินค้า, ราคา,
+    - [ ] ชื่อร้าน และ สถานที่ของร้าน
+- [X] Product details screen
+  - [X] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
+  - [ ] ชื่อร้าน และ สถานที่ของร้าน
   - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
   - [ ] สามารถกดลิ้งค์ไปที่ร้านได้
 - [X] Shopping Cart screen
@@ -31,7 +34,9 @@ This project is brought to you by:
   - [X] Show the total price
   - [X] Buy button to create a transaction
 
-### Sellers
+---
+
+### Sellers [Completed]
 
 - [X] Seller signup module
 
@@ -44,37 +49,53 @@ This project is brought to you by:
 - [X] Seller login module
 - [X] Seller account module (able to edit)
 
-  * Additional Parts (Extra marks)
-    * drop-down list to separate postData + postFiles
-    * files uploaded check whether it is jpeg or not -> avoid unsupported file types
-
   - [X] ชื่อร้าน
   - [X] ชื่อผู้ติดต่อ
   - [X] เบอร์โทร
   - [X] ที่อยู่ร้าน
   - [X] รูปของร้าน (1 picture)
   - [X] รูป QRCode (1 picture)
-- [ ] My Product Listing Screen (Show all my products details)
+- [X] My Product Listing Screen (Show all my products details)
 
-  - [ ] ชื่อสินค้า
-  - [ ] รูปสินค้า
-  - [ ] หมวดหมู่
-  - [ ] ราคา
-  - [ ] สถานะ (ปกติ/หมด)
-- [ ] Add/Edit/Delete Product Screen
+  - [X] ชื่อสินค้า
+  - [X] รูปสินค้า
+  - [X] หมวดหมู่
+  - [X] ราคา
+  - [X] สถานะ (ปกติ/หมด)
+- [X] Add/Edit/Delete Product Screen
 
-  - [ ] ชื่อสินค้า
-  - [ ] รูปสินค้า
-  - [ ] หมวดหมู่
-  - [ ] รายละเอียดสินค้า
-  - [ ] ราคา
-  - [ ] สถานะ (ปกติ/หมด)
+  - [X] ชื่อสินค้า
+  - [X] รูปสินค้า
+  - [X] หมวดหมู่
+  - [X] รายละเอียดสินค้า
+  - [X] ราคา
+  - [X] สถานะ (ปกติ/หมด)
 
 ---
 
-Memo updated list:
+### Remain after finish vendor:
 
-* Matthew -> Finished all requirements within Tuesday 12PM `<br>`
-  (Couldn't complete within the time limit, sorry guys 😓) `<br>`
-  Updated : 5PM -> Already done with the assigned tasks and forwarded to New and Prince for further dev.
-* New & Prince -> Get data from Matthew and working on progress after Aj.Kavin's class
+* Matthew
+
+  - [X] move category to the top of product add
+  - [X] link details href to product details info
+  - [X] product details screen (vendors)
+  - [X] trial and error in สารพัดของกุ๊กกิ๊ก
+* Prince
+
+  - Topic :  Product details screen
+    - [ ] ชื่อร้าน และ สถานที่ของร้าน
+    - [ ] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
+    - [ ] สามารถกดลิ้งค์ไปที่ร้านได้ (suspended)
+* New
+
+  - Topic : Product browsing screen
+    - [X] ชื่อร้าน และ สถานที่ของร้าน (รอ link)
+
+  - [X] Buyer profile screen (ID, name, telephone, email)
+  - [X] Customise button (sold out, available)
+  - Extra !!
+    - [ ] Include search bar in vendors module
+    - [ ] Category - Query bug fix !!
+    - [ ] Include functionality in search (Store + Status)
+
