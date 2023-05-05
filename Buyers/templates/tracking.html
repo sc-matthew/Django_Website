@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"
+        integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="p-5">
+    <div class="row" style="display: flex">
+        <h1><img src="https://www.thailandpost.co.th/images/sorry.jpg" style="width:60px;margin-right:20px;margin-top:-30px">ThailandPost Tracking System</h1>
+      </div>
+      
+  <hr>
+  <div class="row">
+    <div class="col-12 col-sm-4">
+      <span>Tracking number</span>
+      
+      <input id="txt_tracking" type="text" class="form-control" placeholder="XXXXXXXXXXXXX (13 Digits)" style="margin-top:10px">
+      <div class="mt-3 d-flex justify-content-end">
+        <button onclick="searchnow()" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    <div id="render" class="col-12 col-sm-8">
+
+    </div>
+  </div>
+</div>
+
+<script>
+function searchnow() {
+    var tracking = document.querySelector("#txt_tracking");
+    if (tracking.value.length <= 0) {
+      alert("Please fill tracking number");
+    } else {
+      //get token
+      var config = {
+        method: "post",
+        url: "https://trackapi.thailandpost.co.th/post/api/v1/authenticate/token",
+        headers: {
+          "Authorization": "{{ token|safe }}",
+          "Content-Type": "application/json"
+        }
+      };
+  
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          if (response.data.token && response.data.expire) {
+            const token = response.data.token;
+  
+            var data = JSON.stringify({
+              status: "all",
+              language: "TH",
+              barcode: [tracking.value]
+            });
+  
+            var config = {
+              method: "post",
+              url: "https://trackapi.thailandpost.co.th/post/api/v1/track",
+              headers: {
+                Authorization: "Token " + token,
+                "Content-Type": "application/json"
+              },
+              data: data
+            };
+  
+            axios(config)
+              .then(function (response) {
+                console.log("final : ", response.data);
+                if (response.data.message == "successful") {
+                  var render = document.querySelector("#render");
+                  var responsex = response.data.response.items[tracking.value];
+                  var html = "";
+                  for (let i = 0; i < responsex.length; i++) {
+                    const element = responsex[i];
+  
+                    var color = "";
+                    if (element.status == "501") {
+                      color = "bg-success";
+                    } else {
+                      color = "bg-secondary";
+                    }
+                    if (element.status == "501") {
+                    html += `
+                                      <div class="card ${color} text-white p-3 mb-3">
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>สถานะ</span>
+                                              <span>${element.status_description}</span>
+                                          </div>
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>สถานที่</span>
+                                              <span>${element.location}</span>
+                                          </div>
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>เวลา</span>
+                                              <span>${element.status_date}</span>
+                                          </div>
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>ชื่อผู้รับ</span>
+                                              <span>${element.receiver_name}</span>
+                                          </div>
+                                      </div>
+                                      `;
+                                    }
+                    else {     html += `
+                                      <div class="card ${color} text-white p-3 mb-3">
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>สถานะ</span>
+                                              <span>${element.status_description}</span>
+                                          </div>
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>สถานที่</span>
+                                              <span>${element.location}</span>
+                                          </div>
+                                          <div class="d-flex justify-content-between mb-2" style="border-bottom: 1px solid #adadad">
+                                              <span>เวลา</span>
+                                              <span>${element.status_date}</span>
+                                          </div>
+                                      </div>
+                                      `;
+                                    }             
+                  }
+                  render.innerHTML = html;
+                } else {
+                  alert("Something is went wrong !");
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+                alert("Something is went wrong !");
+              });
+          } else {
+            alert("Something is went wrong !");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Something is went wrong !");
+        });
+    }
+  }
+</script>
+  
+
+{% endblock %}

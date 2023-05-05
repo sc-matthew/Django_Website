@@ -70,13 +70,27 @@
                         value="{{details.address}}">
                 </div>
 
+                <!-- operation time -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Opening Time</label>
+                        <input required type="text" name="opentime" pattern="\d{1,2}:\d{1,2}" title="Please check your time format"
+                        size="8" id="id_open_hour" value="{{details.open_hour}}" class="form-control form-control-sm" placeholder="Time Format (HH:MM)">
+                    </div>
+                
+                    <div class="form-group col-md-6">
+                        <label for="">Closing Time</label>
+                        <input required type="text" name="closetime" pattern="\d{1,2}:\d{1,2}" title="Please check your time format"
+                        size="8" id="id_close_hour" value="{{details.to_hour}}" class="form-control form-control-sm" placeholder="Time Format (HH:MM)">
+                </div>
+
                 <!--Submit button-->
                 <hr>
                 <button type="submit" class="btn btn-sm btn-success col-lg-12">Submit
                     Changes</button>
 
                 <!-- for resolve the overlap box and button -->
-                <div class="form-group"> </div>
+                <div class="form-group" style="margin-top:-20px"><br></div>
             </div>
         </div>
     </div>

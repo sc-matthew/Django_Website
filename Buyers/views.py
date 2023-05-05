@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-from .models import Customer, Products, Category, Order
+from Buyers.models import Customer, Order
+from Vendors.models import  Products_v, Category_v, Vendors
 from django.urls import reverse
 from django.views import View
 from .middlewares.auth import auth_middleware
@@ -14,7 +15,7 @@ import datetime
 class Cart(View):
     def get(self, request):
         ids = list(request.session.get("cart").keys())
-        products = Products.get_products_by_id(ids)
+        products = Products_v.get_products_by_id(ids)
         print(products)
         return render(request, "cart.html", {"products": products})
 
@@ -25,7 +26,7 @@ class CheckOut(View):
         phone = request.POST.get("phone")
         customer = request.session.get("customer")
         cart = request.session.get("cart")
-        products = Products.get_products_by_id(list(cart.keys()))
+        products = Products_v.get_products_by_id(list(cart.keys()))
         print(address, phone, customer, cart, products)
 
         for product in products:
@@ -43,8 +44,11 @@ class CheckOut(View):
 
         return redirect("cart")
 
-
 class Index(View):
+    def get(self, request):
+        print(f"1.{request.get_full_path()}")
+        return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
+    
     def post(self, request):
         product = request.POST.get("product")
         remove = request.POST.get("remove")
@@ -68,31 +72,62 @@ class Index(View):
 
         request.session["cart"] = cart
         print("cart", request.session["cart"])
+        print(f"{request.get_full_path()}")
         return redirect("homepage")
 
-    def get(self, request):
-        print(f"{request.get_full_path()}")
-        return HttpResponseRedirect(f'store'+f"{request.get_full_path().split('buyers/')[1]}")
-
-
 def store(request):
+    all_vendors = Vendors.get_all_vendor()
     cart = request.session.get("cart")
     if not cart:
         request.session["cart"] = {}
-    products = None
-    categories = Category.get_all_categories()
+
+    # Get all vendors that are currently open
+    open_vendors = Vendors.objects.filter(open_hour__lte=datetime.datetime.now().time(),
+                                           to_hour__gte=datetime.datetime.now().time())
+
+    # Get the products of the open vendors
+    vendor_product_dict = {}
+    for vendor in open_vendors:
+        vendor_products = Products_v.get_product_by_owner(vendor.id)
+        vendor_product_dict[vendor.id] = vendor_products
+
+    # If a category ID is specified, filter products by category from the open vendors
+    categories = Category_v.get_all_categories()
     categoryID = request.GET.get("category")
     if categoryID:
-        products = Products.get_all_products_by_categoryid(categoryID)
+        products = []
+        for vendor_id, product_list in vendor_product_dict.items():
+            filtered_products = product_list.filter(category=categoryID)
+            if filtered_products:
+                products += filtered_products
     else:
-        products = Products.get_all_products()
+        # Get all products from the open vendors
+        products = []
+        for product_list in vendor_product_dict.values():
+            products += product_list
 
-    data = {}
-    data["products"] = products
-    data["categories"] = categories
-
+    # Prepare data dictionary for rendering the template
+    data = {"products": products, "categories": categories, "cart": cart, "all_vendors": all_vendors}
+    print(f'2.{request.get_full_path()}')
     return render(request, "index.html", data)
 
+def product_search(request):
+    all_vendors = Vendors.get_all_vendor()
+    cart = request.session.get("cart")
+    if not cart:
+        request.session["cart"] = {}
+    vendors = Vendors.objects.all()
+    vendor_product_dict = {} 
+
+    for vendor in vendors:
+        if vendor.open_hour <= datetime.datetime.now().time() <= vendor.to_hour:  # Check if the vendor is currently open
+            vendor_products = Products_v.get_product_by_owner(vendor.id)
+            vendor_product_dict[vendor.id] = vendor_products
+
+    query = request.GET.get('query')
+    products = Products_v.objects.filter(name__icontains=query)
+    data = {"products": products, "cart": cart, "all_vendors" : all_vendors}
+    return render(request, 'search.html',  data)
 
 class Login(View):
     return_url = None
@@ -128,7 +163,6 @@ class Login(View):
 def logout(request):
     request.session.clear()
     return redirect("login")
-
 
 class OrderView(View):
     def get(self, request):
@@ -208,6 +242,7 @@ class Account(View):
     
     def post(self, request):
         postData = request.POST
+        postFiles = request.FILES
         customer_id = request.session.get("customer")
         customer = Customer.objects.get(id=customer_id)
         
@@ -218,6 +253,13 @@ class Account(View):
         customer.last_name = postData["lastname"]
         customer.phone = postData["phone"]
         customer.email = postData["email"]
+
+        if 'profile_picture' in postFiles:
+            profile_picture = postFiles.get("profile_picture")
+            if profile_picture.content_type != "image/jpeg":
+                error = "Invalid file type for Profile Picture (Only JPEG and JPG are supported). Please try again."
+                return render(request, "account.html", {"error": error, "details": customer})
+            customer.profile_picture = profile_picture
 
         error_message = self.validateCustomer(customer)
 
@@ -250,3 +292,69 @@ class Account(View):
             error_message = "Email Address Already Registered.."
         
         return error_message
+    
+class Profile(View):
+    def get(self, request):
+        customer = request.session.get("customer")
+        details = Customer.get_customer_by_customerid(customer)
+        return render(request, "buyer_profile.html", {"details" : details})
+    
+class ProductDetailsView(View):
+    def get(self, request, product_id):
+        products = Products_v.objects.get(id=product_id)
+        vendor = Vendors.objects.get(id=products.ownerid)
+        return render(request, "product_details.html", {"product": products, "vendor":vendor})
+
+    def post(self, request, product_id):
+        products = Products_v.objects.get(id=product_id)
+        vendor = Vendors.objects.get(id=products.ownerid)
+        product = request.POST.get("product")
+        remove = request.POST.get("remove")
+        cart = request.session.get("cart")
+        if cart:
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(product)
+                    else:
+                        cart[product] = quantity - 1
+                else:
+                    cart[product] = quantity + 1
+
+            else:
+                cart[product] = 1
+        else:
+            cart = {}
+            cart[product] = 1
+
+        request.session["cart"] = cart
+        print("cart", request.session["cart"])
+        return render(request, "product_details.html", {"product": products, "vendor":vendor})
+
+class VendorDetail_onBuyers(View):
+    def get(self, request, vendorid):
+        vendor = Vendors.get_vendors_by_vendorsid(vendorid)
+        vendor_store = vendor.store_name.lower().replace(" ","")
+        num_product = len(Products_v.objects.filter(ownerid=vendorid))
+        open_hour = vendor.open_hour.strftime("%H:%M")
+        to_hour = vendor.to_hour.strftime("%H:%M")
+        print(open_hour, to_hour)
+
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
+            api = f.read()
+
+        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api,
+                "open_hour":open_hour, "to_hour":to_hour}
+
+        return render(request, "seller_profile.html", data)
+    
+class Tracking(View):
+    def get(self, request):
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/ThailandPost.txt") as f:
+            token = f.read().strip()
+        print(token)
+        context = {"token": token}
+        return render(request, "tracking.html", context)
+
+

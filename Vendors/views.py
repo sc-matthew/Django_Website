@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.views import View
 from .models import Vendors,Products_v, Category_v
 from .middlewares.auth import auth_middleware
+from datetime import *
 
 class Homepage(View):
     def get(self, request):
@@ -25,6 +26,8 @@ class Signup(View):
         address = postData.get("address")
         store_picture = postFiles.get("store_picture")
         qrcode_picture = postFiles.get("qrcode_picture")
+        open_hour = postData.get("opentime")
+        to_hour = postData.get("closetime")
         
         # validation
         value = {
@@ -46,9 +49,17 @@ class Signup(View):
             phone = phone,
             address = address,
             store_picture = store_picture,
-            qrcode_picture = qrcode_picture
+            qrcode_picture = qrcode_picture,
+            open_hour = open_hour,
+            to_hour = to_hour,
         )
         error_message = self.validateVendors(vendors)
+
+        if open_hour and to_hour:
+            open_time = datetime.strptime(open_hour, '%H:%M')
+            close_time = datetime.strptime(to_hour, '%H:%M')
+            if close_time <= open_time:
+                error_message = "Close time must be after open time"
 
         if not error_message:
             vendors.password = make_password(vendors.password)
@@ -110,6 +121,7 @@ class Login(View):
             error_message = "Please check your email and password"
 
         print(email, password)
+        print(request.session.get("vendors"))
         return render(request, "vd_login.html", {"error": error_message})
 
 
@@ -121,6 +133,8 @@ class Account(View):
     def get(self, request):
         vendors = request.session.get("vendors")
         details = Vendors.get_vendors_by_vendorsid(vendors)
+        details.open_hour = details.open_hour.strftime("%H:%M")
+        details.to_hour = details.to_hour.strftime("%H:%M")
         return render(request, "vd_account_details.html", {"details" : details})
     
     def post(self, request):
@@ -137,8 +151,16 @@ class Account(View):
         vendors.phone = postData["phone"]
         vendors.email = postData["email"]
         vendors.address = postData["address"]
+        vendors.open_hour = postData.get("opentime")
+        vendors.to_hour = postData.get("closetime")
 
         error_message = self.validateVendors(vendors)
+
+        if vendors.open_hour and vendors.to_hour:
+            open_time = datetime.strptime(vendors.open_hour, '%H:%M')
+            close_time = datetime.strptime(vendors.to_hour, '%H:%M')
+            if close_time <= open_time:
+                error_message = "Close time must be after open time"
 
         if not error_message:
             vendors.save()
@@ -180,7 +202,6 @@ class Image(View):
         print(details)
         return render(request, "vd_account_image.html", {"details" : details})
     
-
     def post(self, request):
         postFiles = request.FILES
         vendors_id = request.session.get("vendors")
@@ -208,10 +229,9 @@ class Image(View):
         success_message = "Changes saved successfully!"
         return render(request, "vd_account_image.html", {"success_message": success_message, "details" : vendors})
 
-
-
 class vendor_store(View):
     def get(self, request):
+        print(request.session.get("vendors"))
         products = None
         categories = Category_v.get_all_categories()
         categoryID = request.GET.get("category")
@@ -225,6 +245,13 @@ class vendor_store(View):
         data["categories"] = categories
 
         return render(request, "vd_products.html",data)
+
+class ProductDetails(View):
+    def get(self, request, product_id):
+        products = Products_v.get_product_by_productid(product_id)
+        vendor = request.session.get("vendors")
+        print(products)
+        return render(request, 'vd_product_details.html', {"products":products, "vendor":vendor})
 
 class AddProduct(View):
     def get(self, request):
@@ -349,9 +376,10 @@ class AddCategory(View):
             return render(request, "vd_add_category.html", data)
 
         category = Category_v(name=name)
-        success_message = "Changes saved successfully!"
+        success_message = "Category added successfully!"
         category.save()
-        return redirect("add_product")
+        data = {"success_message": success_message, "name": name}
+        return render(request, "vd_add_category.html", data)
         
     
 class EditCategory(View):
@@ -379,6 +407,28 @@ class EditCategory(View):
             category.save()
             return render(request, "vd_edit_category.html", {'success_message':success_message})
         
+class VendorDetail(View):
+    def get(self, request, vendorid):
+        vendor = Vendors.get_vendors_by_vendorsid(vendorid)
+        vendor_store = vendor.store_name.lower().replace(" ","")
+        num_product = len(Products_v.objects.filter(ownerid=vendorid))
+        open_hour = vendor.open_hour.strftime("%H:%M")
+        to_hour = vendor.to_hour.strftime("%H:%M")
+        print(open_hour, to_hour)
+
+        with open("/Users/matthew/Documents/2602369_WAD/GitHub Project/SUB_BRANCH/API/api_key.txt") as f:
+            api = f.read()
+
+        data = {"vendor":vendor, "vendor_store":vendor_store, "num_product" : num_product, "api" : api,
+                "open_hour":open_hour, "to_hour":to_hour}
+
+        return render(request, "vd_profile.html", data)
+    
+def vender_product_search(request):
+    query = request.GET.get('query')
+    products = Products_v.objects.filter(name__icontains=query)
+
+    return render(request,'vd_search.html', {"products": products})
 
     
 

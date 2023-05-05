@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="p-3 m-3">
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <h3 class="alert alert-info rounded-pill" style="text-align:center">My Profile</h3>
+
+            <hr>
+                <!-- picture -->
+                <div class="text-center">
+                    <img src="{{details.profile_picture.url}}"
+                    style="width:225px; height:225px; margin-top: 10px; border-radius: 5%; border: 1px solid grey;">
+                </div>
+
+                <!-- name -->
+                <div class="row" style="margin-top:30px">
+                    <label for="" class="col-4" style="font-size:12pt ;margin-right:-10px "><strong><u>First Name: </u></strong></label>
+                    <a>{{details.first_name}}</a>
+                </div>
+
+                <!-- lastname -->
+                <div class="row">
+                    <label for="" class="col-4" style="font-size:12pt ;margin-right:-10px "><strong><u>Last Name: </u></strong></label>
+                    <a>{{details.last_name}}</a>
+                </div>
+
+                <!-- phone -->
+                <div class="row">
+                    <label for="" class="col-4" style="font-size:12pt ;margin-right:-10px "><strong><u>Phone: </u></strong></label>
+                    <a>{{details.phone}}</a>
+                </div>
+
+
+                <!-- email -->
+                <div class="row" style="margin-bottom:20px">
+                    <label for="" class="col-4" style="font-size:12pt ;margin-right:-10px "><strong><u>Email:</u></strong></label>
+                    <a>{{details.email}}</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
+import datetime
+# from Buyers.models import Customer 
 
 # Create your models here.
 
@@ -12,11 +14,17 @@ class Vendors(models.Model):
     address = models.CharField(max_length=300)
     store_picture = models.ImageField(upload_to="uploads/store/")
     qrcode_picture = models.ImageField(upload_to="uploads/qrcode/")
+    open_hour = models.TimeField(default=datetime.time(8, 00))
+    to_hour = models.TimeField(default=datetime.time(20, 00))
     last_update = models.DateTimeField(auto_now=True)
+    member_since = models.DateTimeField(auto_now_add=True)
 
     # to save the data
     def register(self):
         self.save()
+
+    def __str__(self):
+        return self.store_name
 
     @staticmethod
     def get_vendors_by_email(email):
@@ -30,11 +38,14 @@ class Vendors(models.Model):
             return Vendors.objects.get(id=vendors_id)
         except Vendors.DoesNotExist:
             return None
+
+    def get_all_vendor():
+        return Vendors.objects.all()
         
     def isExists(self):
         if Vendors.objects.filter(email=self.email):
             return True
-
+        
         return False
 
 class Category_v(models.Model):
@@ -66,6 +77,10 @@ class Products_v(models.Model):
     status = models.BooleanField(default=True)
     ownerid = models.PositiveSmallIntegerField(default=1, null=False)
     last_update = models.DateTimeField(auto_now=True)
+    # liked_by = models.ManyToManyField(Customer, related_name='liked_products')
+
+    def __str__(self):
+        return self.name
 
     @staticmethod
     def get_products_by_id(ids):
@@ -75,10 +90,18 @@ class Products_v(models.Model):
     def get_all_products():
         return Products_v.objects.all()
 
+
     @staticmethod
     def get_all_products_by_categoryid(category_id):
         if category_id:
             return Products_v.objects.filter(category=category_id)
+        else:
+            return Products_v.get_all_products()
+    
+    @staticmethod
+    def get_product_by_productid(product_id):
+        if product_id:
+            return Products_v.objects.get(id=product_id)
         else:
             return Products_v.get_all_products()
         
@@ -87,3 +110,7 @@ class Products_v(models.Model):
             return Products_v.objects.filter(ownerid=ownerid)
         else:
             return None
+        
+
+
+        
