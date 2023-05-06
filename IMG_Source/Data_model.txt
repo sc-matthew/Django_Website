@@ -54,13 +54,13 @@ Price : 3650
 Product Name : Gundam
 Category : Gundam/Gunpla
 Description : 
-■ Premium Bandai® Tamashii Nations® Metal Build Premium Gundam Action Figure GAT-X105 STRIKE GUNDAM (INFINITY VER) สไตร์ค กันดั้ม
+Premium Bandai® Tamashii Nations® Metal Build Premium Gundam Action Figure GAT-X105 STRIKE GUNDAM (INFINITY VER) สไตร์ค กันดั้ม
 Reborn with a new interpretation, got the power of the mechanic designer Kunio Ogawara and Mr. Satoshi Shigeta, an animator. 
-■ Metal frame showing a new expression and striker pack that is free to change. Please expect to accelerate further METAL BUILD. Quantities will be very limited!
-■ MULTI-MATERIAL-FRAME multimaterial frame The metal frame which is also a characteristic of strike adopts two different colors of plating for each part. 
+Metal frame showing a new expression and striker pack that is free to change. Please expect to accelerate further METAL BUILD. Quantities will be very limited!
+MULTI-MATERIAL-FRAME multimaterial frame The metal frame which is also a characteristic of strike adopts two different colors of plating for each part. 
 Metal pipes are also placed in various places, expressing heavy feeling and a sense of solemn. 
-■ Product Specifications Height: about 190mm Material: die-cast, ABS, made of PVC 
-■ Set Contents · Body • Replacement wrist left and right each four • Replacement antenna · 57mm high energy beam rifle Armor Schneider × 2 Vs. beam shield · Saber blade × 2
+Product Specifications Height: about 190mm Material: die-cast, ABS, made of PVC 
+Set Contents · Body • Replacement wrist left and right each four • Replacement antenna · 57mm high energy beam rifle Armor Schneider × 2 Vs. beam shield · Saber blade × 2
 Price : 9800
 
 008_Gundam_V2.jpg
@@ -68,11 +68,11 @@ Product Name : Gundam version 2
 Category : Gundam/Gunpla
 Description : 
 MG 1/100 FREEDOM GUNDAM Ver.2.0 - Gundamsmith
-■ From "Mobile Suit Gundam SEED", "Freedom Gundam" is now available as MG Ver.2.0, which has achieved the ultimate evolution!
-■ Renewed proportions with completely new modeling for both frame and exterior! Details that follow the SEED Ver.RM system are included everywhere.
-■ Heroic poses can be reproduced, such as arms that can be expanded and contracted at the elbow joints, thigh armor with a slide mechanism, and flexible waist!
-■ Wings and beam cannons are also movable, and full burst mode can be taken.
-■ In addition to various weapons such as beam sabers that can be connected, various options such as pedestals and hand parts are also included!
+From "Mobile Suit Gundam SEED", "Freedom Gundam" is now available as MG Ver.2.0, which has achieved the ultimate evolution!
+Renewed proportions with completely new modeling for both frame and exterior! Details that follow the SEED Ver.RM system are included everywhere.
+Heroic poses can be reproduced, such as arms that can be expanded and contracted at the elbow joints, thigh armor with a slide mechanism, and flexible waist!
+Wings and beam cannons are also movable, and full burst mode can be taken.
+In addition to various weapons such as beam sabers that can be connected, various options such as pedestals and hand parts are also included!
 Price : 1800
 
 009_Kamen_rider_Decade.jpg
@@ -95,8 +95,8 @@ Price : 1170
 Product Name : Kamen rider Kuuga
 Category : Figure Rise Standard
 Description : 
-- สินค้าสีอาจจะไม่เหมือนรูป เนื่องจากมีการตกแต่งและทำสีเพื่อใช้ในการโฆษณา สินค้าเป็นมือ 1 มีซองพลาสติกห่อหุ้มแผงรันเนอร์ทุกอัน สินค้าลิขสิทธิ์แท้จากบริษัทผู้ผลิตสินค้า สินค้าไม่รับคืน และเปลี่ยนเป็นสินค้าอื่นทุกกรณี 
-- สินค้า กันพลา หรือ งานพลาโม อื่น ๆ จะไม่มีการซีสกล่องนะครับ ไม่ว่าลูกค้าจะซื้อที่ญี่ปุ่นหรือประเทศไหน ๆ ก็ตาม สภาพกล่องสินค้าอาจจะบุบ ยุบ หรือเก่าบ้างเนื่องจากบริษัทส่งสินค้ามาให้ทางร้านแบบนั้น ทางร้านก็จะทำการจัดส่งในลูกค้าตามสภาพที่ได้มาไม่มีการดัดแปลงใด ๆ 
+สินค้าสีอาจจะไม่เหมือนรูป เนื่องจากมีการตกแต่งและทำสีเพื่อใช้ในการโฆษณา สินค้าเป็นมือ 1 มีซองพลาสติกห่อหุ้มแผงรันเนอร์ทุกอัน สินค้าลิขสิทธิ์แท้จากบริษัทผู้ผลิตสินค้า สินค้าไม่รับคืน และเปลี่ยนเป็นสินค้าอื่นทุกกรณี 
+สินค้า กันพลา หรือ งานพลาโม อื่น ๆ จะไม่มีการซีสกล่องนะครับ ไม่ว่าลูกค้าจะซื้อที่ญี่ปุ่นหรือประเทศไหน ๆ ก็ตาม สภาพกล่องสินค้าอาจจะบุบ ยุบ หรือเก่าบ้างเนื่องจากบริษัทส่งสินค้ามาให้ทางร้านแบบนั้น ทางร้านก็จะทำการจัดส่งในลูกค้าตามสภาพที่ได้มาไม่มีการดัดแปลงใด ๆ 
 Price : 1230
 
 011_Ironman_mark_42.jpg
@@ -105,14 +105,8 @@ Category : S.H.FIGUARTS (SHF)
 Description : 
 HOT TOYS - IRON MAN MARK XLII / MARK 42 -​ [ DIE CAST ] -​ MMS197D02 : IRON MAN 3
 สถานะสินค้า : สินค้ามือ2
-- ของครบ
-- แขนขาแข็งแรง
-- กล่องสวย
-- มีกล่องน้ำตาล
-
-ตำหนิ
-- มือกำที่เป็นยางด้านขวาสีซีด
-- มีรอยที่เล็กๆที่ต้นขา(ขอดูรูปตำหนิได้ทางแชทครับ)​
+ของครบ แขนขาแข็งแรง กล่องสวย มีกล่องน้ำตาล
+ตำหนิ มือกำที่เป็นยางด้านขวาสีซีด มีรอยที่เล็กๆที่ต้นขา(ขอดูรูปตำหนิได้ทางแชทครับ)​
 💥 ราคาหน้่าร้าน ​​7,900 บาท 💥
 Price : 8580
 
@@ -194,14 +188,14 @@ Price : 730
 Product Name : Nezuko
 Category : Action Figure
 Description : 
-- Condition:100% NEW/China version
-- Specification: 10cm
-- Material: PVC
--Packing method: color box
+Condition:100% NEW/China version
+Specification: 10cm
+Material: PVC
+Packing method: color box
 Notice: Due to different displays and lighting effects, the actual color of the product may be slightly different from the color shown in the picture.
 Because manual measurement and measurement methods are different, please allow a measurement deviation of 1-2cm.
-- Your satisfaction and positive feedback will help us improve our products and services. We would appreciate it if you could give us a 5-star review.
-- If you are not satisfied with the product, please contact us as soon as possible, 
+Your satisfaction and positive feedback will help us improve our products and services. We would appreciate it if you could give us a 5-star review.
+If you are not satisfied with the product, please contact us as soon as possible, 
 we will provide you with a satisfactory solution before you give us a bad review, and will do our best to provide you with thoughtful customer service.
 Price : 1500
 
@@ -423,7 +417,7 @@ Description :
 ขนาด: ประมาณ15ซม
 สี: ตามภาพ
 สภาพ: ใหม่100%
-Price : 250
+Price : 2500
 
 036_Ben10.jpg
 Product Name : 9ชิ้น/เซ็ต Ben 10
