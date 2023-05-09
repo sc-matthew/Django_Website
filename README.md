@@ -13,24 +13,31 @@ This project is brought to you by:
 ### Buyers [Completed]
 
 - [X] Buyer signup module (using chula domain)
+
   - [X] Name, telephone (regex), email (regex)
+
   * E-mail check (can't use the one that already used)
 - [X] Buyer login module
 - [X] Buyer profile screen (ID, name, telephone, email)
+
   - [X] Able to edit Name, telephone (regex), email (regex)
 - [X] Category browsing screen
+
   - [X] Have category name and image
 - [X] Product browsing screen
+
   - [X] Based on a category
   - [X] แสดงข้อมูล
     - [X] รูปสินค้า, ชื่อสินค้า, ราคา,
     - [X] ชื่อร้าน และ สถานที่ของร้าน
 - [X] Product details screen
+
   - [X] แสดงข้อมูล รูปสินค้า, ชื่อสินค้า, ราคา
   - [X] ชื่อร้าน และ สถานที่ของร้าน
   - [X] สามารถกดเพิ่มสินค้าเข้าไปในตะกร้าขายของได้
   - [X] สามารถกดลิ้งค์ไปที่ร้านได้
 - [X] Shopping Cart screen
+
   - [X] Show the selected products, quantity, and price
   - [X] Show the total price
   - [X] Buy button to create a transaction
@@ -72,4 +79,24 @@ This project is brought to you by:
   - [X] ราคา
   - [X] สถานะ (ปกติ/หมด)
 
+---
+### Additional Parts + Extra
 
+* (EXTRA) in the Project Specification
+
+  - [X] Aesthetic templates
+  - [X] Make use of any 3rd parties (API)
+  - [X] Shop open-close time
+  - [X] Product Search
+  - [ ] Publically accessible to cloud service
+    -> (Trial and Error) but failed in deployment
+* Additional (Not in the Project Specification)
+
+  * JavaScript -> QuerySelector
+  * files uploaded check whether it is jpeg or not-> avoid unsupported file types
+  * Info Button -> Hover and show info box
+  * Modal & Lightbox
+  * Image Carousel (Banner)
+  * dotenv (securely store API KEY)
+  * allowed to transform textarea (more in height) -> practical
+  * prepared db.sqlite (4 vendors, 2 customer, 40 products with completed product details/pic/price)

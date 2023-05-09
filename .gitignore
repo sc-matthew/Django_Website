@@ -58,8 +58,8 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
+# db.sqlite3
+# db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -146,7 +146,8 @@ text.txt
 EXTRA.md
 ProjectCalculation.txt
 PROJECT_Specification.pdf
+TrackingCode.txt
 
-# Personal Image
+# Deployment Trial Image
 /Evidence
 
