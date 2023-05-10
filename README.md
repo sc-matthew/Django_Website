@@ -1,5 +1,4 @@
 # Web Application (Django)
-
 ---
 
 This project is brought to you by:
@@ -7,6 +6,19 @@ This project is brought to you by:
 * Suramate Chokchaisuwan (Matthew)
 * Dhawalrat Leelapratak (New)
 * Tanupat Kontha (Prince)
+
+---
+
+### Package Requirement
+Please noted that there are several packages required to run the project which can be found in the requirement.txt. However, not all of them are necessarily required.
+
+But, there is one "important" package that must be installed, otherwise, the project can't be run. 
+
+```sh
+pipenv install python-dotenv
+```
+
+* Remark: Some modules in the project need API Key and Token as authentication. Users can get these credentials from Google API and ThailandPost Token. (Put the credentials in the file and name ".env.secret", It should work without any error 😊)
 
 ---
 
